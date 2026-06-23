@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alioth Marketing Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Archivo:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── BRAND TOKENS ─── */
+    :root {
+      --black:        #0E0D0B;
+      --cream:        #F1E9DA;
+      --cream-deep:   #E6DAC2;
+      --cream-soft:   #F6F1E8;
+      --cream-60:     rgba(241,233,218,0.60);
+      --cream-40:     rgba(241,233,218,0.40);
+      --green:        #1B3B2F;
+      --green-bright: #27513F;
+      --green-deep:   #0F2A20;
+      --ink:          #0E0D0B;
+      --ink-60:       rgba(14,13,11,0.60);
+      --ink-40:       rgba(14,13,11,0.40);
+      --ink-15:       rgba(14,13,11,0.09);
+      --line:         rgba(14,13,11,0.10);
+      --line-dark:    rgba(241,233,218,0.10);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Archivo', system-ui, sans-serif;
+      --mono:  'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── GRID BACKGROUND ─── */
+    .grid-bg {
+      background-color: var(--cream);
+      background-image:
+        linear-gradient(var(--ink-15) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ink-15) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      background: rgba(241,233,218,0.90);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow 0.3s;
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.45rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo-text { line-height: 1.15; }
+    .nav-logo-name {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-logo-div {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-60);
+    }
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 2.25rem;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-60);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    @media (min-width: 820px) { .nav-links { display: flex; } }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--sans);
+      font-weight: 600;
+      border-radius: 9999px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { opacity: 0.86; transform: translateY(-1px); }
+    .btn-sm  { font-size: 0.78rem; padding: 0.6rem 1.25rem; }
+    .btn-md  { font-size: 0.88rem; padding: 0.8rem 1.75rem; }
+    .btn-lg  { font-size: 0.95rem; padding: 0.95rem 2.1rem; }
+    .btn-green        { background: var(--green); color: var(--cream); }
+    .btn-green:hover  { opacity: 1; background: var(--green-bright); transform: translateY(-1px); }
+    .btn-dark         { background: var(--ink); color: var(--cream); }
+    .btn-outline-ink  { background: transparent; color: var(--ink);   border: 1.5px solid var(--ink); }
+    .btn-outline-cream{ background: transparent; color: var(--cream); border: 1.5px solid var(--cream-40); }
+
+    /* ─── TYPE SCALE ─── */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-60);
+    }
+    .eyebrow-light { color: var(--cream-60); }
+    .display {
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 0.93;
+    }
+    .h-xl { font-size: clamp(3.8rem, 11vw, 10rem); }
+    .h-l  { font-size: clamp(2.5rem, 5.5vw, 5rem); }
+    .h-m  { font-size: clamp(1.9rem, 3.2vw, 3rem); }
+    .h-s  { font-size: clamp(1.3rem, 2vw, 1.75rem); }
+    .body-copy {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--ink-60);
+    }
+    .lede {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      color: var(--ink-60);
+    }
+
+    /* ─── SURFACES ─── */
+    .on-dark  { background: var(--black); color: var(--cream); }
+    .on-green { background: var(--green); color: var(--cream); }
+    .on-cream-deep { background: var(--cream-deep); }
+
+    /* ─── LAYOUT ─── */
+    .wrap { max-width: 1280px; margin: 0 auto; }
+    section { padding: clamp(4.5rem, 9vw, 8rem) 2rem; }
+    .section-head { margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+    .g2 { display: grid; grid-template-columns: 1fr;   gap: clamp(2rem,5vw,5rem); }
+    .g3 { display: grid; grid-template-columns: 1fr;   gap: 1.25rem; }
+    @media (min-width: 760px)  { .g2 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px)  { .g3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── MARQUEE ─── */
+    .marquee-outer { overflow: hidden; }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 26s linear infinite;
+    }
+    .marquee-item {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      padding: 0 2rem;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      border: 1px solid var(--line);
+      padding: 2.25rem;
+      background: var(--cream);
+      transition: box-shadow 0.22s, transform 0.22s;
+    }
+    .card:hover {
+      box-shadow: 0 10px 36px rgba(14,13,11,0.07);
+      transform: translateY(-3px);
+    }
+    .card-dark {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--cream);
+    }
+    .card-dark .body-copy { color: var(--cream-60); }
+
+    /* ─── NUM LABEL ─── */
+    .num {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--ink-40);
+      margin-bottom: 1.1rem;
+    }
+    .num-light { color: var(--cream-40); }
+
+    /* ─── ACCORDION ─── */
+    .acc-item { border-top: 1px solid var(--line); }
+    .acc-btn {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem 0;
+    }
+    .acc-title {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .acc-icon {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--ink-40);
+      flex-shrink: 0;
+      line-height: 1;
+      transition: transform 0.3s;
+    }
+    .acc-btn.open .acc-icon { transform: rotate(45deg); }
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s ease;
+    }
+    .acc-body.open { max-height: 200px; padding-bottom: 1.5rem; }
+
+    /* ─── FORM ─── */
+    .form-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-60);
+      margin-bottom: 0.4rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: transparent;
+      border: 1.5px solid var(--line);
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder { color: var(--ink-40); }
+    .form-input:focus { border-color: var(--green); }
+
+    /* ─── SCROLL CUE ─── */
+    @keyframes scrl { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+    .scroll-cue { animation: scrl 2.2s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav id="topnav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">A</div>
+      <div class="nav-logo-text">
+        <div class="nav-logo-name">Alioth</div>
+        <div class="nav-logo-div">Marketing Solutions</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#services">Services</a>
+      <a href="#who">Who We Serve</a>
+      <a href="#approach">Approach</a>
+      <a href="#about">About</a>
+    </div>
+    <button class="btn btn-green btn-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      Book a Call
+    </button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="grid-bg" style="min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding-top:100px; padding-bottom:5rem; text-align:center;">
+  <div class="wrap" style="width:100%;">
+
+    <!-- Badge -->
+    <div class="reveal" style="display:inline-flex; align-items:center; gap:0.55rem; border:1px solid var(--line); border-radius:9999px; padding:0.35rem 1rem 0.35rem 0.6rem; margin-bottom:3.5rem; background:rgba(241,233,218,0.7);">
+      <span style="width:7px; height:7px; border-radius:50%; background:#22c55e; flex-shrink:0;"></span>
+      <span style="font-family:var(--sans); font-size:0.75rem; font-weight:500; color:var(--ink-60);">South African Marketing Solutions</span>
+    </div>
+
+    <!-- Display heading -->
+    <div class="reveal" style="margin-bottom:3rem; line-height:0.92;">
+      <div class="display h-xl" style="color:var(--ink);">Alioth</div>
+      <div class="display h-xl" style="color:#C5B7A0;">Marketing</div>
+      <div class="display h-xl" style="color:var(--ink);">Solutions.</div>
+    </div>
+
+    <!-- Tagline -->
+    <p class="reveal" style="font-family:var(--serif); font-size:clamp(1.2rem,2.5vw,1.65rem); font-weight:500; color:var(--ink); letter-spacing:0.01em; margin-bottom:0.6rem;">
+      Real People. Real Results. Real Systems.
+    </p>
+
+    <!-- Sub copy -->
+    <p class="reveal lede" style="max-width:480px; margin:0 auto 0.5rem;">
+      Stop paying massive retainers to agencies that overpromise and underdeliver.
+    </p>
+    <p class="reveal" style="font-family:var(--sans); font-size:0.92rem; font-weight:700; color:var(--ink); margin-bottom:2.75rem;">
+      Learn it. Automate it. Or let us build it properly.
+    </p>
+
+    <!-- CTAs -->
+    <div class="reveal" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1rem; margin-bottom:5rem;">
+      <button class="btn btn-green btn-lg" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Book a Strategy Call &rarr;
+      </button>
+      <button class="btn btn-outline-ink btn-lg" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M2 1.5l9 5-9 5V1.5z"/></svg>
+        See How It Works
+      </button>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="scroll-cue" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--ink-40);">
+      <span style="font-family:var(--mono); font-size:0.55rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;">Scroll</span>
+      <svg width="12" height="16" viewBox="0 0 12 16" fill="none">
+        <path d="M6 1v14M1 10l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     MARQUEE
+══════════════════════════════════════════ -->
+<div class="on-dark marquee-outer" style="border-top:1px solid #1a1a1a; padding:1.1rem 0;">
+  <div class="marquee-track">
+    <span class="marquee-item">Real Results</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">South African Marketing</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Google Ads</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Meta Ads</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Email Automation</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">SEO &amp; Content</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Strategy &amp; Systems</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <!-- duplicate -->
+    <span class="marquee-item">Real Results</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">South African Marketing</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Google Ads</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Meta Ads</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Email Automation</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">SEO &amp; Content</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item">Strategy &amp; Systems</span>
+    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PROBLEM
+══════════════════════════════════════════ -->
+<section id="problem" style="background:var(--cream); border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="g2" style="align-items:start;">
+
+      <div class="reveal">
+        <span class="eyebrow">01 &mdash; The Problem</span>
+        <h2 class="display h-l" style="margin-top:1.5rem; color:var(--ink); max-width:440px;">
+          The marketing industry is broken.
+        </h2>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:2.5rem;">
+
+        <div class="reveal" style="padding-bottom:2.5rem; border-bottom:1px solid var(--line);">
+          <div class="num">01</div>
+          <h3 style="font-family:var(--sans); font-size:0.95rem; font-weight:700; margin-bottom:0.6rem;">
+            Agencies take your money, not your growth seriously
+          </h3>
+          <p class="body-copy">Most agencies focus on billable hours, not outcomes. They lock you into retainers and deliver reports, not results.</p>
+        </div>
+
+        <div class="reveal" style="padding-bottom:2.5rem; border-bottom:1px solid var(--line);">
+          <div class="num">02</div>
+          <h3 style="font-family:var(--sans); font-size:0.95rem; font-weight:700; margin-bottom:0.6rem;">
+            You don't know what's actually working
+          </h3>
+          <p class="body-copy">Vanity metrics. Confusing dashboards. No clear line between your spend and your revenue. You're flying blind.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="num">03</div>
+          <h3 style="font-family:var(--sans); font-size:0.95rem; font-weight:700; margin-bottom:0.6rem;">
+            One-size-fits-all strategies that don't fit you
+          </h3>
+          <p class="body-copy">South African businesses have unique market dynamics, customer behaviours and budget constraints. You need a partner who understands your context.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════ -->
+<section id="services" style="background:var(--cream-deep); border-top:1px solid var(--line);">
+  <div class="wrap">
+
+    <div class="section-head">
+      <span class="eyebrow reveal">02 &mdash; Services</span>
+      <h2 class="display h-l reveal" style="margin-top:1.5rem; max-width:520px;">
+        Three ways we can<br/>work together.
+      </h2>
+    </div>
+
+    <div class="g3">
+
+      <div class="card reveal" style="background:var(--cream);">
+        <div class="num">01</div>
+        <h3 style="font-family:var(--serif); font-size:2.2rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem; line-height:1.1;">
+          Learn It.
+        </h3>
+        <p class="body-copy" style="margin-bottom:1.75rem;">We train your in-house team to own your marketing properly. No agency dependency — just capability, confidence and a system that works for you.</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.55rem;">
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Google &amp; Meta Ads training</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Email &amp; CRM fundamentals</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Analytics &amp; reporting clarity</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Strategy &amp; positioning workshops</li>
+        </ul>
+      </div>
+
+      <div class="card reveal" style="background:var(--cream);">
+        <div class="num">02</div>
+        <h3 style="font-family:var(--serif); font-size:2.2rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem; line-height:1.1;">
+          Automate It.
+        </h3>
+        <p class="body-copy" style="margin-bottom:1.75rem;">We build the systems that do the work for you — lead nurturing, follow-up sequences, retargeting — all running in the background.</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.55rem;">
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> CRM &amp; email automation setup</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Lead capture &amp; nurture flows</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Retargeting &amp; remarketing systems</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Reporting dashboards</li>
+        </ul>
+      </div>
+
+      <div class="card card-dark reveal">
+        <div class="num num-light">03</div>
+        <h3 style="font-family:var(--serif); font-size:2.2rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem; line-height:1.1; color:var(--cream);">
+          Build It Properly.
+        </h3>
+        <p class="body-copy" style="margin-bottom:1.75rem;">Full-service marketing management. We handle strategy, execution and optimisation — accountable to actual revenue, not vanity metrics.</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.55rem;">
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> Paid media (Google, Meta, TikTok)</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> Content &amp; creative production</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> SEO &amp; organic growth</li>
+          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> Monthly strategy reviews</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     WHO WE SERVE
+══════════════════════════════════════════ -->
+<section id="who" style="background:var(--cream); border-top:1px solid var(--line);">
+  <div class="wrap">
+
+    <div class="section-head">
+      <span class="eyebrow reveal">03 &mdash; Who We Serve</span>
+      <h2 class="display h-l reveal" style="margin-top:1.5rem; max-width:560px;">
+        We work best with ambitious South African businesses.
+      </h2>
+    </div>
+
+    <!-- 2×2 bordered grid -->
+    <div style="border:1px solid var(--line); display:grid; grid-template-columns:1fr;" class="who-grid">
+      <div class="reveal" style="padding:2.25rem; border-bottom:1px solid var(--line);">
+        <div class="num">01</div>
+        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">SMEs &amp; Growing Businesses</h3>
+        <p class="body-copy">You have a product the market wants. You just need the systems and strategy to reach them consistently — without wasting budget on the wrong channels.</p>
+      </div>
+      <div class="reveal" style="padding:2.25rem; border-bottom:1px solid var(--line);">
+        <div class="num">02</div>
+        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">E-commerce Brands</h3>
+        <p class="body-copy">Scaling online sales in South Africa takes a specific approach. We understand local payment behaviour, logistics and what actually converts.</p>
+      </div>
+      <div class="reveal" style="padding:2.25rem; border-bottom:1px solid var(--line);">
+        <div class="num">03</div>
+        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">Service Businesses &amp; Professionals</h3>
+        <p class="body-copy">Lawyers, consultants, healthcare providers, financial services. We help you build authority and a consistent flow of qualified leads.</p>
+      </div>
+      <div class="reveal" style="padding:2.25rem;">
+        <div class="num">04</div>
+        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">Brands Burned by Agencies</h3>
+        <p class="body-copy">If you've been through the retainer cycle and have nothing to show for it — we're built for you. Transparent deliverables, tied to outcomes.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @media (min-width: 760px) {
+    .who-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+    .who-grid > div:nth-child(1),
+    .who-grid > div:nth-child(2) { border-bottom: 1px solid var(--line) !important; }
+    .who-grid > div:nth-child(3),
+    .who-grid > div:nth-child(4) { border-bottom: none !important; }
+    .who-grid > div:nth-child(odd) { border-right: 1px solid var(--line); }
+  }
+</style>
+
+
+<!-- ══════════════════════════════════════════
+     APPROACH
+══════════════════════════════════════════ -->
+<section id="approach" style="background:var(--cream-deep); border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="g2" style="align-items:start;">
+
+      <div>
+        <span class="eyebrow reveal">04 &mdash; Approach</span>
+        <h2 class="display h-l reveal" style="margin-top:1.5rem; max-width:380px;">
+          We don't do fluff.<br/>We do outcomes.
+        </h2>
+        <p class="lede reveal" style="margin-top:1.5rem; max-width:380px;">
+          Every engagement starts with a diagnosis. We earn the right to strategy before we touch execution.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggleAcc(this)">
+            <span class="acc-title">01 &nbsp;&nbsp; Diagnose First</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p class="body-copy" style="padding-bottom:0.25rem;">We audit your current marketing — what's running, what's working, what's draining budget. No assumptions, just data.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggleAcc(this)">
+            <span class="acc-title">02 &nbsp;&nbsp; Build a Real Strategy</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p class="body-copy">A tailored roadmap tied to your business goals, budget and customers — not a templated plan recycled from another client.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggleAcc(this)">
+            <span class="acc-title">03 &nbsp;&nbsp; Execute &amp; Iterate</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p class="body-copy">We run campaigns, test creative and optimise relentlessly. Every decision is data-driven — not gut feeling or trend-chasing.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggleAcc(this)">
+            <span class="acc-title">04 &nbsp;&nbsp; Transparent Reporting</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p class="body-copy">You'll always know where your money is going. Monthly reviews, clear dashboards, and honest conversations when things need to change.</p>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--line);"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<section id="about" class="on-dark" style="border-top:1px solid #1a1a1a;">
+  <div class="wrap">
+
+    <span class="eyebrow eyebrow-light reveal">05 &mdash; About</span>
+
+    <div class="g2 reveal" style="margin-top:2rem; align-items:start;">
+      <div>
+        <h2 class="display h-l" style="color:var(--cream); max-width:420px; margin-bottom:1.75rem;">
+          A small team<br/>that punches<br/><span style="color:rgba(241,233,218,0.40);">above its weight.</span>
+        </h2>
+        <p class="body-copy" style="color:var(--cream-60); max-width:420px; line-height:1.82;">
+          Alioth Marketing Solutions was built out of frustration with how the industry operates. We're a lean South African team with deep expertise in performance marketing, automation and strategy — and a relentless focus on results over relationships.
+        </p>
+        <p class="body-copy" style="color:var(--cream-60); max-width:420px; line-height:1.82; margin-top:1rem;">
+          Our name comes from Alioth — the brightest star in the handle of the Big Dipper, the star navigators steered by. That's the role we play for our clients: a fixed point to orient around.
+        </p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:1px; border:1px solid var(--line-dark);">
+        <div style="padding:2rem; border-bottom:1px solid var(--line-dark);">
+          <div style="font-family:var(--serif); font-size:3.5rem; font-weight:600; color:var(--cream); line-height:1; margin-bottom:0.4rem;">100%</div>
+          <div style="font-family:var(--mono); font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream-40);">Outcome-focused</div>
+        </div>
+        <div style="padding:2rem; border-bottom:1px solid var(--line-dark);">
+          <div style="font-family:var(--serif); font-size:3.5rem; font-weight:600; color:var(--cream); line-height:1; margin-bottom:0.4rem;">ZA&#8209;based</div>
+          <div style="font-family:var(--mono); font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream-40);">We understand your market</div>
+        </div>
+        <div style="padding:2rem;">
+          <div style="font-family:var(--serif); font-size:3.5rem; font-weight:600; color:var(--cream); line-height:1; margin-bottom:0.4rem;">No fluff</div>
+          <div style="font-family:var(--mono); font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream-40);">Honest, direct, accountable</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     ACCENT STATEMENT
+══════════════════════════════════════════ -->
+<section class="on-green" style="border-top:1px solid rgba(27,59,47,0.6);">
+  <div class="wrap">
+    <span class="eyebrow eyebrow-light reveal" style="opacity:0.7;">The idea, in one line</span>
+    <h2 class="display h-l reveal" style="color:var(--cream); margin-top:1.5rem; max-width:14ch;">
+      Alioth is the star you steer by.
+    </h2>
+    <p class="lede reveal" style="color:var(--cream-60); margin-top:1.5rem; max-width:38ch;">
+      We're the fixed point ambitious South African brands orient around — strategy, creative, web, campaigns and performance under one roof.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section id="contact" class="grid-bg" style="border-top:1px solid var(--line);">
+  <div class="wrap" style="max-width:700px;">
+
+    <span class="eyebrow reveal">06 &mdash; Book a Strategy Call</span>
+    <h2 class="display h-l reveal" style="margin-top:1.5rem; margin-bottom:1rem;">
+      Let's talk about<br/>your growth.
+    </h2>
+    <p class="lede reveal" style="margin-bottom:3rem; max-width:44ch;">
+      No pitch deck. No obligation. Just an honest conversation about where your marketing is — and what it would take to move the needle.
+    </p>
+
+    <form class="reveal" id="contact-form" onsubmit="handleSubmit(event)">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;" class="form-row">
+        <div>
+          <label class="form-label">First Name</label>
+          <input class="form-input" type="text" placeholder="Aedan" required />
+        </div>
+        <div>
+          <label class="form-label">Last Name</label>
+          <input class="form-input" type="text" placeholder="Doubell" required />
+        </div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@company.co.za" required />
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label class="form-label">Business Name</label>
+        <input class="form-input" type="text" placeholder="Your business" />
+      </div>
+      <div style="margin-bottom:2rem;">
+        <label class="form-label">What's your biggest marketing challenge?</label>
+        <textarea class="form-input" rows="4" placeholder="Tell us what's not working…" style="resize:vertical;"></textarea>
+      </div>
+      <button type="submit" class="btn btn-green btn-lg" style="width:100%; justify-content:center;">
+        Book a Strategy Call &rarr;
+      </button>
+    </form>
+
+    <div id="form-success" style="display:none; margin-top:2rem; border:1px solid var(--green); padding:2rem;">
+      <div style="font-family:var(--serif); font-size:1.8rem; font-weight:600; margin-bottom:0.4rem;">You're booked in.</div>
+      <p class="body-copy">We'll be in touch within 24 hours to confirm a time.</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr !important; } }
+</style>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="on-dark" style="border-top:1px solid #1a1a1a; padding:3rem 2rem;">
+  <div class="wrap" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:2rem;">
+
+    <div style="display:flex; align-items:center; gap:0.8rem;">
+      <div style="width:36px; height:36px; background:var(--cream); display:flex; align-items:center; justify-content:center; color:var(--ink); font-family:var(--serif); font-weight:600; font-size:1.35rem; line-height:1;">A</div>
+      <div>
+        <div style="font-family:var(--sans); font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--cream);">Alioth</div>
+        <div style="font-family:var(--mono); font-size:0.56rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--cream-40);">Marketing Solutions</div>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:1.75rem;">
+      <a href="#problem" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Problem</a>
+      <a href="#services" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Services</a>
+      <a href="#who" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Who We Serve</a>
+      <a href="#approach" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Approach</a>
+      <a href="#about" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">About</a>
+    </div>
+
+    <div style="font-family:var(--mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--cream-40);">
+      &copy; 2026 Alioth Marketing Solutions &middot; South Africa
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+  // Scroll reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('topnav').style.boxShadow =
+      window.scrollY > 12 ? '0 2px 24px rgba(14,13,11,0.08)' : 'none';
+  });
+
+  // Accordion
+  function toggleAcc(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.acc-btn').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>
