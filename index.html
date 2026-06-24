@@ -6,545 +6,291 @@
   <title>Alioth Marketing Solutions</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Archivo:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ─── BRAND TOKENS ─── */
     :root {
       --black:        #0E0D0B;
       --cream:        #F1E9DA;
       --cream-deep:   #E6DAC2;
-      --cream-soft:   #F6F1E8;
-      --cream-60:     rgba(241,233,218,0.60);
-      --cream-40:     rgba(241,233,218,0.40);
       --green:        #1B3B2F;
       --green-bright: #27513F;
-      --green-deep:   #0F2A20;
+      --cream-60:     rgba(241,233,218,0.60);
+      --cream-40:     rgba(241,233,218,0.40);
+      --cream-12:     rgba(241,233,218,0.12);
       --ink:          #0E0D0B;
       --ink-60:       rgba(14,13,11,0.60);
       --ink-40:       rgba(14,13,11,0.40);
-      --ink-15:       rgba(14,13,11,0.09);
+      --ink-10:       rgba(14,13,11,0.08);
       --line:         rgba(14,13,11,0.10);
       --line-dark:    rgba(241,233,218,0.10);
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans:  'Archivo', system-ui, sans-serif;
       --mono:  'Space Mono', monospace;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--black); color: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    body {
-      font-family: var(--sans);
-      background: var(--cream);
-      color: var(--ink);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─── GRID BACKGROUND ─── */
-    .grid-bg {
+    /* ── GRID BG ── */
+    .grid-cream {
       background-color: var(--cream);
-      background-image:
-        linear-gradient(var(--ink-15) 1px, transparent 1px),
-        linear-gradient(90deg, var(--ink-15) 1px, transparent 1px);
+      background-image: linear-gradient(var(--ink-10) 1px, transparent 1px), linear-gradient(90deg, var(--ink-10) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .grid-dark {
+      background-color: var(--black);
+      background-image: linear-gradient(rgba(241,233,218,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(241,233,218,0.04) 1px, transparent 1px);
       background-size: 72px 72px;
     }
 
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 50;
-      background: rgba(241,233,218,0.90);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
+    /* ── NAV ── */
+    #topnav {
+      position: fixed; inset: 0 0 auto; z-index: 100;
+      background: rgba(14,13,11,0.92);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line-dark);
       transition: box-shadow 0.3s;
     }
-    .nav-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
-      color: var(--ink);
-    }
-    .nav-logo-mark {
-      width: 38px;
-      height: 38px;
-      background: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--cream);
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 1.45rem;
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
+    .nav-inner { max-width: 1340px; margin: 0 auto; padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: inline-flex; align-items: center; gap: 0.65rem; text-decoration: none; color: var(--cream); }
     .nav-logo-text { line-height: 1.15; }
-    .nav-logo-name {
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .nav-logo-div {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-60);
-    }
-    .nav-links {
-      display: none;
-      align-items: center;
-      gap: 2.25rem;
-    }
-    .nav-links a {
-      font-family: var(--sans);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--ink-60);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-    @media (min-width: 820px) { .nav-links { display: flex; } }
+    .nav-logo-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; letter-spacing: 0.04em; color: var(--cream); }
+    .nav-logo-sub { font-family: var(--mono); font-size: 0.52rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cream-40); margin-top: 0.1rem; }
+    .nav-links { display: none; align-items: center; gap: 2rem; }
+    .nav-links a { font-family: var(--sans); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-60); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cream); }
+    @media (min-width: 900px) { .nav-links { display: flex; } }
 
-    /* ─── BUTTONS ─── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-family: var(--sans);
-      font-weight: 600;
-      border-radius: 9999px;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.15s;
-      white-space: nowrap;
-    }
-    .btn:hover { opacity: 0.86; transform: translateY(-1px); }
-    .btn-sm  { font-size: 0.78rem; padding: 0.6rem 1.25rem; }
-    .btn-md  { font-size: 0.88rem; padding: 0.8rem 1.75rem; }
-    .btn-lg  { font-size: 0.95rem; padding: 0.95rem 2.1rem; }
-    .btn-green        { background: var(--green); color: var(--cream); }
-    .btn-green:hover  { opacity: 1; background: var(--green-bright); transform: translateY(-1px); }
-    .btn-dark         { background: var(--ink); color: var(--cream); }
-    .btn-outline-ink  { background: transparent; color: var(--ink);   border: 1.5px solid var(--ink); }
-    .btn-outline-cream{ background: transparent; color: var(--cream); border: 1.5px solid var(--cream-40); }
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--sans); font-weight: 600; border-radius: 0; cursor: pointer; border: none; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-sm  { font-size: 0.72rem; padding: 0.6rem 1.2rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .btn-md  { font-size: 0.78rem; padding: 0.75rem 1.6rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .btn-lg  { font-size: 0.82rem; padding: 0.9rem 2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .btn-green       { background: var(--green); color: var(--cream); }
+    .btn-green:hover { background: var(--green-bright); }
+    .btn-cream       { background: var(--cream); color: var(--ink); }
+    .btn-cream:hover { background: var(--cream-deep); }
+    .btn-outline-cream { background: transparent; color: var(--cream); border: 1px solid var(--cream-40); }
+    .btn-outline-cream:hover { border-color: var(--cream); }
+    .btn-outline-ink   { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+    .btn-outline-ink:hover { background: var(--ink); color: var(--cream); }
 
-    /* ─── TYPE SCALE ─── */
-    .eyebrow {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-60);
-    }
+    /* ── TYPE ── */
+    .eyebrow { font-family: var(--mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-60); }
     .eyebrow-light { color: var(--cream-60); }
-    .display {
-      font-family: var(--serif);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      line-height: 0.93;
-    }
-    .h-xl { font-size: clamp(3.8rem, 11vw, 10rem); }
-    .h-l  { font-size: clamp(2.5rem, 5.5vw, 5rem); }
-    .h-m  { font-size: clamp(1.9rem, 3.2vw, 3rem); }
-    .h-s  { font-size: clamp(1.3rem, 2vw, 1.75rem); }
-    .body-copy {
-      font-family: var(--sans);
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: var(--ink-60);
-    }
-    .lede {
-      font-family: var(--sans);
-      font-size: 1.05rem;
-      line-height: 1.72;
-      color: var(--ink-60);
-    }
+    .eyebrow-green  { color: var(--green-bright); }
+    .display { font-family: var(--serif); font-weight: 600; line-height: 0.92; letter-spacing: -0.01em; }
+    .h-hero { font-size: clamp(4.5rem, 13vw, 12rem); }
+    .h-xl   { font-size: clamp(3.5rem, 9vw,  8rem); }
+    .h-l    { font-size: clamp(2.4rem, 5vw,  4.5rem); }
+    .h-m    { font-size: clamp(1.8rem, 3vw,  2.75rem); }
+    .body-copy { font-family: var(--sans); font-size: 0.9rem; line-height: 1.82; color: var(--ink-60); }
+    .body-copy-light { color: var(--cream-60); }
+    .lede { font-family: var(--sans); font-size: 1.05rem; line-height: 1.72; color: var(--ink-60); }
 
-    /* ─── SURFACES ─── */
-    .on-dark  { background: var(--black); color: var(--cream); }
-    .on-green { background: var(--green); color: var(--cream); }
-    .on-cream-deep { background: var(--cream-deep); }
+    /* ── LAYOUT ── */
+    .wrap { max-width: 1340px; margin: 0 auto; }
+    section { padding: clamp(5rem, 10vw, 9rem) 2rem; }
+    .section-head { margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .g2 { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem,5vw,5rem); }
+    .g3 { display: grid; grid-template-columns: 1fr; gap: 1px; }
+    .g6 { display: grid; grid-template-columns: 1fr; gap: 1px; }
+    @media (min-width: 700px)  { .g3 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px)  { .g2 { grid-template-columns: 1fr 1fr; } .g6 { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (min-width: 1100px) { .g3 { grid-template-columns: 1fr 1fr 1fr; } }
 
-    /* ─── LAYOUT ─── */
-    .wrap { max-width: 1280px; margin: 0 auto; }
-    section { padding: clamp(4.5rem, 9vw, 8rem) 2rem; }
-    .section-head { margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
-    .g2 { display: grid; grid-template-columns: 1fr;   gap: clamp(2rem,5vw,5rem); }
-    .g3 { display: grid; grid-template-columns: 1fr;   gap: 1.25rem; }
-    @media (min-width: 760px)  { .g2 { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px)  { .g3 { grid-template-columns: 1fr 1fr 1fr; } }
-
-    /* ─── REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ─── MARQUEE ─── */
+    /* ── MARQUEE ── */
     .marquee-outer { overflow: hidden; }
-    .marquee-track {
-      display: flex;
-      white-space: nowrap;
-      animation: marquee 26s linear infinite;
-    }
-    .marquee-item {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #555;
-      padding: 0 2rem;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
+    .marquee-track { display: flex; white-space: nowrap; animation: marquee 28s linear infinite; }
+    .marquee-item { font-family: var(--mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0 2.5rem; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* ─── CARDS ─── */
-    .card {
-      border: 1px solid var(--line);
-      padding: 2.25rem;
-      background: var(--cream);
-      transition: box-shadow 0.22s, transform 0.22s;
-    }
-    .card:hover {
-      box-shadow: 0 10px 36px rgba(14,13,11,0.07);
-      transform: translateY(-3px);
-    }
-    .card-dark {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--cream);
-    }
-    .card-dark .body-copy { color: var(--cream-60); }
-
-    /* ─── NUM LABEL ─── */
-    .num {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--ink-40);
-      margin-bottom: 1.1rem;
-    }
-    .num-light { color: var(--cream-40); }
-
-    /* ─── ACCORDION ─── */
+    /* ── ACCORDION ── */
     .acc-item { border-top: 1px solid var(--line); }
-    .acc-btn {
-      width: 100%;
-      text-align: left;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.5rem 0;
-    }
-    .acc-title {
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .acc-icon {
-      font-size: 1.2rem;
-      font-weight: 300;
-      color: var(--ink-40);
-      flex-shrink: 0;
-      line-height: 1;
-      transition: transform 0.3s;
-    }
+    .acc-item-dark { border-top-color: var(--line-dark); }
+    .acc-btn { width: 100%; text-align: left; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.5rem 0; }
+    .acc-title { font-family: var(--sans); font-size: 0.88rem; font-weight: 700; }
+    .acc-title-light { color: var(--cream); }
+    .acc-icon { font-size: 1.2rem; font-weight: 300; color: var(--ink-40); flex-shrink: 0; line-height: 1; transition: transform 0.3s; }
+    .acc-icon-light { color: var(--cream-40); }
     .acc-btn.open .acc-icon { transform: rotate(45deg); }
-    .acc-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.38s ease;
-    }
-    .acc-body.open { max-height: 200px; padding-bottom: 1.5rem; }
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.38s ease; }
+    .acc-body.open { max-height: 220px; padding-bottom: 1.5rem; }
 
-    /* ─── FORM ─── */
-    .form-label {
-      display: block;
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-60);
-      margin-bottom: 0.4rem;
-    }
-    .form-input {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      background: transparent;
-      border: 1.5px solid var(--line);
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      color: var(--ink);
-      outline: none;
-      transition: border-color 0.2s;
-      border-radius: 0;
-      -webkit-appearance: none;
-    }
+    /* ── FORM ── */
+    .form-label { display: block; font-family: var(--mono); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 0.4rem; }
+    .form-input { width: 100%; padding: 0.85rem 1rem; background: transparent; border: 1.5px solid var(--line); font-family: var(--sans); font-size: 0.88rem; color: var(--ink); outline: none; transition: border-color 0.2s; border-radius: 0; -webkit-appearance: none; }
     .form-input::placeholder { color: var(--ink-40); }
     .form-input:focus { border-color: var(--green); }
 
-    /* ─── SCROLL CUE ─── */
-    @keyframes scrl { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+    /* ── MISC ── */
+    .num { font-family: var(--mono); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.14em; color: var(--ink-40); margin-bottom: 1rem; }
+    .num-light { color: var(--cream-40); }
+    @keyframes scrl { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(7px); } }
     .scroll-cue { animation: scrl 2.2s ease-in-out infinite; }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu { display: none; position: fixed; inset: 68px 0 0; background: var(--black); z-index: 99; padding: 3rem 2rem; flex-direction: column; gap: 2rem; border-top: 1px solid var(--line-dark); }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a { font-family: var(--sans); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cream); text-decoration: none; border-bottom: 1px solid var(--line-dark); padding-bottom: 1.5rem; }
+
+    /* ── FILTER TABS ── */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .filter-btn { font-family: var(--mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.1rem; border: 1px solid var(--line); background: transparent; color: var(--ink-60); cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+    /* ── WORK GRID ── */
+    .work-item { display: none; }
+    .work-item.show { display: block; }
+    .work-card { background: var(--black); aspect-ratio: 4/3; position: relative; overflow: hidden; cursor: pointer; }
+    .work-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.75rem; background: linear-gradient(to top, rgba(14,13,11,0.9) 0%, transparent 60%); }
+    .work-card:hover .work-card-inner { background: linear-gradient(to top, rgba(27,59,47,0.92) 0%, rgba(27,59,47,0.3) 100%); transition: background 0.3s; }
+    .work-card-bg { position: absolute; inset: 0; background: #1a1a1a; display: flex; align-items: center; justify-content: center; }
+    .work-card-tag { font-family: var(--mono); font-size: 0.52rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green-bright); margin-bottom: 0.5rem; }
+    .work-card-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--cream); line-height: 1.1; }
+    .work-card-meta { font-family: var(--sans); font-size: 0.75rem; color: var(--cream-60); margin-top: 0.35rem; }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     NAV
-══════════════════════════════════════════ -->
+<!-- ══ NAV ══ -->
 <nav id="topnav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <div class="nav-logo-mark">A</div>
+      <svg width="26" height="30" viewBox="0 0 100 112" fill="none">
+        <path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/>
+        <path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
+        <path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
+      </svg>
       <div class="nav-logo-text">
         <div class="nav-logo-name">Alioth</div>
-        <div class="nav-logo-div">Marketing Solutions</div>
+        <div class="nav-logo-sub">Marketing Solutions</div>
       </div>
     </a>
     <div class="nav-links">
-      <a href="#problem">Problem</a>
-      <a href="#services">Services</a>
-      <a href="#who">Who We Serve</a>
-      <a href="#approach">Approach</a>
       <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#who">Who We Serve</a>
+      <a href="#contact">Contact</a>
     </div>
-    <button class="btn btn-green btn-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      Book a Call
-    </button>
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <button class="btn btn-green btn-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</button>
+      <button id="burger" style="display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;" onclick="toggleMenu()" aria-label="Menu">
+        <span style="display:block;width:22px;height:2px;background:var(--cream);transition:all 0.3s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--cream);transition:all 0.3s;"></span>
+        <span style="display:block;width:14px;height:2px;background:var(--cream);transition:all 0.3s;"></span>
+      </button>
+    </div>
   </div>
 </nav>
+<div id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#work" onclick="closeMenu()">Work</a>
+  <a href="#who" onclick="closeMenu()">Who We Serve</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
 
 
-<!-- ══════════════════════════════════════════
-     HERO
-══════════════════════════════════════════ -->
-<section class="grid-bg" style="min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding-top:100px; padding-bottom:5rem; text-align:center;">
-  <div class="wrap" style="width:100%;">
+<!-- ══ HERO ══ -->
+<section class="grid-dark" style="min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:68px;padding-bottom:clamp(3rem,6vw,5rem);position:relative;overflow:hidden;">
+  <div class="wrap" style="width:100%;position:relative;z-index:2;">
 
-    <!-- Badge -->
-    <div class="reveal" style="display:inline-flex; align-items:center; gap:0.55rem; border:1px solid var(--line); border-radius:9999px; padding:0.35rem 1rem 0.35rem 0.6rem; margin-bottom:3.5rem; background:rgba(241,233,218,0.7);">
-      <span style="width:7px; height:7px; border-radius:50%; background:#22c55e; flex-shrink:0;"></span>
-      <span style="font-family:var(--sans); font-size:0.75rem; font-weight:500; color:var(--ink-60);">South African Marketing Solutions</span>
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <span class="eyebrow eyebrow-light" style="margin-bottom:1.5rem;display:block;">South African Marketing Solutions</span>
+      <div class="display h-hero" style="color:var(--cream);">For</div>
+      <div class="display h-hero" style="color:var(--cream-40);font-style:italic;">ambitious</div>
+      <div class="display h-hero" style="color:var(--cream);">brands.</div>
     </div>
 
-    <!-- Display heading -->
-    <div class="reveal" style="margin-bottom:3rem; line-height:0.92;">
-      <div class="display h-xl" style="color:var(--ink);">Alioth</div>
-      <div class="display h-xl" style="color:#C5B7A0;">Marketing</div>
-      <div class="display h-xl" style="color:var(--ink);">Solutions.</div>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:2rem;" class="reveal">
+      <div style="max-width:480px;">
+        <p style="font-family:var(--sans);font-size:1rem;color:var(--cream-60);line-height:1.78;margin-bottom:1.5rem;">
+          Real People. Real Results. Real Systems. — Stop paying massive retainers to agencies that overpromise and underdeliver.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+          <button class="btn btn-green btn-lg" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Strategy Call →</button>
+          <button class="btn btn-outline-cream btn-lg" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Our Services</button>
+        </div>
+      </div>
+      <div class="scroll-cue" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--cream-40);">
+        <span style="font-family:var(--mono);font-size:0.5rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Scroll</span>
+        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 1v16M1 11l5 6 5-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
     </div>
 
-    <!-- Tagline -->
-    <p class="reveal" style="font-family:var(--serif); font-size:clamp(1.2rem,2.5vw,1.65rem); font-weight:500; color:var(--ink); letter-spacing:0.01em; margin-bottom:0.6rem;">
-      Real People. Real Results. Real Systems.
-    </p>
+  </div>
 
-    <!-- Sub copy -->
-    <p class="reveal lede" style="max-width:480px; margin:0 auto 0.5rem;">
-      Stop paying massive retainers to agencies that overpromise and underdeliver.
-    </p>
-    <p class="reveal" style="font-family:var(--sans); font-size:0.92rem; font-weight:700; color:var(--ink); margin-bottom:2.75rem;">
-      Learn it. Automate it. Or let us build it properly.
-    </p>
-
-    <!-- CTAs -->
-    <div class="reveal" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1rem; margin-bottom:5rem;">
-      <button class="btn btn-green btn-lg" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-        Book a Strategy Call &rarr;
-      </button>
-      <button class="btn btn-outline-ink btn-lg" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M2 1.5l9 5-9 5V1.5z"/></svg>
-        See How It Works
-      </button>
-    </div>
-
-    <!-- Scroll cue -->
-    <div class="scroll-cue" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--ink-40);">
-      <span style="font-family:var(--mono); font-size:0.55rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;">Scroll</span>
-      <svg width="12" height="16" viewBox="0 0 12 16" fill="none">
-        <path d="M6 1v14M1 10l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-
+  <!-- Decorative A mark, large, faded -->
+  <div style="position:absolute;right:-4%;bottom:-8%;opacity:0.04;pointer-events:none;">
+    <svg width="600" height="680" viewBox="0 0 100 112" fill="none">
+      <path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/>
+      <path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
+      <path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
+    </svg>
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════
-     MARQUEE
-══════════════════════════════════════════ -->
-<div class="on-dark marquee-outer" style="border-top:1px solid #1a1a1a; padding:1.1rem 0;">
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-outer" style="background:var(--green);padding:1rem 0;border-top:1px solid var(--green-bright);border-bottom:1px solid var(--green-bright);">
   <div class="marquee-track">
-    <span class="marquee-item">Real Results</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">South African Marketing</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Google Ads</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Meta Ads</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Email Automation</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">SEO &amp; Content</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Performance Marketing</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Strategy &amp; Systems</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Paid Media</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Google Ads</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Meta Ads</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Email Automation</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">SEO &amp; Content</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Strategy</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Analytics</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">South African Marketing</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
     <!-- duplicate -->
-    <span class="marquee-item">Real Results</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">South African Marketing</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Google Ads</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Meta Ads</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Email Automation</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">SEO &amp; Content</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Performance Marketing</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
-    <span class="marquee-item">Strategy &amp; Systems</span>
-    <span class="marquee-item" style="color:var(--green-bright);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Paid Media</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Google Ads</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Meta Ads</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Email Automation</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">SEO &amp; Content</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Strategy</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">Analytics</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
+    <span class="marquee-item" style="color:var(--cream-60);">South African Marketing</span><span class="marquee-item" style="color:var(--cream-40);">·</span>
   </div>
 </div>
 
 
-<!-- ══════════════════════════════════════════
-     PROBLEM
-══════════════════════════════════════════ -->
-<section id="problem" style="background:var(--cream); border-top:1px solid var(--line);">
+<!-- ══ ABOUT ══ -->
+<section id="about" class="grid-cream" style="color:var(--ink);">
   <div class="wrap">
-    <div class="g2" style="align-items:start;">
+    <div class="g2" style="align-items:center;gap:clamp(3rem,7vw,8rem);">
 
       <div class="reveal">
-        <span class="eyebrow">01 &mdash; The Problem</span>
-        <h2 class="display h-l" style="margin-top:1.5rem; color:var(--ink); max-width:440px;">
-          The marketing industry is broken.
-        </h2>
+        <span class="eyebrow" style="display:block;margin-bottom:2rem;">About Alioth</span>
+        <div class="display h-xl" style="color:var(--ink);">The star<br/>you <em style="color:var(--green);">steer</em><br/>by.</div>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:2.5rem;">
-
-        <div class="reveal" style="padding-bottom:2.5rem; border-bottom:1px solid var(--line);">
-          <div class="num">01</div>
-          <h3 style="font-family:var(--sans); font-size:0.95rem; font-weight:700; margin-bottom:0.6rem;">
-            Agencies take your money, not your growth seriously
-          </h3>
-          <p class="body-copy">Most agencies focus on billable hours, not outcomes. They lock you into retainers and deliver reports, not results.</p>
+      <div class="reveal">
+        <p class="lede" style="margin-bottom:1.5rem;">
+          Alioth Marketing Solutions was built out of frustration with how the industry operates. We're a lean South African team with deep expertise in performance marketing, automation and strategy.
+        </p>
+        <p class="body-copy" style="margin-bottom:1.5rem;">
+          We consolidate strategy, creative, campaigns and performance under one roof — eliminating the cost and inconsistency of juggling multiple vendors. Our name comes from Alioth, the brightest star in the Big Dipper's handle. The star navigators steered by. That's the role we play: a fixed point to orient around.
+        </p>
+        <p class="body-copy" style="margin-bottom:2.5rem;">
+          No fluff. No retainer lock-in. No overpromising. Just honest, data-driven marketing built for South African businesses that are serious about growth.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem;">
+          <button class="btn btn-green btn-md" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Work With Us</button>
+          <div style="display:inline-flex;align-items:center;gap:0.6rem;border:1px solid var(--line);padding:0.6rem 1rem;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="var(--green)" stroke-width="1.2"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-family:var(--mono);font-size:0.55rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-60);">ZA-Based Team</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:0.6rem;border:1px solid var(--line);padding:0.6rem 1rem;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="var(--green)" stroke-width="1.2"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-family:var(--mono);font-size:0.55rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-60);">Outcome-Focused</span>
+          </div>
         </div>
-
-        <div class="reveal" style="padding-bottom:2.5rem; border-bottom:1px solid var(--line);">
-          <div class="num">02</div>
-          <h3 style="font-family:var(--sans); font-size:0.95rem; font-weight:700; margin-bottom:0.6rem;">
-            You don't know what's actually working
-          </h3>
-          <p class="body-copy">Vanity metrics. Confusing dashboards. No clear line between your spend and your revenue. You're flying blind.</p>
-        </div>
-
-        <div class="reveal">
-          <div class="num">03</div>
-          <h3 style="font-family:var(--sans); font-size:0.95rem; font-weight:700; margin-bottom:0.6rem;">
-            One-size-fits-all strategies that don't fit you
-          </h3>
-          <p class="body-copy">South African businesses have unique market dynamics, customer behaviours and budget constraints. You need a partner who understands your context.</p>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════
-     SERVICES
-══════════════════════════════════════════ -->
-<section id="services" style="background:var(--cream-deep); border-top:1px solid var(--line);">
-  <div class="wrap">
-
-    <div class="section-head">
-      <span class="eyebrow reveal">02 &mdash; Services</span>
-      <h2 class="display h-l reveal" style="margin-top:1.5rem; max-width:520px;">
-        Three ways we can<br/>work together.
-      </h2>
-    </div>
-
-    <div class="g3">
-
-      <div class="card reveal" style="background:var(--cream);">
-        <div class="num">01</div>
-        <h3 style="font-family:var(--serif); font-size:2.2rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem; line-height:1.1;">
-          Learn It.
-        </h3>
-        <p class="body-copy" style="margin-bottom:1.75rem;">We train your in-house team to own your marketing properly. No agency dependency — just capability, confidence and a system that works for you.</p>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.55rem;">
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Google &amp; Meta Ads training</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Email &amp; CRM fundamentals</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Analytics &amp; reporting clarity</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Strategy &amp; positioning workshops</li>
-        </ul>
-      </div>
-
-      <div class="card reveal" style="background:var(--cream);">
-        <div class="num">02</div>
-        <h3 style="font-family:var(--serif); font-size:2.2rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem; line-height:1.1;">
-          Automate It.
-        </h3>
-        <p class="body-copy" style="margin-bottom:1.75rem;">We build the systems that do the work for you — lead nurturing, follow-up sequences, retargeting — all running in the background.</p>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.55rem;">
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> CRM &amp; email automation setup</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Lead capture &amp; nurture flows</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Retargeting &amp; remarketing systems</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:var(--green); font-weight:700; flex-shrink:0;">→</span> Reporting dashboards</li>
-        </ul>
-      </div>
-
-      <div class="card card-dark reveal">
-        <div class="num num-light">03</div>
-        <h3 style="font-family:var(--serif); font-size:2.2rem; font-weight:600; letter-spacing:-0.01em; margin-bottom:0.75rem; line-height:1.1; color:var(--cream);">
-          Build It Properly.
-        </h3>
-        <p class="body-copy" style="margin-bottom:1.75rem;">Full-service marketing management. We handle strategy, execution and optimisation — accountable to actual revenue, not vanity metrics.</p>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.55rem;">
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> Paid media (Google, Meta, TikTok)</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> Content &amp; creative production</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> SEO &amp; organic growth</li>
-          <li class="body-copy" style="display:flex; gap:0.6rem;"><span style="color:#6BA888; font-weight:700; flex-shrink:0;">→</span> Monthly strategy reviews</li>
-        </ul>
       </div>
 
     </div>
@@ -552,202 +298,326 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════
-     WHO WE SERVE
-══════════════════════════════════════════ -->
-<section id="who" style="background:var(--cream); border-top:1px solid var(--line);">
+<!-- ══ SERVICES ══ -->
+<section id="services" style="background:var(--black);color:var(--cream);">
   <div class="wrap">
-
     <div class="section-head">
-      <span class="eyebrow reveal">03 &mdash; Who We Serve</span>
-      <h2 class="display h-l reveal" style="margin-top:1.5rem; max-width:560px;">
-        We work best with ambitious South African businesses.
-      </h2>
+      <span class="eyebrow eyebrow-light reveal" style="display:block;margin-bottom:1.5rem;">What We Do</span>
+      <h2 class="display h-l reveal" style="color:var(--cream);max-width:560px;">Everything your brand needs to grow.</h2>
     </div>
 
-    <!-- 2×2 bordered grid -->
-    <div style="border:1px solid var(--line); display:grid; grid-template-columns:1fr;" class="who-grid">
-      <div class="reveal" style="padding:2.25rem; border-bottom:1px solid var(--line);">
-        <div class="num">01</div>
-        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">SMEs &amp; Growing Businesses</h3>
-        <p class="body-copy">You have a product the market wants. You just need the systems and strategy to reach them consistently — without wasting budget on the wrong channels.</p>
+    <!-- 3×2 service grid -->
+    <div class="g6" style="border:1px solid var(--line-dark);">
+
+      <div class="reveal" style="padding:2.25rem;border-right:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);transition:background 0.25s;" onmouseover="this.style.background='var(--green)'" onmouseout="this.style.background='transparent'">
+        <div style="margin-bottom:1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="var(--cream-40)" stroke-width="1.2"/><path d="M10 16l4 4 8-8" stroke="var(--cream)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:0.65rem;line-height:1.1;">Strategy</h3>
+        <p style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);line-height:1.75;">Marketing strategy, positioning, channel planning and go-to-market roadmaps — built around your business goals, not generic templates.</p>
       </div>
-      <div class="reveal" style="padding:2.25rem; border-bottom:1px solid var(--line);">
+
+      <div class="reveal" style="padding:2.25rem;border-right:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);transition:background 0.25s;" onmouseover="this.style.background='var(--green)'" onmouseout="this.style.background='transparent'">
+        <div style="margin-bottom:1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="3" y="8" width="10" height="16" rx="1" stroke="var(--cream-40)" stroke-width="1.2"/><rect x="19" y="3" width="10" height="21" rx="1" stroke="var(--cream)" stroke-width="1.2"/><path d="M3 26h26" stroke="var(--cream-40)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:0.65rem;line-height:1.1;">Paid Media</h3>
+        <p style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);line-height:1.75;">Google Ads, Meta, TikTok and LinkedIn — managed for maximum return. We optimise relentlessly so every rand works harder.</p>
+      </div>
+
+      <div class="reveal" style="padding:2.25rem;border-bottom:1px solid var(--line-dark);transition:background 0.25s;" onmouseover="this.style.background='var(--green)'" onmouseout="this.style.background='transparent'">
+        <div style="margin-bottom:1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="3" y="7" width="26" height="18" rx="2" stroke="var(--cream-40)" stroke-width="1.2"/><path d="M3 12l13 8 13-8" stroke="var(--cream)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:0.65rem;line-height:1.1;">Email &amp; Automation</h3>
+        <p style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);line-height:1.75;">CRM setup, email sequences, lead nurturing and remarketing flows — all running in the background, converting while you sleep.</p>
+      </div>
+
+      <div class="reveal" style="padding:2.25rem;border-right:1px solid var(--line-dark);transition:background 0.25s;" onmouseover="this.style.background='var(--green)'" onmouseout="this.style.background='transparent'">
+        <div style="margin-bottom:1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="14" cy="14" r="9" stroke="var(--cream-40)" stroke-width="1.2"/><path d="M21 21l7 7" stroke="var(--cream)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:0.65rem;line-height:1.1;">SEO &amp; Content</h3>
+        <p style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);line-height:1.75;">Organic search visibility and content that attracts, educates and converts. Long-term growth you own, not rented from a platform.</p>
+      </div>
+
+      <div class="reveal" style="padding:2.25rem;border-right:1px solid var(--line-dark);transition:background 0.25s;" onmouseover="this.style.background='var(--green)'" onmouseout="this.style.background='transparent'">
+        <div style="margin-bottom:1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 26L26 6M6 6l8 8M20 18l6 8" stroke="var(--cream-40)" stroke-width="1.2" stroke-linecap="round"/><circle cx="22" cy="10" r="4" stroke="var(--cream)" stroke-width="1.2"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:0.65rem;line-height:1.1;">Design &amp; Creative</h3>
+        <p style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);line-height:1.75;">Brand creative, campaign assets and ad production that stop the scroll. Strategy-led design built to perform, not just look good.</p>
+      </div>
+
+      <div class="reveal" style="padding:2.25rem;transition:background 0.25s;" onmouseover="this.style.background='var(--green)'" onmouseout="this.style.background='transparent'">
+        <div style="margin-bottom:1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 24l7-8 5 5 5-9 7 12" stroke="var(--cream)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="3" width="26" height="26" rx="1" stroke="var(--cream-40)" stroke-width="1.2"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:0.65rem;line-height:1.1;">Analytics &amp; Reporting</h3>
+        <p style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);line-height:1.75;">Clear dashboards, attribution modelling and monthly reviews. You'll always know exactly where your money is going and what it's returning.</p>
+      </div>
+
+    </div>
+
+    <div style="margin-top:2rem;text-align:center;" class="reveal">
+      <button class="btn btn-outline-cream btn-md" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Discuss Your Project →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ WORK ══ -->
+<section id="work" class="grid-cream" style="color:var(--ink);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal" style="display:block;margin-bottom:1.5rem;">Our Work</span>
+      <h2 class="display h-l reveal" style="color:var(--ink);max-width:520px;">Results that speak for themselves.</h2>
+    </div>
+
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="paid-media">Paid Media</button>
+      <button class="filter-btn" data-filter="seo">SEO &amp; Content</button>
+      <button class="filter-btn" data-filter="email">Email &amp; Automation</button>
+      <button class="filter-btn" data-filter="strategy">Strategy</button>
+    </div>
+
+    <div class="g3 reveal" style="gap:1px;background:var(--ink-10);" id="work-grid">
+
+      <div class="work-item show" data-category="paid-media">
+        <div class="work-card">
+          <div class="work-card-bg">
+            <svg width="48" height="54" viewBox="0 0 100 112" fill="none" opacity="0.08"><path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/><path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/><path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-card-inner">
+            <div class="work-card-tag">Paid Media</div>
+            <div class="work-card-title">E-commerce Scale-Up</div>
+            <div class="work-card-meta">340% ROAS increase in 90 days</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item show" data-category="seo">
+        <div class="work-card">
+          <div class="work-card-bg">
+            <svg width="48" height="54" viewBox="0 0 100 112" fill="none" opacity="0.08"><path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/><path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/><path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-card-inner">
+            <div class="work-card-tag">SEO &amp; Content</div>
+            <div class="work-card-title">Professional Services Firm</div>
+            <div class="work-card-meta">4× organic traffic in 6 months</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item show" data-category="email">
+        <div class="work-card">
+          <div class="work-card-bg">
+            <svg width="48" height="54" viewBox="0 0 100 112" fill="none" opacity="0.08"><path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/><path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/><path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-card-inner">
+            <div class="work-card-tag">Email &amp; Automation</div>
+            <div class="work-card-title">Retail Brand</div>
+            <div class="work-card-meta">62% open rate · 18% conversion lift</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item show" data-category="strategy">
+        <div class="work-card">
+          <div class="work-card-bg">
+            <svg width="48" height="54" viewBox="0 0 100 112" fill="none" opacity="0.08"><path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/><path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/><path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-card-inner">
+            <div class="work-card-tag">Strategy</div>
+            <div class="work-card-title">B2B Tech Company</div>
+            <div class="work-card-meta">Full go-to-market repositioning</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item show" data-category="paid-media">
+        <div class="work-card">
+          <div class="work-card-bg">
+            <svg width="48" height="54" viewBox="0 0 100 112" fill="none" opacity="0.08"><path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/><path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/><path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-card-inner">
+            <div class="work-card-tag">Paid Media</div>
+            <div class="work-card-title">Healthcare Provider</div>
+            <div class="work-card-meta">2.1× leads at 40% lower CPL</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item show" data-category="seo">
+        <div class="work-card">
+          <div class="work-card-bg">
+            <svg width="48" height="54" viewBox="0 0 100 112" fill="none" opacity="0.08"><path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/><path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/><path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-card-inner">
+            <div class="work-card-tag">SEO &amp; Content</div>
+            <div class="work-card-title">Financial Services Brand</div>
+            <div class="work-card-meta">Page 1 rankings for 38 keywords</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CLIENT LOGOS ══ -->
+<div style="background:var(--black);border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);padding:clamp(3rem,5vw,4.5rem) 0;">
+  <div style="max-width:1340px;margin:0 auto;padding:0 2rem;margin-bottom:2rem;">
+    <p class="eyebrow eyebrow-light reveal" style="text-align:center;">Brands We've Worked With</p>
+  </div>
+  <div class="marquee-outer">
+    <div class="marquee-track" style="animation-duration:32s;">
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Meridian Group</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Northstar Retail</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Vexel Technologies</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Luminary Co.</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Orbite Finance</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Solara Health</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Cairn Properties</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <!-- duplicate -->
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Meridian Group</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Northstar Retail</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Vexel Technologies</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Luminary Co.</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Orbite Finance</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Solara Health</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+      <span class="marquee-item" style="color:var(--cream-40);font-size:0.8rem;font-family:var(--serif);font-weight:600;letter-spacing:0.1em;">Cairn Properties</span>
+      <span class="marquee-item" style="color:var(--cream-12);">·</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ WHO WE SERVE ══ -->
+<section id="who" style="background:var(--cream-deep);color:var(--ink);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal" style="display:block;margin-bottom:1.5rem;">Who We Serve</span>
+      <h2 class="display h-l reveal" style="color:var(--ink);max-width:520px;">Built for ambitious South African businesses.</h2>
+    </div>
+    <div style="border:1px solid var(--line);display:grid;grid-template-columns:1fr;" class="who-grid">
+      <div class="reveal" style="padding:2.25rem;border-bottom:1px solid var(--line);">
+        <div class="num">01</div>
+        <h3 style="font-family:var(--sans);font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.6rem;">SMEs &amp; Growing Businesses</h3>
+        <p class="body-copy">You have a product the market wants. You need the systems and strategy to reach them consistently — without burning budget on the wrong channels.</p>
+      </div>
+      <div class="reveal" style="padding:2.25rem;border-bottom:1px solid var(--line);">
         <div class="num">02</div>
-        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">E-commerce Brands</h3>
+        <h3 style="font-family:var(--sans);font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.6rem;">E-commerce Brands</h3>
         <p class="body-copy">Scaling online sales in South Africa takes a specific approach. We understand local payment behaviour, logistics and what actually converts.</p>
       </div>
-      <div class="reveal" style="padding:2.25rem; border-bottom:1px solid var(--line);">
+      <div class="reveal" style="padding:2.25rem;border-bottom:1px solid var(--line);">
         <div class="num">03</div>
-        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">Service Businesses &amp; Professionals</h3>
+        <h3 style="font-family:var(--sans);font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.6rem;">Service Businesses &amp; Professionals</h3>
         <p class="body-copy">Lawyers, consultants, healthcare providers, financial services. We help you build authority and a consistent flow of qualified leads.</p>
       </div>
       <div class="reveal" style="padding:2.25rem;">
         <div class="num">04</div>
-        <h3 style="font-family:var(--sans); font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.6rem;">Brands Burned by Agencies</h3>
-        <p class="body-copy">If you've been through the retainer cycle and have nothing to show for it — we're built for you. Transparent deliverables, tied to outcomes.</p>
+        <h3 style="font-family:var(--sans);font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.6rem;">Brands Burned by Agencies</h3>
+        <p class="body-copy">Been through the retainer cycle with nothing to show? We're built for you. Transparent deliverables, tied to real outcomes.</p>
       </div>
     </div>
-
   </div>
 </section>
-
 <style>
   @media (min-width: 760px) {
-    .who-grid {
-      grid-template-columns: 1fr 1fr !important;
-    }
-    .who-grid > div:nth-child(1),
-    .who-grid > div:nth-child(2) { border-bottom: 1px solid var(--line) !important; }
-    .who-grid > div:nth-child(3),
-    .who-grid > div:nth-child(4) { border-bottom: none !important; }
+    .who-grid { grid-template-columns: 1fr 1fr !important; }
+    .who-grid > div:nth-child(1),.who-grid > div:nth-child(2) { border-bottom: 1px solid var(--line) !important; }
+    .who-grid > div:nth-child(3),.who-grid > div:nth-child(4) { border-bottom: none !important; }
     .who-grid > div:nth-child(odd) { border-right: 1px solid var(--line); }
   }
 </style>
 
 
-<!-- ══════════════════════════════════════════
-     APPROACH
-══════════════════════════════════════════ -->
-<section id="approach" style="background:var(--cream-deep); border-top:1px solid var(--line);">
+<!-- ══ APPROACH ══ -->
+<section style="background:var(--black);color:var(--cream);">
   <div class="wrap">
-    <div class="g2" style="align-items:start;">
-
+    <div class="g2" style="align-items:start;gap:clamp(3rem,6vw,7rem);">
       <div>
-        <span class="eyebrow reveal">04 &mdash; Approach</span>
-        <h2 class="display h-l reveal" style="margin-top:1.5rem; max-width:380px;">
-          We don't do fluff.<br/>We do outcomes.
-        </h2>
-        <p class="lede reveal" style="margin-top:1.5rem; max-width:380px;">
-          Every engagement starts with a diagnosis. We earn the right to strategy before we touch execution.
-        </p>
+        <span class="eyebrow eyebrow-light reveal" style="display:block;margin-bottom:1.5rem;">Our Approach</span>
+        <h2 class="display h-l reveal" style="color:var(--cream);max-width:380px;">We don't do fluff.<br/>We do outcomes.</h2>
+        <p style="font-family:var(--sans);font-size:1rem;color:var(--cream-60);line-height:1.78;margin-top:1.5rem;max-width:360px;" class="reveal">Every engagement starts with a diagnosis. We earn the right to strategy before we touch execution.</p>
       </div>
-
       <div class="reveal">
-        <div class="acc-item">
+        <div class="acc-item acc-item-dark">
           <button class="acc-btn" onclick="toggleAcc(this)">
-            <span class="acc-title">01 &nbsp;&nbsp; Diagnose First</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-title acc-title-light">01 &nbsp;&nbsp; Diagnose First</span>
+            <span class="acc-icon acc-icon-light">+</span>
           </button>
           <div class="acc-body">
-            <p class="body-copy" style="padding-bottom:0.25rem;">We audit your current marketing — what's running, what's working, what's draining budget. No assumptions, just data.</p>
+            <p style="font-family:var(--sans);font-size:0.88rem;color:var(--cream-60);line-height:1.8;padding-bottom:0.5rem;">We audit your current marketing — what's running, what's working, what's draining budget. No assumptions, just data.</p>
           </div>
         </div>
-        <div class="acc-item">
+        <div class="acc-item acc-item-dark">
           <button class="acc-btn" onclick="toggleAcc(this)">
-            <span class="acc-title">02 &nbsp;&nbsp; Build a Real Strategy</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-title acc-title-light">02 &nbsp;&nbsp; Build a Real Strategy</span>
+            <span class="acc-icon acc-icon-light">+</span>
           </button>
           <div class="acc-body">
-            <p class="body-copy">A tailored roadmap tied to your business goals, budget and customers — not a templated plan recycled from another client.</p>
+            <p style="font-family:var(--sans);font-size:0.88rem;color:var(--cream-60);line-height:1.8;">A tailored roadmap tied to your goals, budget and customers — not a template recycled from another client.</p>
           </div>
         </div>
-        <div class="acc-item">
+        <div class="acc-item acc-item-dark">
           <button class="acc-btn" onclick="toggleAcc(this)">
-            <span class="acc-title">03 &nbsp;&nbsp; Execute &amp; Iterate</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-title acc-title-light">03 &nbsp;&nbsp; Execute &amp; Iterate</span>
+            <span class="acc-icon acc-icon-light">+</span>
           </button>
           <div class="acc-body">
-            <p class="body-copy">We run campaigns, test creative and optimise relentlessly. Every decision is data-driven — not gut feeling or trend-chasing.</p>
+            <p style="font-family:var(--sans);font-size:0.88rem;color:var(--cream-60);line-height:1.8;">We run campaigns, test creative and optimise relentlessly. Every decision is data-driven — not gut feeling or trend-chasing.</p>
           </div>
         </div>
-        <div class="acc-item">
+        <div class="acc-item acc-item-dark">
           <button class="acc-btn" onclick="toggleAcc(this)">
-            <span class="acc-title">04 &nbsp;&nbsp; Transparent Reporting</span>
-            <span class="acc-icon">+</span>
+            <span class="acc-title acc-title-light">04 &nbsp;&nbsp; Transparent Reporting</span>
+            <span class="acc-icon acc-icon-light">+</span>
           </button>
           <div class="acc-body">
-            <p class="body-copy">You'll always know where your money is going. Monthly reviews, clear dashboards, and honest conversations when things need to change.</p>
+            <p style="font-family:var(--sans);font-size:0.88rem;color:var(--cream-60);line-height:1.8;">You'll always know where your money is going. Monthly reviews, clear dashboards, honest conversations when things need to change.</p>
           </div>
         </div>
-        <div style="border-top:1px solid var(--line);"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════
-     ABOUT
-══════════════════════════════════════════ -->
-<section id="about" class="on-dark" style="border-top:1px solid #1a1a1a;">
-  <div class="wrap">
-
-    <span class="eyebrow eyebrow-light reveal">05 &mdash; About</span>
-
-    <div class="g2 reveal" style="margin-top:2rem; align-items:start;">
-      <div>
-        <h2 class="display h-l" style="color:var(--cream); max-width:420px; margin-bottom:1.75rem;">
-          A small team<br/>that punches<br/><span style="color:rgba(241,233,218,0.40);">above its weight.</span>
-        </h2>
-        <p class="body-copy" style="color:var(--cream-60); max-width:420px; line-height:1.82;">
-          Alioth Marketing Solutions was built out of frustration with how the industry operates. We're a lean South African team with deep expertise in performance marketing, automation and strategy — and a relentless focus on results over relationships.
-        </p>
-        <p class="body-copy" style="color:var(--cream-60); max-width:420px; line-height:1.82; margin-top:1rem;">
-          Our name comes from Alioth — the brightest star in the handle of the Big Dipper, the star navigators steered by. That's the role we play for our clients: a fixed point to orient around.
-        </p>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:1px; border:1px solid var(--line-dark);">
-        <div style="padding:2rem; border-bottom:1px solid var(--line-dark);">
-          <div style="font-family:var(--serif); font-size:3.5rem; font-weight:600; color:var(--cream); line-height:1; margin-bottom:0.4rem;">100%</div>
-          <div style="font-family:var(--mono); font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream-40);">Outcome-focused</div>
-        </div>
-        <div style="padding:2rem; border-bottom:1px solid var(--line-dark);">
-          <div style="font-family:var(--serif); font-size:3.5rem; font-weight:600; color:var(--cream); line-height:1; margin-bottom:0.4rem;">ZA&#8209;based</div>
-          <div style="font-family:var(--mono); font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream-40);">We understand your market</div>
-        </div>
-        <div style="padding:2rem;">
-          <div style="font-family:var(--serif); font-size:3.5rem; font-weight:600; color:var(--cream); line-height:1; margin-bottom:0.4rem;">No fluff</div>
-          <div style="font-family:var(--mono); font-size:0.58rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream-40);">Honest, direct, accountable</div>
-        </div>
+        <div style="border-top:1px solid var(--line-dark);"></div>
       </div>
     </div>
-
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════
-     ACCENT STATEMENT
-══════════════════════════════════════════ -->
-<section class="on-green" style="border-top:1px solid rgba(27,59,47,0.6);">
-  <div class="wrap">
-    <span class="eyebrow eyebrow-light reveal" style="opacity:0.7;">The idea, in one line</span>
-    <h2 class="display h-l reveal" style="color:var(--cream); margin-top:1.5rem; max-width:14ch;">
-      Alioth is the star you steer by.
-    </h2>
-    <p class="lede reveal" style="color:var(--cream-60); margin-top:1.5rem; max-width:38ch;">
-      We're the fixed point ambitious South African brands orient around — strategy, creative, web, campaigns and performance under one roof.
-    </p>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════
-     CONTACT
-══════════════════════════════════════════ -->
-<section id="contact" class="grid-bg" style="border-top:1px solid var(--line);">
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="grid-cream" style="color:var(--ink);">
   <div class="wrap" style="max-width:700px;">
-
-    <span class="eyebrow reveal">06 &mdash; Book a Strategy Call</span>
-    <h2 class="display h-l reveal" style="margin-top:1.5rem; margin-bottom:1rem;">
-      Let's talk about<br/>your growth.
-    </h2>
-    <p class="lede reveal" style="margin-bottom:3rem; max-width:44ch;">
-      No pitch deck. No obligation. Just an honest conversation about where your marketing is — and what it would take to move the needle.
-    </p>
+    <span class="eyebrow reveal" style="display:block;margin-bottom:1.5rem;">Get In Touch</span>
+    <h2 class="display h-l reveal" style="color:var(--ink);margin-bottom:1rem;">Let's talk about<br/>your growth.</h2>
+    <p class="lede reveal" style="margin-bottom:3rem;max-width:44ch;">No pitch deck. No obligation. Just an honest conversation about where your marketing is — and what it would take to move the needle.</p>
 
     <form class="reveal" id="contact-form" onsubmit="handleSubmit(event)">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;" class="form-row">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="form-row">
         <div>
           <label class="form-label">First Name</label>
-          <input class="form-input" type="text" placeholder="Aedan" required />
+          <input class="form-input" type="text" placeholder="First name" required />
         </div>
         <div>
           <label class="form-label">Last Name</label>
-          <input class="form-input" type="text" placeholder="Doubell" required />
+          <input class="form-input" type="text" placeholder="Last name" required />
         </div>
       </div>
       <div style="margin-bottom:1rem;">
@@ -762,68 +632,102 @@
         <label class="form-label">What's your biggest marketing challenge?</label>
         <textarea class="form-input" rows="4" placeholder="Tell us what's not working…" style="resize:vertical;"></textarea>
       </div>
-      <button type="submit" class="btn btn-green btn-lg" style="width:100%; justify-content:center;">
-        Book a Strategy Call &rarr;
-      </button>
+      <button type="submit" class="btn btn-green btn-lg" style="width:100%;justify-content:center;">Book a Strategy Call →</button>
     </form>
-
-    <div id="form-success" style="display:none; margin-top:2rem; border:1px solid var(--green); padding:2rem;">
-      <div style="font-family:var(--serif); font-size:1.8rem; font-weight:600; margin-bottom:0.4rem;">You're booked in.</div>
+    <div id="form-success" style="display:none;margin-top:2rem;border:1px solid var(--green);padding:2rem;">
+      <div style="font-family:var(--serif);font-size:1.8rem;font-weight:600;margin-bottom:0.4rem;">You're booked in.</div>
       <p class="body-copy">We'll be in touch within 24 hours to confirm a time.</p>
     </div>
-
   </div>
 </section>
-
-<style>
-  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr !important; } }
-</style>
+<style>@media (max-width:560px){ .form-row { grid-template-columns:1fr !important; } }</style>
 
 
-<!-- ══════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════ -->
-<footer class="on-dark" style="border-top:1px solid #1a1a1a; padding:3rem 2rem;">
-  <div class="wrap" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:2rem;">
+<!-- ══ FOOTER ══ -->
+<footer style="background:var(--black);border-top:1px solid var(--line-dark);">
 
-    <div style="display:flex; align-items:center; gap:0.8rem;">
-      <div style="width:36px; height:36px; background:var(--cream); display:flex; align-items:center; justify-content:center; color:var(--ink); font-family:var(--serif); font-weight:600; font-size:1.35rem; line-height:1;">A</div>
-      <div>
-        <div style="font-family:var(--sans); font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--cream);">Alioth</div>
-        <div style="font-family:var(--mono); font-size:0.56rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--cream-40);">Marketing Solutions</div>
+  <!-- Top footer -->
+  <div class="wrap footer-grid" style="padding:clamp(3.5rem,6vw,5rem) 2rem;display:grid;grid-template-columns:1fr;gap:3rem;">
+
+    <div>
+      <a href="#" style="display:inline-flex;align-items:center;gap:0.65rem;text-decoration:none;color:var(--cream);margin-bottom:1.25rem;">
+        <svg width="26" height="30" viewBox="0 0 100 112" fill="none">
+          <path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/>
+          <path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div style="font-family:var(--serif);font-size:1rem;font-weight:600;letter-spacing:0.04em;color:var(--cream);">Alioth</div>
+          <div style="font-family:var(--mono);font-size:0.5rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--cream-40);margin-top:0.1rem;">Marketing Solutions</div>
+        </div>
+      </a>
+      <p style="font-family:var(--sans);font-size:0.85rem;color:var(--cream-60);line-height:1.78;max-width:300px;">The fixed point ambitious South African brands orient around — strategy, creative, campaigns and performance.</p>
+      <!-- Social -->
+      <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
+        <a href="#" style="width:36px;height:36px;border:1px solid var(--line-dark);display:flex;align-items:center;justify-content:center;color:var(--cream-60);transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='var(--cream)';this.style.color='var(--cream)'" onmouseout="this.style.borderColor='var(--line-dark)';this.style.color='var(--cream-60)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" style="width:36px;height:36px;border:1px solid var(--line-dark);display:flex;align-items:center;justify-content:center;color:var(--cream-60);transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='var(--cream)';this.style.color='var(--cream)'" onmouseout="this.style.borderColor='var(--line-dark)';this.style.color='var(--cream-60)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" style="width:36px;height:36px;border:1px solid var(--line-dark);display:flex;align-items:center;justify-content:center;color:var(--cream-60);transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='var(--cream)';this.style.color='var(--cream)'" onmouseout="this.style.borderColor='var(--line-dark)';this.style.color='var(--cream-60)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
       </div>
     </div>
 
-    <div style="display:flex; flex-wrap:wrap; gap:1.75rem;">
-      <a href="#problem" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Problem</a>
-      <a href="#services" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Services</a>
-      <a href="#who" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Who We Serve</a>
-      <a href="#approach" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">Approach</a>
-      <a href="#about" style="font-family:var(--sans); font-size:0.75rem; color:var(--cream-40); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-40)'">About</a>
+    <div>
+      <div style="font-family:var(--mono);font-size:0.58rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream-40);margin-bottom:1.25rem;">Navigation</div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <a href="#about" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">About</a>
+        <a href="#services" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">Services</a>
+        <a href="#work" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">Work</a>
+        <a href="#who" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">Who We Serve</a>
+        <a href="#contact" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">Contact</a>
+      </div>
     </div>
 
-    <div style="font-family:var(--mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--cream-40);">
-      &copy; 2026 Alioth Marketing Solutions &middot; South Africa
+    <div>
+      <div style="font-family:var(--mono);font-size:0.58rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream-40);margin-bottom:1.25rem;">Get In Touch</div>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;">
+        <a href="tel:+27000000000" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;display:flex;align-items:center;gap:0.6rem;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +27 (0) 00 000 0000
+        </a>
+        <a href="mailto:hello@alioth.co.za" style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);text-decoration:none;display:flex;align-items:center;gap:0.6rem;transition:color 0.2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--cream-60)'">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@alioth.co.za
+        </a>
+        <div style="font-family:var(--sans);font-size:0.82rem;color:var(--cream-60);display:flex;align-items:flex-start;gap:0.6rem;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Johannesburg, South Africa
+        </div>
+      </div>
     </div>
 
   </div>
+
+  <!-- Bottom bar -->
+  <div style="border-top:1px solid var(--line-dark);padding:1.25rem 2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+    <span style="font-family:var(--mono);font-size:0.55rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--cream-40);">Copyright &copy; 2026 &middot; Alioth Marketing Solutions</span>
+    <span style="font-family:var(--mono);font-size:0.55rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--cream-40);">South Africa</span>
+  </div>
+
 </footer>
+<style>
+  @media (min-width: 760px) { .footer-grid { grid-template-columns: 2fr 1fr 1.5fr !important; } }
+</style>
 
 
-<!-- ══════════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════════ -->
+<!-- ══ SCRIPTS ══ -->
 <script>
-  // Scroll reveal
-  const ro = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  // Reveal
+  const ro = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-  // Nav shadow on scroll
+  // Nav scroll
   window.addEventListener('scroll', () => {
-    document.getElementById('topnav').style.boxShadow =
-      window.scrollY > 12 ? '0 2px 24px rgba(14,13,11,0.08)' : 'none';
+    document.getElementById('topnav').style.boxShadow = window.scrollY > 12 ? '0 2px 28px rgba(14,13,11,0.5)' : 'none';
   });
 
   // Accordion
@@ -834,6 +738,23 @@
     document.querySelectorAll('.acc-btn').forEach(b => b.classList.remove('open'));
     if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
   }
+
+  // Work filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.work-item').forEach(item => {
+        const show = filter === 'all' || item.dataset.category === filter;
+        item.classList.toggle('show', show);
+      });
+    });
+  });
+
+  // Mobile menu
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
 
   // Form
   function handleSubmit(e) {
