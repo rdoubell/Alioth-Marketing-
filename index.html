@@ -137,6 +137,15 @@
     #mobile-menu.open { display: flex; }
     #mobile-menu a { font-family: var(--sans); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cream); text-decoration: none; border-bottom: 1px solid var(--line-dark); padding-bottom: 1.5rem; }
 
+    /* ── C3 LOGO ── */
+    .lc { display: inline-flex; align-items: flex-start; gap: 8px; }
+    .cg { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 0.92; display: inline-flex; align-items: baseline; }
+    .lc-div { display: inline-block; width: 1px; background: currentColor; opacity: 0.35; flex-shrink: 0; }
+    .b2 { display: inline-block; font-family: var(--sans); font-weight: 300; letter-spacing: 0.04em; }
+    .bl { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+    .nav-logo-lc { color: var(--cream); text-decoration: none; display: inline-flex; align-items: center; }
+    @media (min-width: 900px) { #burger { display: none; } }
+
     /* ── FILTER TABS ── */
     .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
     .filter-btn { font-family: var(--mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.1rem; border: 1px solid var(--line); background: transparent; color: var(--ink-60); cursor: pointer; transition: all 0.2s; }
@@ -159,32 +168,39 @@
 <!-- ══ NAV ══ -->
 <nav id="topnav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <svg width="26" height="30" viewBox="0 0 100 112" fill="none">
-        <path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="#F1E9DA" stroke-width="9" stroke-linecap="round"/>
-        <path d="M 24 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
-        <path d="M 76 102 L 50 42" stroke="#F1E9DA" stroke-width="6.5" stroke-linecap="round"/>
-      </svg>
-      <div class="nav-logo-text">
-        <div class="nav-logo-name">Alioth</div>
-        <div class="nav-logo-sub">Marketing Solutions</div>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#who">Who We Serve</a>
-      <a href="#contact">Contact</a>
-    </div>
+
+    <!-- LEFT: hamburger (mobile) + nav links + CTA (desktop) -->
     <div style="display:flex;align-items:center;gap:0.75rem;">
-      <button class="btn btn-green btn-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</button>
       <button id="burger" style="display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;" onclick="toggleMenu()" aria-label="Menu">
         <span style="display:block;width:22px;height:2px;background:var(--cream);transition:all 0.3s;"></span>
         <span style="display:block;width:22px;height:2px;background:var(--cream);transition:all 0.3s;"></span>
         <span style="display:block;width:14px;height:2px;background:var(--cream);transition:all 0.3s;"></span>
       </button>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#who">Who We Serve</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="btn btn-green btn-sm nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</button>
     </div>
+
+    <!-- RIGHT: exact c3 logo -->
+    <a href="#" class="nav-logo-lc" id="nav-logo-lc">
+      <span class="lc">
+        <span class="cg" style="font-size:31px">
+          <svg height="20" viewBox="0 0 100 112" fill="none" style="display:block;width:auto;flex-shrink:0;">
+            <path d="M 9 102 L 34 24 Q 50 8 66 24 L 91 102" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <path d="M 24 102 L 50 42" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M 76 102 L 50 42" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+          </svg>lioth
+        </span>
+        <span class="lc-div"></span>
+        <span class="b2"><span>Marketing<i class="bl"></i></span><br><span>Group<i class="bl"></i></span></span>
+      </span>
+    </a>
+
   </div>
 </nav>
 <div id="mobile-menu">
@@ -267,7 +283,7 @@
 
       <div class="reveal">
         <span class="eyebrow" style="display:block;margin-bottom:2rem;">About Alioth</span>
-        <div class="display h-xl" style="color:var(--ink);">The star<br/>you <em style="color:var(--green);">steer</em><br/>by.</div>
+        <div class="display h-xl" style="color:var(--ink);">Built to<br/><em style="color:var(--green);">move</em><br/>brands.</div>
       </div>
 
       <div class="reveal">
@@ -303,7 +319,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow eyebrow-light reveal" style="display:block;margin-bottom:1.5rem;">What We Do</span>
-      <h2 class="display h-l reveal" style="color:var(--cream);max-width:560px;">Everything your brand needs to grow.</h2>
+      <h2 class="display h-l reveal" style="color:var(--cream);">Everything your brand needs to grow.</h2>
     </div>
 
     <!-- 3×2 service grid -->
@@ -371,7 +387,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow reveal" style="display:block;margin-bottom:1.5rem;">Our Work</span>
-      <h2 class="display h-l reveal" style="color:var(--ink);max-width:520px;">Results that speak for themselves.</h2>
+      <h2 class="display h-l reveal" style="color:var(--ink);">Results that speak for themselves.</h2>
     </div>
 
     <div class="filter-bar reveal">
@@ -513,7 +529,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow reveal" style="display:block;margin-bottom:1.5rem;">Who We Serve</span>
-      <h2 class="display h-l reveal" style="color:var(--ink);max-width:520px;">Built for ambitious South African businesses.</h2>
+      <h2 class="display h-l reveal" style="color:var(--ink);">Built for ambitious South African businesses.</h2>
     </div>
     <div style="border:1px solid var(--line);display:grid;grid-template-columns:1fr;" class="who-grid">
       <div class="reveal" style="padding:2.25rem;border-bottom:1px solid var(--line);">
@@ -721,6 +737,37 @@
 
 <!-- ══ SCRIPTS ══ -->
 <script>
+  // C3 logo alignment (ported from _logo-export.html alignLC logic)
+  var NAV_CAP = 0.654;
+  function alignNavLC() {
+    var lc = document.querySelector('#nav-logo-lc .lc');
+    if (!lc) return;
+    var ref = lc.querySelector('.cg svg');
+    var div = lc.querySelector('.lc-div');
+    var b2  = lc.querySelector('.b2');
+    if (!ref || !div || !b2) return;
+    b2.style.transform = 'none'; div.style.transform = 'none';
+    var lcTop = lc.getBoundingClientRect().top;
+    var r = ref.getBoundingClientRect();
+    var refTop = r.top, refBot = r.bottom;
+    var Hh = refBot - refTop;
+    div.style.height = Hh + 'px';
+    div.style.transform = 'translateY(' + (refTop - lcTop) + 'px)';
+    var fs2 = Hh * 0.6;
+    b2.style.fontSize = fs2 + 'px';
+    b2.style.lineHeight = (Hh - NAV_CAP * fs2) + 'px';
+    var bls = b2.querySelectorAll('.bl');
+    if (bls.length) {
+      var bl1 = bls[0].getBoundingClientRect().top;
+      var capTop1 = bl1 - NAV_CAP * fs2;
+      b2.style.transform = 'translateY(' + (refTop - capTop1) + 'px)';
+    }
+  }
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function() {
+    alignNavLC(); setTimeout(alignNavLC, 120);
+  });
+  window.addEventListener('resize', alignNavLC);
+
   // Reveal
   const ro = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
