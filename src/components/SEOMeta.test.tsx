@@ -1,8 +1,12 @@
 import { render } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import SEOMeta from './SEOMeta'
 
 describe('SEOMeta', () => {
+  afterEach(() => {
+    document.head.innerHTML = ''
+    document.title = ''
+  })
   it('sets the document title with the site name suffix', () => {
     render(<SEOMeta title="Solutions" description="What we offer." path="/solutions" />)
     expect(document.title).toBe('Solutions | Alioth Marketing Solutions')
