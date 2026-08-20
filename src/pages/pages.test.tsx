@@ -7,6 +7,7 @@ import Solutions from './Solutions'
 import Contact from './Contact'
 import Blog from './Blog'
 import BlogPost from './BlogPost'
+import NotFound from './NotFound'
 
 describe('page shells', () => {
   it('Home renders an h1 "Home"', () => {
@@ -43,5 +44,10 @@ describe('page shells', () => {
       </MemoryRouter>
     )
     expect(screen.getByRole('heading', { name: 'Post: hello-world' })).toBeInTheDocument()
+  })
+
+  it('NotFound renders an h1 "Page Not Found"', () => {
+    render(<NotFound />)
+    expect(screen.getByRole('heading', { name: 'Page Not Found' })).toBeInTheDocument()
   })
 })

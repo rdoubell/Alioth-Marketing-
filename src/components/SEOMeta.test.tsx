@@ -32,4 +32,16 @@ describe('SEOMeta', () => {
     expect(ogImage?.getAttribute('content')).toBe('https://www.aliothgroup.co.za/og-image.png')
     expect(ogType?.getAttribute('content')).toBe('website')
   })
+
+  it('defaults robots to index, follow when noindex is not set', () => {
+    render(<SEOMeta title="Solutions" description="What we offer." path="/solutions" />)
+    const robots = document.querySelector('meta[name="robots"]')
+    expect(robots?.getAttribute('content')).toBe('index, follow')
+  })
+
+  it('sets robots to noindex, nofollow when noindex is true', () => {
+    render(<SEOMeta title="Page Not Found" description="Not found." path="/oops" noindex />)
+    const robots = document.querySelector('meta[name="robots"]')
+    expect(robots?.getAttribute('content')).toBe('noindex, nofollow')
+  })
 })

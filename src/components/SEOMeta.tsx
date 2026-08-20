@@ -7,6 +7,7 @@ interface SEOMetaProps {
   path?: string
   ogImage?: string
   ogType?: 'website' | 'article'
+  noindex?: boolean
 }
 
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`
@@ -31,15 +32,24 @@ function setLink(rel: string, href: string) {
   el.href = href
 }
 
-export default function SEOMeta({ title, description, path = '/', ogImage, ogType = 'website' }: SEOMetaProps) {
+export default function SEOMeta({
+  title,
+  description,
+  path = '/',
+  ogImage,
+  ogType = 'website',
+  noindex = false,
+}: SEOMetaProps) {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   const url = `${SITE_URL}${path}`
   const image = ogImage ?? DEFAULT_OG_IMAGE
+  const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow'
 
   useEffect(() => {
     document.title = fullTitle
 
     setMeta('description', description)
+    setMeta('robots', robotsContent)
     setLink('canonical', url)
 
     setMeta('og:title', fullTitle, 'property')
@@ -53,7 +63,7 @@ export default function SEOMeta({ title, description, path = '/', ogImage, ogTyp
     setMeta('twitter:title', fullTitle)
     setMeta('twitter:description', description)
     setMeta('twitter:image', image)
-  }, [fullTitle, description, url, ogType, image])
+  }, [fullTitle, description, url, ogType, image, robotsContent])
 
   return null
 }

@@ -47,4 +47,9 @@ describe('AppRoutes', () => {
     expect(screen.getAllByRole('link', { name: 'Alioth Marketing Solutions' })[0]).toHaveAttribute('href', '/')
     expect(screen.getByText(/All rights reserved/)).toBeInTheDocument()
   })
+
+  it('renders NotFound for an unmatched path', () => {
+    renderAt('/servicez')
+    expect(screen.getByRole('heading', { name: 'Page Not Found' })).toBeInTheDocument()
+  })
 })
