@@ -6,6 +6,8 @@ export default function Hero() {
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/video/hero-loop.mp4"
+        poster="/video/hero-poster.jpg"
+        preload="metadata"
         autoPlay
         muted
         loop

@@ -17,6 +17,7 @@ describe('Hero', () => {
     const video = container.querySelector('video')
     expect(video).not.toBeNull()
     expect(video).toHaveAttribute('src', '/video/hero-loop.mp4')
+    expect(video).toHaveAttribute('poster', '/video/hero-poster.jpg')
     expect(video?.autoplay).toBe(true)
     expect(video?.loop).toBe(true)
     expect(video?.muted).toBe(true)
