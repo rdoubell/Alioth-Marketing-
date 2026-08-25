@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import ServicesSection, { SERVICES } from './ServicesSection'
+import ServicesSection from './ServicesSection'
+import { SERVICES } from './services-data'
 
 describe('ServicesSection', () => {
   it('renders the section label', () => {
