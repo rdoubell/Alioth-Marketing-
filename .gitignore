@@ -1,4 +1,5 @@
 .worktrees
+.superpowers
 source-footage
 node_modules
 dist
