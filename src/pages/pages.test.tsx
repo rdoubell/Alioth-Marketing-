@@ -10,9 +10,13 @@ import BlogPost from './BlogPost'
 import NotFound from './NotFound'
 
 describe('page shells', () => {
-  it('Home renders an h1 "Home"', () => {
-    render(<Home />)
-    expect(screen.getByRole('heading', { name: 'Home' })).toBeInTheDocument()
+  it('Home renders the hero headline', () => {
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    )
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/steer/i)
   })
 
   it('About renders an h1 "About"', () => {
