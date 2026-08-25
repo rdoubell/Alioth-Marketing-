@@ -1,67 +1,89 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS, SITE_NAME } from '../lib/brand'
+import logoIcon from '../assets/brand/A-black.png'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-cream/10">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="font-serif text-lg text-cream" onClick={() => setOpen(false)}>
-          {SITE_NAME}
-        </Link>
-
-        <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className="font-sans text-xs uppercase tracking-wider text-cream/70 hover:text-cream transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/90 backdrop-blur-sm">
+      <div className="mx-auto max-w-6xl px-6 py-4">
+        <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">
           <Link
             to="/contact"
-            className="font-sans text-xs uppercase tracking-wider bg-cream text-ink px-5 py-2.5 hover:bg-cream-deep transition-colors"
+            className="justify-self-start border border-ink px-6 py-3 font-sans text-xs uppercase tracking-wider text-ink transition-colors hover:bg-ink hover:text-cream"
           >
             Contact Us
           </Link>
+
+          <nav aria-label="Primary" className="flex items-center gap-1 justify-self-center rounded-full bg-green px-2 py-2">
+            {NAV_LINKS.map((link) => {
+              const active = location.pathname === link.href
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`rounded-full px-5 py-2 font-sans text-xs uppercase tracking-wider transition-colors ${
+                    active ? 'bg-cream text-ink' : 'text-cream/80 hover:text-cream'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          <Link to="/" className="justify-self-end">
+            <img src={logoIcon} alt={SITE_NAME} className="h-8 w-auto" />
+          </Link>
         </div>
 
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden text-cream"
-        >
-          {open ? 'Close' : 'Menu'}
-        </button>
+        <div className="flex items-center justify-between md:hidden">
+          <Link to="/" onClick={() => setOpen(false)}>
+            <img src={logoIcon} alt={SITE_NAME} className="h-8 w-auto" />
+          </Link>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="text-ink"
+          >
+            {open ? 'Close' : 'Menu'}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="md:hidden flex flex-col gap-4 px-6 pb-6">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              onClick={() => setOpen(false)}
-              className="font-sans text-sm uppercase tracking-wider text-cream/80"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="flex flex-col gap-2 px-6 pb-6 md:hidden">
+          {NAV_LINKS.map((link) => {
+            const active = location.pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setOpen(false)}
+                aria-current={active ? 'page' : undefined}
+                className={`rounded-full px-4 py-2 text-center font-sans text-sm uppercase tracking-wider ${
+                  active ? 'bg-cream text-ink' : 'text-ink/70'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
           <Link
             to="/contact"
             onClick={() => setOpen(false)}
-            className="font-sans text-sm uppercase tracking-wider bg-cream text-ink px-5 py-3 text-center"
+            className="border border-ink px-5 py-3 text-center font-sans text-sm uppercase tracking-wider text-ink"
           >
             Contact Us
           </Link>
         </div>
       )}
-    </nav>
+    </header>
   )
 }
