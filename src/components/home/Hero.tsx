@@ -16,22 +16,22 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-32">
-        <h1 className="max-w-3xl font-serif text-5xl font-bold text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
+        <h1 className="animate-fade-up max-w-3xl font-serif text-5xl font-bold text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
           Steer by a fixed point
         </h1>
-        <p className="mt-6 max-w-xl font-sans text-lg text-cream/80">
+        <p className="animate-fade-up mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms]">
           A full-service marketing studio — strategy, creative, web, campaigns and performance.
         </p>
-        <div className="mt-10 flex flex-wrap gap-4">
+        <div className="animate-fade-up mt-10 flex flex-wrap gap-4 [animation-delay:300ms]">
           <Link
             to="/contact"
-            className="bg-cream px-8 py-3.5 font-sans text-xs uppercase tracking-wider text-ink transition-colors hover:bg-cream-deep"
+            className="rounded-full bg-cream px-8 py-3.5 font-sans text-xs uppercase tracking-wider text-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-cream-deep hover:shadow-lg active:translate-y-0 active:scale-95"
           >
             Work With Us
           </Link>
           <Link
             to="/solutions"
-            className="border border-cream px-8 py-3.5 font-sans text-xs uppercase tracking-wider text-cream transition-colors hover:bg-cream/10"
+            className="rounded-full border border-cream px-8 py-3.5 font-sans text-xs uppercase tracking-wider text-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-cream/10 active:translate-y-0 active:scale-95"
           >
             Our Solutions
           </Link>
