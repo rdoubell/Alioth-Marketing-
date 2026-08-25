@@ -16,7 +16,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-32">
-        <h1 className="max-w-3xl font-serif text-5xl text-cream md:text-7xl">
+        <h1 className="max-w-3xl font-serif text-5xl font-bold text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
           Steer by a fixed point
         </h1>
         <p className="mt-6 max-w-xl font-sans text-lg text-cream/80">

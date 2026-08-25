@@ -11,11 +11,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/90 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-6 py-4">
         <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">
-          <Link
-            to="/contact"
-            className="justify-self-start border border-ink px-6 py-3 font-sans text-xs uppercase tracking-wider text-ink transition-colors hover:bg-ink hover:text-cream"
-          >
-            Contact Us
+          <Link to="/" className="justify-self-start">
+            <img src={logoIcon} alt={SITE_NAME} className="h-8 w-auto" />
           </Link>
 
           <nav aria-label="Primary" className="flex items-center gap-1 justify-self-center rounded-full bg-green px-2 py-2">
@@ -36,8 +33,11 @@ export default function Navbar() {
             })}
           </nav>
 
-          <Link to="/" className="justify-self-end">
-            <img src={logoIcon} alt={SITE_NAME} className="h-8 w-auto" />
+          <Link
+            to="/contact"
+            className="justify-self-end border border-ink px-6 py-3 font-sans text-xs uppercase tracking-wider text-ink transition-colors hover:bg-ink hover:text-cream"
+          >
+            Contact Us
           </Link>
         </div>
 
