@@ -54,4 +54,16 @@ describe('Navbar', () => {
     fireEvent.click(toggle)
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
+
+  it('highlights the active mobile link with bg-green instead of cream-on-cream', () => {
+    renderNavbar(['/about'])
+    const toggle = screen.getByRole('button', { name: 'Toggle menu' })
+    fireEvent.click(toggle)
+
+    const activeLink = screen.getAllByRole('link', { name: 'About' }).find((link) =>
+      link.className.includes('text-center')
+    )
+    expect(activeLink).toHaveClass('bg-green')
+    expect(activeLink).not.toHaveClass('bg-cream')
+  })
 })

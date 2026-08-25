@@ -68,4 +68,33 @@ describe('ContactForm', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent(/something went wrong/i)
   })
+
+  it('renders the button with bg-green by default (light tone, used on /contact)', () => {
+    render(<ContactForm source="contact-page" />)
+    expect(screen.getByRole('button', { name: 'Send' })).toHaveClass('bg-green')
+  })
+
+  it('uses cream success text and a cream button on a dark tone', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) }))
+
+    render(<ContactForm source="home" tone="dark" />)
+    expect(screen.getByRole('button', { name: 'Send' })).toHaveClass('bg-cream')
+    fillForm()
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }))
+
+    expect(await screen.findByRole('status')).toHaveClass('text-cream')
+  })
+
+  it('uses readable red error text on a dark tone', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({ ok: false, json: async () => ({ error: 'a valid email is required' }) })
+    )
+
+    render(<ContactForm source="home" tone="dark" />)
+    fillForm()
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }))
+
+    expect(await screen.findByRole('alert')).toHaveClass('text-red-300')
+  })
 })

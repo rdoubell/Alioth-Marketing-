@@ -10,4 +10,9 @@ describe('ContactSection', () => {
     expect(screen.getByLabelText('Email')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Send' })).toBeInTheDocument()
   })
+
+  it('renders the contact form with the dark tone so it is readable on the green background', () => {
+    render(<ContactSection />)
+    expect(screen.getByRole('button', { name: 'Send' })).toHaveClass('bg-cream')
+  })
 })

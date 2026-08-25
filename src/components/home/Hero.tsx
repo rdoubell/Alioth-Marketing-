@@ -10,8 +10,9 @@ export default function Hero() {
         muted
         loop
         playsInline
+        aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-32">
         <h1 className="max-w-3xl font-serif text-5xl text-cream md:text-7xl">
           Steer by a fixed point

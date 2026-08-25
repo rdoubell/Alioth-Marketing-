@@ -11,7 +11,7 @@ export default function ContactSection() {
             Tell us where your brand is headed — we&apos;ll tell you how to get there faster.
           </p>
         </div>
-        <ContactForm source="home" />
+        <ContactForm source="home" tone="dark" />
       </div>
     </section>
   )

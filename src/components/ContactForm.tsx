@@ -1,14 +1,16 @@
 import { useState, type FormEvent } from 'react'
 
 export type ContactFormSource = 'home' | 'contact-page'
+export type ContactFormTone = 'light' | 'dark'
 
 interface ContactFormProps {
   source: ContactFormSource
+  tone?: ContactFormTone
 }
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-export default function ContactForm({ source }: ContactFormProps) {
+export default function ContactForm({ source, tone = 'light' }: ContactFormProps) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -48,7 +50,7 @@ export default function ContactForm({ source }: ContactFormProps) {
 
   if (status === 'success') {
     return (
-      <p role="status" className="font-sans text-ink">
+      <p role="status" className={`font-sans ${tone === 'dark' ? 'text-cream' : 'text-ink'}`}>
         Thanks — we&apos;ll be in touch soon.
       </p>
     )
@@ -99,14 +101,18 @@ export default function ContactForm({ source }: ContactFormProps) {
         className="resize-none border border-ink/20 bg-cream-soft px-4 py-3 font-sans text-sm"
       />
       {status === 'error' && (
-        <p role="alert" className="font-sans text-sm text-red-700">
+        <p role="alert" className={`font-sans text-sm ${tone === 'dark' ? 'text-red-300' : 'text-red-700'}`}>
           {errorMessage}
         </p>
       )}
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="self-start bg-green px-8 py-3 font-sans text-xs uppercase tracking-wider text-cream transition-colors hover:bg-green-bright disabled:opacity-50"
+        className={`self-start px-8 py-3 font-sans text-xs uppercase tracking-wider transition-colors disabled:opacity-50 ${
+          tone === 'dark'
+            ? 'bg-cream text-ink hover:bg-cream-deep'
+            : 'bg-green text-cream hover:bg-green-bright'
+        }`}
       >
         {status === 'submitting' ? 'Sending…' : 'Send'}
       </button>

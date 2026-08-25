@@ -58,7 +58,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="flex flex-col gap-2 px-6 pb-6 md:hidden">
+        <nav aria-label="Primary" className="flex flex-col gap-2 px-6 pb-6 md:hidden">
           {NAV_LINKS.map((link) => {
             const active = location.pathname === link.href
             return (
@@ -68,7 +68,7 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 aria-current={active ? 'page' : undefined}
                 className={`rounded-full px-4 py-2 text-center font-sans text-sm uppercase tracking-wider ${
-                  active ? 'bg-cream text-ink' : 'text-ink/70'
+                  active ? 'bg-green text-cream' : 'text-ink/70'
                 }`}
               >
                 {link.label}
@@ -82,7 +82,7 @@ export default function Navbar() {
           >
             Contact Us
           </Link>
-        </div>
+        </nav>
       )}
     </header>
   )
