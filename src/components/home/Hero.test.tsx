@@ -33,4 +33,9 @@ describe('Hero', () => {
     expect(screen.getByRole('link', { name: 'Work With Us' })).toHaveAttribute('href', '/contact')
     expect(screen.getByRole('link', { name: 'Our Solutions' })).toHaveAttribute('href', '/solutions')
   })
+
+  it('renders a "What We Offer" teaser band beneath the video, hinting at the next section', () => {
+    renderHero()
+    expect(screen.getByText('What We Offer')).toBeInTheDocument()
+  })
 })

@@ -9,8 +9,8 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/90 backdrop-blur-sm">
-      <div className="mx-auto max-w-6xl px-6 py-4">
-        <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">
+      <div className="mx-auto flex h-20 max-w-6xl items-center px-6">
+        <div className="hidden w-full grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">
           <Link to="/" className="justify-self-start">
             <img src={logoIcon} alt={SITE_NAME} className="h-8 w-auto" />
           </Link>
@@ -41,7 +41,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center justify-between md:hidden">
+        <div className="flex w-full items-center justify-between md:hidden">
           <Link to="/" onClick={() => setOpen(false)}>
             <img src={logoIcon} alt={SITE_NAME} className="h-8 w-auto" />
           </Link>

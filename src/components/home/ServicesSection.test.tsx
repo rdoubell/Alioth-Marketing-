@@ -4,9 +4,8 @@ import ServicesSection from './ServicesSection'
 import { SERVICES } from './services-data'
 
 describe('ServicesSection', () => {
-  it('renders the section label and headline', () => {
+  it('renders the section headline', () => {
     render(<ServicesSection />)
-    expect(screen.getByText('What We Offer')).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
   })
 
