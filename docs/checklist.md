@@ -28,6 +28,7 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Hero video compressed 18.7MB → 3.7MB + poster frame added
 - [x] Hero headline legibility fix (bold weight + drop-shadow), Services section headline sized up, Navbar logo/Contact Us swapped (your direct requests, not from the taste-skill list)
 - [x] Hero entrance animation (headline/subhead/buttons fade-up on load, staggered) + rounded pill CTA buttons with hover-lift/press micro-interaction
+- [x] Hero split into 3/4 video + 1/4 cream "What We Offer" teaser band (both fully visible on first load, no scroll needed) — moved the label out of ServicesSection to avoid repeating it
 - [x] Maintenance gate removed entirely — site is live
 - [x] All commits pushed to GitHub (`origin/main` at `93e0fd2`)
 
