@@ -17,7 +17,7 @@ export default function Hero() {
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
-          <h1 className="animate-fade-up max-w-3xl font-serif text-5xl font-bold text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
+          <h1 className="animate-fade-up max-w-3xl font-display text-5xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
             From where you are to where you should be.
           </h1>
           <p className="animate-fade-up mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms]">
@@ -40,7 +40,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="flex h-1/4 items-center justify-center bg-cream">
-        <span className="font-mono text-3xl font-bold uppercase tracking-tight text-green md:text-5xl">
+        <span className="font-serif text-3xl font-bold uppercase text-green md:text-5xl">
           What We Offer
         </span>
       </div>

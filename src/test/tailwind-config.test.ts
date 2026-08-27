@@ -19,5 +19,6 @@ describe('tailwind design tokens', () => {
     expect(fonts.serif[0]).toBe('"Cormorant Garamond"')
     expect(fonts.sans[0]).toBe('Archivo')
     expect(fonts.mono[0]).toBe('"Space Mono"')
+    expect(fonts.display[0]).toBe('"Playfair Display"')
   })
 })
