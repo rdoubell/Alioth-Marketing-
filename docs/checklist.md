@@ -40,7 +40,8 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Navbar transparent-over-hero + scroll hide/reveal built (Home only), animated hamburger↔X, sliding active-link pill
 - [x] Mobile Hero fixes: desktop logo lockup on mobile navbar, static poster frame instead of video (no play-button overlay), subhead second line breaks on mobile
 - [x] Desktop Navbar transparent-over-hero reverted to the solid cream bar per your feedback — mobile keeps the transparent treatment, desktop is always solid/sticky now
-- [x] All commits pushed to GitHub (`origin/main` at `b233cfb`)
+- [x] What We Offer / Services section rebuilt entirely as a GSAP scroll-stacking sequence (see Services section notes below) — new `gsap` dependency added
+- [x] All commits pushed to GitHub (`origin/main` at `2ed8d38`)
 
 ---
 
@@ -74,9 +75,10 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Services section
 
-- **The single biggest structural opportunity on the page.** Replace the uniform 3×2 grid with a **bento-style layout** — the dominant 2026 pattern for feature/service grids (research puts bento-style layouts on ~67% of top SaaS homepages currently): one or two services featured in larger tiles, the rest smaller, asymmetric but balanced — instead of 6 identical boxes.
-- [x] Scroll-triggered, staggered fade-up per card as the section enters view — done.
-- [x] Card hover now has the same lift/shadow treatment as the Hero buttons — done. Still open: a small accent numeral (01–06, Space Mono) per card instead of a generic icon pack, which the taste-skill audit specifically flags as a common tell.
+- [x] **The single biggest structural opportunity on the page — resolved, replaced the uniform 3×2 grid entirely.** Rebuilt as a GSAP ScrollTrigger scroll-stacking sequence: "What We Offer" pins as a backdrop, then each of the 6 cards slides up and pins in turn, scaling down slightly as the next arrives so earlier ones peek out behind it. 3D-shadowed cream blocks (not the reference's glass/blur style), respects `prefers-reduced-motion`.
+- [x] Scroll-triggered, staggered fade-up per card as the section enters view — superseded by the stacking-scroll rebuild above.
+- [x] Card hover lift/shadow — superseded by the stacking-scroll rebuild above.
+- [x] Small accent numeral (01–06, Space Mono) per card instead of a generic icon pack — done as part of the rebuild.
 
 ### Contact section (Home) + /contact page
 
