@@ -30,7 +30,10 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Hero entrance animation (headline/subhead/buttons fade-up on load, staggered) + rounded pill CTA buttons with hover-lift/press micro-interaction
 - [x] Hero split into 3/4 video + 1/4 cream "What We Offer" teaser band (both fully visible on first load, no scroll needed) — moved the label out of ServicesSection to avoid repeating it
 - [x] Maintenance gate removed entirely — site is live
-- [x] All commits pushed to GitHub (`origin/main` at `93e0fd2`)
+- [x] Hero headline replaced ("From where you are to where you should be." / "Guiding your business, growing your revenue."), no more "steer" language
+- [x] Playfair Display Black added for hero-scale headlines only (Cormorant Garamond's ceiling is 700); "What We Offer" moved to Cormorant Garamond now that it's heading-scale
+- [x] Site-wide scroll-triggered entrance animations (`useScrollReveal` hook) — Services headline + staggered cards, Contact intro + form
+- [x] All commits pushed to GitHub (`origin/main` at `78233b7`)
 
 ---
 
@@ -42,8 +45,8 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Global / cross-cutting
 
-- **Font boldness has a ceiling.** Cormorant Garamond on Google Fonts tops out at weight 700 — already applied to the Hero headline tonight. There is no heavier cut of this specific typeface available. If it still needs to feel bolder than that, the real levers are: (a) push size further at desktop (`md:text-7xl` → `lg:text-8xl`), (b) bring in a heavier *display* serif reserved only for hero-scale headline moments (e.g. Fraunces Black, Playfair Display Black) layered alongside Cormorant Garamond rather than replacing it everywhere, or (c) accept 700 as the ceiling and lean on size/shadow/animation instead, as done tonight. This is a real brand-system decision — flagging it rather than silently picking one.
-- **Scroll-triggered entrance animation, site-wide.** Tonight's Hero fade-up only fires once on load. 2026 trend research is consistent: sections should gently fade/slide into view *as the user scrolls to them* (IntersectionObserver-based), not just on initial page load — this is now treated as a baseline expectation, not a flourish, as long as it stays subtle.
+- [x] **Font boldness ceiling** — resolved via option (b): Playfair Display Black added as a `font-display` token, reserved for the Hero headline only, layered alongside (not replacing) Cormorant Garamond.
+- [x] **Scroll-triggered entrance animation, site-wide.** Done — `useScrollReveal` hook applied to Services (headline + staggered cards) and Contact (intro + form). Hero keeps its load-in animation since it's always in view on first paint.
 - **Consistent micro-interactions.** Hero buttons now have a hover-lift + press-down. Extend the same feel to Navbar links, service cards, and the Contact form's submit button, so the whole site reads as one considered system instead of one animated corner.
 - **Color ratio is already on-trend** — the brand's cream-dominant palette matches 2026's move toward "unbleached neutrals over pure white," and Deep Forest green used sparingly matches the trend toward strategic (not dominant) accent color. No change recommended here.
 - **No "skip to content" link anywhere on the site** — small, cheap accessibility fix carried over from the earlier taste-skill audit, still not done.
@@ -65,7 +68,7 @@ Combines the taste-skill audit with current (2026) web design trend research —
 ### Services section
 
 - **The single biggest structural opportunity on the page.** Replace the uniform 3×2 grid with a **bento-style layout** — the dominant 2026 pattern for feature/service grids (research puts bento-style layouts on ~67% of top SaaS homepages currently): one or two services featured in larger tiles, the rest smaller, asymmetric but balanced — instead of 6 identical boxes.
-- Add scroll-triggered, staggered fade-up per card as the section enters view.
+- [x] Scroll-triggered, staggered fade-up per card as the section enters view — done.
 - Card hover is currently just a border-color change — add the same lift/shadow treatment as the Hero buttons. Consider a small accent numeral (01–06, Space Mono) per card instead of a generic icon pack, which the taste-skill audit specifically flags as a common tell.
 
 ### Contact section (Home) + /contact page
