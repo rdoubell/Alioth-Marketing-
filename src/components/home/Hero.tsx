@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logoMark from '../../assets/brand/A-cream.png'
 
 export default function Hero() {
   return (
@@ -15,19 +16,25 @@ export default function Hero() {
           playsInline
           aria-hidden="true"
         />
+        <img
+          src={logoMark}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-16 -right-16 h-[85%] w-auto opacity-[0.35]"
+        />
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div
-          className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-green/80 via-green/25 to-transparent"
+          className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-green/85 via-green/35 to-transparent"
           aria-hidden="true"
         />
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
-          <h1 className="animate-fade-up max-w-3xl font-display text-5xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-right">
+          <h1 className="animate-fade-up ml-auto max-w-3xl font-display text-5xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
             From where you are to where you should be.
           </h1>
-          <p className="animate-fade-up mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms]">
+          <p className="animate-fade-up ml-auto mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms]">
             Guiding your business, growing your revenue.
           </p>
-          <div className="animate-fade-up mt-10 flex flex-wrap gap-4 [animation-delay:300ms]">
+          <div className="animate-fade-up mt-10 flex flex-wrap justify-end gap-4 [animation-delay:300ms]">
             <Link
               to="/contact"
               className="rounded-full bg-cream px-8 py-3.5 font-sans text-xs uppercase tracking-wider text-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-cream-deep hover:shadow-lg active:translate-y-0 active:scale-95"

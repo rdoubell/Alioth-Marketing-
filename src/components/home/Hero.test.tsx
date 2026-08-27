@@ -40,4 +40,11 @@ describe('Hero', () => {
     renderHero()
     expect(screen.getByText('What We Offer')).toBeInTheDocument()
   })
+
+  it('renders the decorative watermark mark as a hidden, non-focusable image', () => {
+    const { container } = renderHero()
+    const watermark = container.querySelector('img[alt=""]')
+    expect(watermark).not.toBeNull()
+    expect(watermark).toHaveAttribute('aria-hidden', 'true')
+  })
 })

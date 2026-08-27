@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS, SITE_NAME } from '../lib/brand'
 import logoIcon from '../assets/brand/A-black.png'
-import LogoC3 from './LogoC3'
+import LogoC2 from './LogoC2'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-20 max-w-6xl items-center px-6">
         <div className="hidden w-full grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">
           <span className="justify-self-start">
-            <LogoC3 />
+            <LogoC2 />
           </span>
 
           <nav aria-label="Primary" className="flex items-center gap-1 justify-self-center rounded-full bg-green px-2 py-2">
