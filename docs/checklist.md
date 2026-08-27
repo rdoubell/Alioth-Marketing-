@@ -38,7 +38,9 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Hero subhead: sized up, "growing your ___" now bold with a typewriter word-rotation (revenue/presence/reach/audience/brand) matching revx.ai's pattern
 - [x] Micro-interactions matched everywhere (service cards, Contact submit button) + skip-to-content link added
 - [x] Navbar transparent-over-hero + scroll hide/reveal built (Home only), animated hamburger↔X, sliding active-link pill
-- [x] All commits pushed to GitHub (`origin/main` at `6b1f75b`)
+- [x] Mobile Hero fixes: desktop logo lockup on mobile navbar, static poster frame instead of video (no play-button overlay), subhead second line breaks on mobile
+- [x] Desktop Navbar transparent-over-hero reverted to the solid cream bar per your feedback — mobile keeps the transparent treatment, desktop is always solid/sticky now
+- [x] All commits pushed to GitHub (`origin/main` at `b233cfb`)
 
 ---
 
@@ -58,7 +60,7 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Navbar
 
-- [x] **Transparent-over-hero + scroll hide/reveal** — done. Home only; every other page unaffected. Found and fixed a real bug along the way: the mobile dropdown used the same 90%-opacity background as the resting scrolled state, which let the Hero text ghost through — opening the menu now forces full opacity.
+- [x] **Transparent-over-hero + scroll hide/reveal** — mobile only, on Home. Desktop was tried transparent too but reverted per your feedback — desktop (md+) now always shows the solid cream bar, sticky, never hidden on scroll, on every page including Home. Found and fixed a real bug along the way: the mobile dropdown used the same 90%-opacity background as the resting scrolled state, which let the Hero text ghost through — opening the menu now forces full opacity.
 - [x] Hover-lift micro-interaction on nav links and Contact Us button — done (earlier pass).
 - [x] **Animated hamburger↔X icon** — done, replaces the old "Menu"/"Close" text toggle.
 - [x] **Active-link pill now slides** between routes (measures the active link's position via refs, animates a shared capsule) instead of each link cross-fading its own background.
