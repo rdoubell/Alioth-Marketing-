@@ -18,6 +18,8 @@ export default function Navbar() {
   const { atTop, hidden } = useNavbarScrollState(isHome)
   // Transparent-over-hero only applies at the very top of Home, and never
   // while the mobile menu is open (it needs a readable backing regardless).
+  // Mobile only — desktop (md+) always shows the solid cream bar, see the
+  // `md:` overrides on the header below.
   const isTransparent = isHome && atTop && !open
 
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
@@ -40,7 +42,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`inset-x-0 top-0 z-50 transition-all duration-300 ${isHome ? 'fixed' : 'sticky'} ${
+      className={`inset-x-0 top-0 z-50 transition-all duration-300 md:sticky md:translate-y-0 md:border-b md:border-ink/10 md:backdrop-blur-sm md:bg-cream/90 ${isHome ? 'fixed' : 'sticky'} ${
         isTransparent
           ? 'bg-transparent'
           : `border-b border-ink/10 backdrop-blur-sm ${open ? 'bg-cream' : 'bg-cream/90'}`
@@ -49,7 +51,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-20 max-w-6xl items-center px-6">
         <div className="hidden w-full grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">
           <span className="justify-self-start">
-            <LogoC2 tone={isTransparent ? 'cream' : 'ink'} />
+            <LogoC2 tone="ink" />
           </span>
 
           <nav
@@ -90,11 +92,7 @@ export default function Navbar() {
 
           <Link
             to="/contact"
-            className={`justify-self-end rounded-full border px-6 py-3 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 ${
-              isTransparent
-                ? 'border-cream text-cream hover:bg-cream hover:text-ink'
-                : 'border-ink text-ink hover:bg-ink hover:text-cream'
-            }`}
+            className="justify-self-end rounded-full border border-ink px-6 py-3 font-sans text-xs uppercase tracking-wider text-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink hover:text-cream hover:shadow-lg active:translate-y-0 active:scale-95"
           >
             Contact Us
           </Link>

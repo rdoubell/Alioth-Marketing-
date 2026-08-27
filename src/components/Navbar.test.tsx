@@ -95,11 +95,20 @@ describe('Navbar', () => {
     expect(header).not.toHaveClass('bg-transparent')
   })
 
-  it('switches the Contact Us button to cream-on-transparent styling when transparent', () => {
+  it('keeps the desktop Contact Us button ink-on-solid at all times, even when transparent on mobile', () => {
     renderNavbar(['/'])
     const contactLink = screen.getAllByRole('link', { name: 'Contact Us' })[0]
-    expect(contactLink).toHaveClass('border-cream')
-    expect(contactLink).toHaveClass('text-cream')
+    expect(contactLink).toHaveClass('border-ink')
+    expect(contactLink).toHaveClass('text-ink')
+    expect(contactLink).not.toHaveClass('border-cream')
+  })
+
+  it('carries a desktop override so the bar stays solid and sticky above md, even when transparent on mobile at the top of Home', () => {
+    const { container } = renderNavbar(['/'])
+    const header = container.querySelector('header')
+    expect(header).toHaveClass('md:sticky')
+    expect(header).toHaveClass('md:bg-cream/90')
+    expect(header).toHaveClass('md:translate-y-0')
   })
 
   it('animates the mobile toggle bars into an X when opened', () => {
