@@ -47,4 +47,9 @@ describe('Hero', () => {
     expect(watermark).not.toBeNull()
     expect(watermark).toHaveAttribute('aria-hidden', 'true')
   })
+
+  it('exposes a full, static subhead sentence to screen readers behind the animated one', () => {
+    renderHero()
+    expect(screen.getByText('Guiding your business, growing your revenue.')).toBeInTheDocument()
+  })
 })

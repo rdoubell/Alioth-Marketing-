@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 import logoMark from '../../assets/brand/A-cream.png'
+import { useTypewriter } from '../../hooks/useTypewriter'
+
+const GROWTH_WORDS = ['revenue', 'presence', 'reach', 'audience', 'brand', 'pipeline']
 
 export default function Hero() {
+  const growthWord = useTypewriter({ words: GROWTH_WORDS })
+
   return (
     <section className="flex h-[calc(100vh-5rem)] flex-col overflow-hidden">
       <div className="relative flex h-3/4 items-center overflow-hidden">
@@ -31,8 +36,15 @@ export default function Hero() {
           <h1 className="animate-fade-up max-w-3xl font-display text-5xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
             From where you are to where you should be.
           </h1>
-          <p className="animate-fade-up mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms]">
-            Guiding your business, growing your revenue.
+          <p className="animate-fade-up mt-6 max-w-xl font-sans text-xl text-cream/80 [animation-delay:150ms] md:text-2xl">
+            <span className="sr-only">Guiding your business, growing your revenue.</span>
+            <span aria-hidden="true">
+              Guiding your business,{' '}
+              <span className="font-bold text-cream">
+                growing your {growthWord}
+                <span className="animate-pulse">|</span>
+              </span>
+            </span>
           </p>
           <div className="animate-fade-up mt-10 flex flex-wrap gap-4 [animation-delay:300ms]">
             <Link
