@@ -31,7 +31,7 @@ export default function Hero() {
           src={logoMark}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 -right-24 h-[130%] w-auto max-w-none opacity-[0.35]"
+          className="pointer-events-none absolute -bottom-8 right-0 h-48 w-auto max-w-none opacity-[0.35] md:-bottom-24 md:-right-24 md:h-[130%]"
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div
