@@ -20,7 +20,7 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 
 ## In progress
 
-- [ ] **Home page entrance experience** — logo splash screen on first load + a transparent, scroll-aware Navbar over the Hero video with a cream gradient scrim. **Design approved via mockup** — not yet spec'd/planned/built.
+- [ ] **Splash screen on first load** — logo on cream, ~1s hold, once per browser session. **Design approved via mockup** — not yet built. (The transparent/scroll-aware Navbar half of this design is now done, see below.)
 
 ## Already done this session
 
@@ -37,7 +37,8 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Hero: forest-green gradient wash at the bottom of the video (later deepened), large semi-transparent watermark "A" mark bottom-right (later enlarged)
 - [x] Hero subhead: sized up, "growing your ___" now bold with a typewriter word-rotation (revenue/presence/reach/audience/brand) matching revx.ai's pattern
 - [x] Micro-interactions matched everywhere (service cards, Contact submit button) + skip-to-content link added
-- [x] All commits pushed to GitHub (`origin/main` at `9e2d4fd`)
+- [x] Navbar transparent-over-hero + scroll hide/reveal built (Home only), animated hamburger↔X, sliding active-link pill
+- [x] All commits pushed to GitHub (`origin/main` at `6b1f75b`)
 
 ---
 
@@ -57,10 +58,10 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Navbar
 
-- **Transparent-over-hero + scroll hide/reveal** — already designed and approved via mockup; next thing to actually build.
-- Extend the hover-lift micro-interaction to the nav links and Contact Us button.
-- **Mobile toggle is still plain text** ("Menu"/"Close") — swap for an animated hamburger↔X icon, standard and expected on mobile nav today.
-- Active-link cream pill could transition smoothly between links on route change instead of snapping instantly — nice-to-have.
+- [x] **Transparent-over-hero + scroll hide/reveal** — done. Home only; every other page unaffected. Found and fixed a real bug along the way: the mobile dropdown used the same 90%-opacity background as the resting scrolled state, which let the Hero text ghost through — opening the menu now forces full opacity.
+- [x] Hover-lift micro-interaction on nav links and Contact Us button — done (earlier pass).
+- [x] **Animated hamburger↔X icon** — done, replaces the old "Menu"/"Close" text toggle.
+- [x] **Active-link pill now slides** between routes (measures the active link's position via refs, animates a shared capsule) instead of each link cross-fading its own background.
 
 ### Hero
 
