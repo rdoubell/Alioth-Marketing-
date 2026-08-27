@@ -20,7 +20,7 @@ export default function Hero() {
           src={logoMark}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 h-[85%] w-auto opacity-[0.35]"
+          className="pointer-events-none absolute -bottom-24 -right-24 h-[130%] w-auto opacity-[0.35]"
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div
