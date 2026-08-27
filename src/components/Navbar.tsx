@@ -1,8 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { NAV_LINKS, SITE_NAME } from '../lib/brand'
-import logoIconInk from '../assets/brand/A-black.png'
-import logoIconCream from '../assets/brand/A-cream.png'
+import { NAV_LINKS } from '../lib/brand'
 import LogoC2 from './LogoC2'
 import { useNavbarScrollState } from '../hooks/useNavbarScrollState'
 
@@ -103,9 +101,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex w-full items-center justify-between md:hidden">
-          <Link to="/" onClick={() => setOpen(false)}>
-            <img src={isTransparent ? logoIconCream : logoIconInk} alt={SITE_NAME} className="h-8 w-auto" />
-          </Link>
+          <span onClick={() => setOpen(false)}>
+            <LogoC2 tone={isTransparent ? 'cream' : 'ink'} />
+          </span>
           <button
             type="button"
             aria-label="Toggle menu"

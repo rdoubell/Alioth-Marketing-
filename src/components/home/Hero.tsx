@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="flex h-screen flex-col overflow-hidden">
       <div className="relative flex h-3/4 items-center overflow-hidden">
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 hidden h-full w-full object-cover md:block"
           src="/video/hero-loop.mp4"
           poster="/video/hero-poster.jpg"
           preload="metadata"
@@ -20,6 +20,12 @@ export default function Hero() {
           loop
           playsInline
           aria-hidden="true"
+        />
+        <img
+          src="/video/hero-poster.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover md:hidden"
         />
         <img
           src={logoMark}
@@ -43,7 +49,8 @@ export default function Hero() {
           <p className="animate-fade-up mt-6 max-w-xl font-sans text-xl text-cream/80 [animation-delay:150ms] md:text-2xl">
             <span className="sr-only">Guiding your business, growing your revenue.</span>
             <span aria-hidden="true">
-              Guiding your business,{' '}
+              Guiding your business,
+              <br className="md:hidden" />{' '}
               <span className="font-bold text-cream">
                 growing your {growthWord}
                 <span className="animate-pulse">|</span>
