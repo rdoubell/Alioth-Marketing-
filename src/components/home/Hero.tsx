@@ -16,6 +16,10 @@ export default function Hero() {
           aria-hidden="true"
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+        <div
+          className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-green/80 via-green/25 to-transparent"
+          aria-hidden="true"
+        />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <h1 className="animate-fade-up max-w-3xl font-display text-5xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
             From where you are to where you should be.

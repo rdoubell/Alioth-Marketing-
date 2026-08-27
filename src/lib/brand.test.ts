@@ -12,8 +12,9 @@ describe('brand constants', () => {
     expect(CONTACT_PHONE).toBe('+27 (0) 00 000 0000')
   })
 
-  it('defines exactly the three navbar links in order', () => {
+  it('defines exactly the four navbar links in order', () => {
     expect(NAV_LINKS).toEqual([
+      { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Solutions', href: '/solutions' },
       { label: 'Blog', href: '/blog' },
