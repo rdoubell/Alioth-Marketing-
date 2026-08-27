@@ -33,7 +33,11 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Hero headline replaced ("From where you are to where you should be." / "Guiding your business, growing your revenue."), no more "steer" language
 - [x] Playfair Display Black added for hero-scale headlines only (Cormorant Garamond's ceiling is 700); "What We Offer" moved to Cormorant Garamond now that it's heading-scale
 - [x] Site-wide scroll-triggered entrance animations (`useScrollReveal` hook) — Services headline + staggered cards, Contact intro + form
-- [x] All commits pushed to GitHub (`origin/main` at `78233b7`)
+- [x] Navbar: Logo C2 (later switched from C3), "Home" added to nav pill, Contact Us made circular, hover-lift matched across pill nav + Contact Us
+- [x] Hero: forest-green gradient wash at the bottom of the video (later deepened), large semi-transparent watermark "A" mark bottom-right (later enlarged)
+- [x] Hero subhead: sized up, "growing your ___" now bold with a typewriter word-rotation (revenue/presence/reach/audience/brand) matching revx.ai's pattern
+- [x] Micro-interactions matched everywhere (service cards, Contact submit button) + skip-to-content link added
+- [x] All commits pushed to GitHub (`origin/main` at `9e2d4fd`)
 
 ---
 
@@ -47,9 +51,9 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 - [x] **Font boldness ceiling** — resolved via option (b): Playfair Display Black added as a `font-display` token, reserved for the Hero headline only, layered alongside (not replacing) Cormorant Garamond.
 - [x] **Scroll-triggered entrance animation, site-wide.** Done — `useScrollReveal` hook applied to Services (headline + staggered cards) and Contact (intro + form). Hero keeps its load-in animation since it's always in view on first paint.
-- **Consistent micro-interactions.** Hero buttons now have a hover-lift + press-down. Extend the same feel to Navbar links, service cards, and the Contact form's submit button, so the whole site reads as one considered system instead of one animated corner.
-- **Color ratio is already on-trend** — the brand's cream-dominant palette matches 2026's move toward "unbleached neutrals over pure white," and Deep Forest green used sparingly matches the trend toward strategic (not dominant) accent color. No change recommended here.
-- **No "skip to content" link anywhere on the site** — small, cheap accessibility fix carried over from the earlier taste-skill audit, still not done.
+- [x] **Consistent micro-interactions.** Done — Navbar links/Contact Us, service cards, and the Contact form's submit button all share the same hover-lift + press-down as the Hero buttons now.
+- [x] **Color ratio is already on-trend** — reviewed, no change needed, per the note below.
+- [x] **Skip-to-content link** — added, first tab-stop on every page, points at a new `<main id="main-content">` landmark.
 
 ### Navbar
 
@@ -69,12 +73,12 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 - **The single biggest structural opportunity on the page.** Replace the uniform 3×2 grid with a **bento-style layout** — the dominant 2026 pattern for feature/service grids (research puts bento-style layouts on ~67% of top SaaS homepages currently): one or two services featured in larger tiles, the rest smaller, asymmetric but balanced — instead of 6 identical boxes.
 - [x] Scroll-triggered, staggered fade-up per card as the section enters view — done.
-- Card hover is currently just a border-color change — add the same lift/shadow treatment as the Hero buttons. Consider a small accent numeral (01–06, Space Mono) per card instead of a generic icon pack, which the taste-skill audit specifically flags as a common tell.
+- [x] Card hover now has the same lift/shadow treatment as the Hero buttons — done. Still open: a small accent numeral (01–06, Space Mono) per card instead of a generic icon pack, which the taste-skill audit specifically flags as a common tell.
 
 ### Contact section (Home) + /contact page
 
 - Inputs currently rely on the browser's default focus ring — a branded focus state (green ring/outline) would feel more deliberate.
-- Submit button should get the same hover-lift treatment as Hero/Services.
+- [x] Submit button now has the same hover-lift treatment as Hero/Services — done.
 - The success message currently replaces the form instantly — animating that swap in would match the "guide and confirm" purpose motion is expected to serve in 2026 (subtle, functional, not decorative).
 
 ### Footer
