@@ -18,10 +18,10 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <h1 className="animate-fade-up max-w-3xl font-serif text-5xl font-bold text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
-            Steer by a fixed point
+            From where you are to where you should be.
           </h1>
           <p className="animate-fade-up mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms]">
-            A full-service marketing studio — strategy, creative, web, campaigns and performance.
+            Guiding your business, growing your revenue.
           </p>
           <div className="animate-fade-up mt-10 flex flex-wrap gap-4 [animation-delay:300ms]">
             <Link

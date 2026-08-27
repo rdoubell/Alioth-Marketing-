@@ -25,7 +25,9 @@ describe('Hero', () => {
 
   it('renders the headline', () => {
     renderHero()
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/steer/i)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      'From where you are to where you should be.'
+    )
   })
 
   it('renders primary and secondary CTA buttons linking to contact and solutions', () => {

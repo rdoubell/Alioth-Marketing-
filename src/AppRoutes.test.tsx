@@ -14,7 +14,7 @@ function renderAt(path: string) {
 describe('AppRoutes', () => {
   it('renders Home at /', () => {
     renderAt('/')
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/steer/i)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/where you should be/i)
   })
 
   it('renders About at /about', () => {

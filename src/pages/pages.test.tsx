@@ -16,7 +16,7 @@ describe('page shells', () => {
         <Home />
       </MemoryRouter>
     )
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/steer/i)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/where you should be/i)
   })
 
   it('About renders an h1 "About"', () => {

@@ -5,6 +5,6 @@ import App from './App'
 describe('App', () => {
   it('renders the Home page at the root route', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/steer/i)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/where you should be/i)
   })
 })
