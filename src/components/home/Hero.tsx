@@ -31,7 +31,7 @@ export default function Hero() {
           src={logoMark}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 -right-24 h-[130%] w-auto opacity-[0.35]"
+          className="pointer-events-none absolute -bottom-24 -right-24 h-[130%] w-auto max-w-none opacity-[0.35]"
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div
@@ -43,10 +43,10 @@ export default function Hero() {
           aria-hidden="true"
         />
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
-          <h1 className="animate-fade-up max-w-3xl font-display text-5xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
+          <h1 className="animate-fade-up max-w-3xl font-display text-4xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">
             From where you are to where you should be.
           </h1>
-          <p className="animate-fade-up mt-6 max-w-xl font-sans text-xl text-cream/80 [animation-delay:150ms] md:text-2xl">
+          <p className="animate-fade-up mt-6 max-w-xl font-sans text-lg text-cream/80 [animation-delay:150ms] md:text-2xl">
             <span className="sr-only">Guiding your business, growing your revenue.</span>
             <span aria-hidden="true">
               Guiding your business,
