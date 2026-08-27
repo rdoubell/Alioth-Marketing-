@@ -8,7 +8,7 @@ export default function Hero() {
   const growthWord = useTypewriter({ words: GROWTH_WORDS })
 
   return (
-    <section className="flex h-[calc(100vh-5rem)] flex-col overflow-hidden">
+    <section className="flex h-screen flex-col overflow-hidden">
       <div className="relative flex h-3/4 items-center overflow-hidden">
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -30,6 +30,10 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div
           className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-green/85 via-green/35 to-transparent"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-cream/70 to-transparent"
           aria-hidden="true"
         />
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6">

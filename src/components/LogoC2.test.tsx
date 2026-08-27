@@ -24,4 +24,20 @@ describe('LogoC2', () => {
     expect(screen.getByText('Group')).toBeInTheDocument()
     expect(screen.queryByRole('img')).not.toBeInTheDocument()
   })
+
+  it('defaults to ink tone, and switches to cream when requested', () => {
+    const { rerender } = render(
+      <MemoryRouter>
+        <LogoC2 />
+      </MemoryRouter>
+    )
+    expect(screen.getByText('Alioth')).toHaveClass('text-ink')
+
+    rerender(
+      <MemoryRouter>
+        <LogoC2 tone="cream" />
+      </MemoryRouter>
+    )
+    expect(screen.getByText('Alioth')).toHaveClass('text-cream')
+  })
 })
