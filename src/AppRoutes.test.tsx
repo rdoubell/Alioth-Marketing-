@@ -52,4 +52,11 @@ describe('AppRoutes', () => {
     renderAt('/servicez')
     expect(screen.getByRole('heading', { name: 'Page Not Found' })).toBeInTheDocument()
   })
+
+  it('renders a skip-to-content link pointing at the main landmark', () => {
+    renderAt('/about')
+    const skipLink = screen.getByRole('link', { name: 'Skip to content' })
+    expect(skipLink).toHaveAttribute('href', '#main-content')
+    expect(screen.getByRole('main')).toHaveAttribute('id', 'main-content')
+  })
 })

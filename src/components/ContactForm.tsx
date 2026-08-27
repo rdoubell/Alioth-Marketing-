@@ -108,7 +108,7 @@ export default function ContactForm({ source, tone = 'light' }: ContactFormProps
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className={`self-start px-8 py-3 font-sans text-xs uppercase tracking-wider transition-colors disabled:opacity-50 ${
+        className={`self-start rounded-full px-8 py-3 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none ${
           tone === 'dark'
             ? 'bg-cream text-ink hover:bg-cream-deep'
             : 'bg-green text-cream hover:bg-green-bright'

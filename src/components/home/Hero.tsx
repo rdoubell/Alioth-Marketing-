@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import logoMark from '../../assets/brand/A-cream.png'
 import { useTypewriter } from '../../hooks/useTypewriter'
 
-const GROWTH_WORDS = ['revenue', 'presence', 'reach', 'audience', 'brand', 'pipeline']
+const GROWTH_WORDS = ['revenue', 'presence', 'reach', 'audience', 'brand']
 
 export default function Hero() {
   const growthWord = useTypewriter({ words: GROWTH_WORDS })

@@ -16,7 +16,7 @@ export default function ServicesSection() {
           {SERVICES.map((service, index) => (
             <div
               key={service.name}
-              className={`reveal border-t border-ink/10 pt-6 transition-colors hover:border-green ${isVisible ? 'reveal-visible' : ''}`}
+              className={`reveal border-t border-ink/10 pt-6 transition-all duration-200 hover:-translate-y-1 hover:border-green hover:shadow-lg ${isVisible ? 'reveal-visible' : ''}`}
               style={{ transitionDelay: isVisible ? `${100 + index * 80}ms` : '0ms' }}
             >
               <h3 className="font-serif text-2xl text-ink">{service.name}</h3>
