@@ -16,11 +16,13 @@ const LAYER_COUNT = SERVICES.length
 const SCALE_STEP = 0.05
 const scaleEase = gsap.parseEase('power2.out')
 
-function GreenGradient() {
+function SectionBackground() {
   return (
-    <div
+    <img
+      src="/Alioth%20background%20section%202.svg"
+      alt=""
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 bg-gradient-to-b from-green-bright via-green to-green-deep"
+      className="pointer-events-none absolute inset-0 h-full w-full object-cover"
     />
   )
 }
@@ -148,10 +150,9 @@ export default function ServicesSection() {
       <section className="relative bg-cream">
         <div className="absolute inset-0" style={{ zIndex: 0 }}>
           <div className="sticky top-0 flex h-screen flex-col items-center gap-6 overflow-hidden pt-24 md:top-20 md:h-[calc(100vh-5rem)] md:pt-28">
-            <GreenGradient />
+            <SectionBackground />
             <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
-              <span className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</span>
-              <h2 className="mt-4 font-serif text-xl text-cream/80 md:text-2xl">One team, six disciplines, no hand-offs</h2>
+              <h2 className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</h2>
             </div>
             <TrackerBar collected={collected} />
           </div>
