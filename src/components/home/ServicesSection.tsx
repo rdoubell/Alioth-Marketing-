@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { SERVICES } from './services-data'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -16,15 +16,11 @@ const LAYER_COUNT = SERVICES.length
 const SCALE_STEP = 0.05
 const scaleEase = gsap.parseEase('power2.out')
 
-function GrainTexture() {
+function GreenGradient() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 bg-cream opacity-[0.05]"
-      style={{
-        backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-      }}
+      className="pointer-events-none absolute inset-0 bg-gradient-to-b from-green-bright via-green to-green-deep"
     />
   )
 }
@@ -41,16 +37,16 @@ function TrackerBar({ collected }: TrackerBarProps) {
           key={service.name}
           className={`flex items-center gap-2 rounded-full border px-3 py-1.5 transition-all duration-500 ease-out md:px-4 md:py-2 ${
             collected[i]
-              ? 'scale-100 border-green bg-green opacity-100'
-              : 'scale-90 border-ink/15 bg-transparent opacity-50'
+              ? 'scale-100 border-cream bg-cream opacity-100'
+              : 'scale-90 border-cream/25 bg-transparent opacity-60'
           }`}
         >
-          <span className={`font-mono text-[10px] md:text-xs ${collected[i] ? 'text-cream' : 'text-ink/40'}`}>
+          <span className={`font-mono text-[10px] md:text-xs ${collected[i] ? 'text-green' : 'text-cream/50'}`}>
             {String(i + 1).padStart(2, '0')}
           </span>
           <span
             className={`font-sans text-[10px] uppercase tracking-wide md:text-xs ${
-              collected[i] ? 'text-cream' : 'hidden md:inline md:text-ink/30'
+              collected[i] ? 'text-green' : 'hidden md:inline md:text-cream/40'
             }`}
           >
             {service.name}
@@ -111,31 +107,15 @@ function StackLayer({ index, onLeave, onEnterBack, children }: StackLayerProps) 
   )
 }
 
-function RecapPanel() {
-  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
-
+function SeeMoreCTA() {
   return (
-    <section className="relative z-10 bg-cream px-6 py-24">
-      <div ref={ref} className="mx-auto max-w-5xl">
-        <h3
-          className={`reveal text-center font-serif text-3xl text-ink md:text-4xl ${isVisible ? 'reveal-visible' : ''}`}
-        >
-          Six disciplines. One team.
-        </h3>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service, i) => (
-            <div
-              key={service.name}
-              className={`reveal rounded-2xl border border-ink/10 bg-cream-soft p-6 transition-all duration-200 hover:-translate-y-1 hover:border-green hover:shadow-lg ${isVisible ? 'reveal-visible' : ''}`}
-              style={{ transitionDelay: isVisible ? `${100 + i * 80}ms` : '0ms' }}
-            >
-              <span className="font-mono text-xs text-green">{String(i + 1).padStart(2, '0')}</span>
-              <h4 className="mt-2 font-serif text-xl text-ink">{service.name}</h4>
-              <p className="mt-2 font-sans text-sm text-ink/70">{service.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <section className="relative z-10 bg-cream px-6 py-20 text-center">
+      <Link
+        to="/solutions"
+        className="inline-block rounded-full border border-ink px-10 py-4 font-sans text-xs uppercase tracking-wider text-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink hover:text-cream hover:shadow-lg active:translate-y-0 active:scale-95"
+      >
+        See More
+      </Link>
     </section>
   )
 }
@@ -168,10 +148,10 @@ export default function ServicesSection() {
       <section className="relative bg-cream">
         <div className="absolute inset-0" style={{ zIndex: 0 }}>
           <div className="sticky top-0 flex h-screen flex-col items-center gap-6 overflow-hidden pt-24 md:top-20 md:h-[calc(100vh-5rem)] md:pt-28">
-            <GrainTexture />
+            <GreenGradient />
             <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
-              <span className="font-serif text-3xl font-bold uppercase text-green md:text-5xl">What We Offer</span>
-              <h2 className="mt-4 font-serif text-xl text-ink/70 md:text-2xl">One team, six disciplines, no hand-offs</h2>
+              <span className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</span>
+              <h2 className="mt-4 font-serif text-xl text-cream/80 md:text-2xl">One team, six disciplines, no hand-offs</h2>
             </div>
             <TrackerBar collected={collected} />
           </div>
@@ -203,7 +183,7 @@ export default function ServicesSection() {
         ))}
       </section>
 
-      <RecapPanel />
+      <SeeMoreCTA />
     </>
   )
 }
