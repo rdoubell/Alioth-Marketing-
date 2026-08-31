@@ -60,7 +60,10 @@ body {
    (not the browser's default white/blue autofill tint) once filled. */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
   -webkit-text-fill-color: #15140f;
   -webkit-box-shadow: 0 0 0 1000px #f1e9da inset;
   box-shadow: 0 0 0 1000px #f1e9da inset;

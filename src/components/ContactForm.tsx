@@ -13,7 +13,7 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 const STEP_COUNT = 3
 
 const inputClass = (tone: ContactFormTone) =>
-  `w-full rounded-xl bg-cream px-4 py-3.5 font-serif text-xl text-ink outline-none placeholder:text-ink/40 transition-shadow duration-200 focus:ring-2 focus:ring-green/50 md:text-2xl ${
+  `w-full rounded-xl bg-cream px-4 py-3.5 font-serif text-xl text-ink caret-ink outline-none placeholder:text-ink/40 transition-shadow duration-200 focus:ring-2 focus:ring-green-bright md:text-2xl ${
     tone === 'light' ? 'border border-ink/15' : ''
   }`
 

@@ -19,9 +19,22 @@ describe('page shells', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/where you should be/i)
   })
 
-  it('About renders an h1 "About"', () => {
-    render(<About />)
-    expect(screen.getByRole('heading', { name: 'About' })).toBeInTheDocument()
+  it('About renders the "Why we\'re called Alioth" headline', () => {
+    render(
+      <MemoryRouter>
+        <About />
+      </MemoryRouter>
+    )
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/why we.re called alioth/i)
+  })
+
+  it('About links to Contact with a Work With Us CTA', () => {
+    render(
+      <MemoryRouter>
+        <About />
+      </MemoryRouter>
+    )
+    expect(screen.getByRole('link', { name: 'Work With Us' })).toHaveAttribute('href', '/contact')
   })
 
   it('Solutions renders an h1 "Solutions"', () => {

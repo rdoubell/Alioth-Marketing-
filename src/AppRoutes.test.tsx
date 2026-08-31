@@ -19,7 +19,7 @@ describe('AppRoutes', () => {
 
   it('renders About at /about', () => {
     renderAt('/about')
-    expect(screen.getByRole('heading', { name: 'About' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/why we.re called alioth/i)
   })
 
   it('renders Solutions at /solutions', () => {
