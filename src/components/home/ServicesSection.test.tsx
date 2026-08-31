@@ -13,11 +13,11 @@ describe('ServicesSection', () => {
     expect(SERVICES).toHaveLength(6)
   })
 
-  it('renders every service as a heading with its description', () => {
+  it('renders every service as a heading with its description, once in the stack and once in the recap', () => {
     render(<ServicesSection />)
     SERVICES.forEach((service) => {
-      expect(screen.getByRole('heading', { name: service.name })).toBeInTheDocument()
-      expect(screen.getByText(service.description)).toBeInTheDocument()
+      expect(screen.getAllByRole('heading', { name: service.name })).toHaveLength(2)
+      expect(screen.getAllByText(service.description)).toHaveLength(2)
     })
   })
 })
