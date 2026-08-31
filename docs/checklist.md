@@ -12,6 +12,50 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 6. [ ] **Analytics setup** — GA4, not yet added (see Pre-launch technical below).
 7. [ ] **Social media** — held for last, at launch.
 
+## Email Integration
+
+How the contact form's email actually works today, and the exact steps to get it firing in production (this is the item held for tomorrow).
+
+**How it works right now:** `ContactForm` posts to `/api/contact` (a Vercel edge function). `api/contact.ts` validates the payload, then uses the `resend` npm package to send the email — to `rohan@aliothgroup.co.za` and `aedan@aliothgroup.co.za`, with reply-to set to whoever filled in the form.
+
+**Steps to get it actually sending:**
+
+1. **Resend account + domain verification**
+   - Log into (or create) an account at [resend.com](https://resend.com)
+   - Resend → Domains → Add Domain → `aliothgroup.co.za`
+   - Resend gives you DNS records (an SPF/TXT record, a DKIM record, usually a DMARC recommendation too) — add these wherever `aliothgroup.co.za`'s DNS is actually managed (check your domain registrar / DNS provider, not necessarily Vercel)
+   - Verification can take anywhere from a few minutes to a few hours to propagate
+   - Until the domain shows "Verified" in Resend, sends from `noreply@aliothgroup.co.za` (the `from` address hardcoded in `api/contact.ts`) will fail
+
+2. **Create an API key**
+   - Resend → API Keys → Create API Key (name it something like `alioth-website-production`)
+   - Copy it immediately — Resend only shows the full key once
+
+3. **Add it to Vercel**
+   - Vercel → this project → Settings → Environment Variables
+   - Add `RESEND_API_KEY` with the key you copied
+   - Set it for **Production** (and Preview too, if you want the form to work on preview deployments)
+
+4. **Redeploy**
+   - Environment variable changes only take effect on the *next* deployment — push any commit, or use Vercel's "Redeploy" button on the latest deployment, to pick it up
+
+5. **Test and verify**
+   - Submit the real form on the live site
+   - If it still fails, check Vercel → this project → Deployments → (latest) → Functions/Logs for `/api/contact` — that will show the actual error (missing key, unverified domain, etc.) instead of the generic "Something went wrong" the form shows visitors
+
+## Backend Hub (future initiative — not started)
+
+A separate internal tool for your own team, distinct from the public marketing site above. Flagging it now so it isn't lost, not treating it as "next" — this is genuinely a second application, not a page on this site.
+
+As described:
+- A hub your team logs into
+- Upload and manage lists of prospective clients you've already put together
+- Build and send automated email campaigns from those lists, tied to your real email addresses
+- Reply to client emails directly from the hub — effectively a lightweight shared inbox
+- An operations dashboard: content/social planner, campaign tracking, etc.
+
+Given the real scope here — team accounts/auth, email-sending infrastructure, a database of client lists, a planner/dashboard UI, an inbox — this deserves its own dedicated spec-and-plan session once the public site items above are further along, rather than being scoped inline in this checklist.
+
 ## Content still needed
 
 - [x] **About page** — built (see Roadmap above for the details).
