@@ -82,9 +82,9 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Contact section (Home) + /contact page
 
-- Inputs currently rely on the browser's default focus ring — a branded focus state (green ring/outline) would feel more deliberate.
+- [x] **Rebuilt as a conversational, personalized 3-step form** — name → email → message, each its own mini-form (native validation + Enter-to-continue still work). Later steps and the success message address the person by their first name. Branded focus states (green underline instead of the browser default) — done.
 - [x] Submit button now has the same hover-lift treatment as Hero/Services — done.
-- The success message currently replaces the form instantly — animating that swap in would match the "guide and confirm" purpose motion is expected to serve in 2026 (subtle, functional, not decorative).
+- [x] Success message now animates in (checkmark badge + personalized "Thanks, {name}" + a reply-time reassurance line) instead of an instant swap — done.
 
 ### Footer
 
