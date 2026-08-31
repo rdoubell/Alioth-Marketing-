@@ -35,8 +35,9 @@ function TrackerBar({ collected }: TrackerBarProps) {
   return (
     <div className="relative z-10 flex flex-wrap items-center justify-center gap-2 px-6">
       {SERVICES.map((service, i) => (
-        <div
+        <Link
           key={service.name}
+          to={`/solutions#${service.slug}`}
           className={`flex items-center gap-2 rounded-full border px-3 py-1.5 transition-all duration-500 ease-out md:px-4 md:py-2 ${
             collected[i]
               ? 'scale-100 border-cream bg-cream opacity-100'
@@ -53,7 +54,7 @@ function TrackerBar({ collected }: TrackerBarProps) {
           >
             {service.name}
           </span>
-        </div>
+        </Link>
       ))}
     </div>
   )
@@ -87,6 +88,11 @@ function StackLayer({ index, onLeave, onEnterBack, children }: StackLayerProps) 
       onUpdate: (self) => {
         const scale = gsap.utils.interpolate(1, targetScale, scaleEase(self.progress))
         gsap.set(card, { scale: Math.max(scale, targetScale), force3D: true })
+        // Belt-and-braces: derive "collected" straight from the same progress
+        // value driving the visible scale, not only the onLeave/onEnterBack
+        // events below, so the pill can never silently fail to fill in.
+        if (self.progress >= 0.999) onLeave()
+        else if (self.progress <= 0.001) onEnterBack()
       },
       onLeave: () => onLeave(),
       onEnterBack: () => onEnterBack(),
@@ -106,19 +112,6 @@ function StackLayer({ index, onLeave, onEnterBack, children }: StackLayerProps) 
         {children}
       </div>
     </div>
-  )
-}
-
-function SeeMoreCTA() {
-  return (
-    <section className="relative z-10 bg-cream px-6 py-20 text-center">
-      <Link
-        to="/solutions"
-        className="inline-block rounded-full border border-ink px-10 py-4 font-sans text-xs uppercase tracking-wider text-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink hover:text-cream hover:shadow-lg active:translate-y-0 active:scale-95"
-      >
-        See More
-      </Link>
-    </section>
   )
 }
 
@@ -146,45 +139,47 @@ export default function ServicesSection() {
   }
 
   return (
-    <>
-      <section className="relative bg-cream">
-        <div className="absolute inset-0" style={{ zIndex: 0 }}>
-          <div className="sticky top-0 flex h-screen flex-col items-center gap-6 overflow-hidden pt-24 md:top-20 md:h-[calc(100vh-5rem)] md:pt-28">
-            <SectionBackground />
-            <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
-              <h2 className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</h2>
-            </div>
-            <TrackerBar collected={collected} />
+    <section className="relative bg-cream">
+      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+        <div className="sticky top-0 flex h-screen flex-col items-center gap-6 overflow-hidden pt-24 md:top-20 md:h-[calc(100vh-5rem)] md:pt-28">
+          <SectionBackground />
+          <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
+            <h2 className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</h2>
           </div>
+          <TrackerBar collected={collected} />
         </div>
+      </div>
 
-        {/* Head-start: gives the backdrop a moment pinned alone before card 1 arrives. */}
-        <div aria-hidden="true" className="h-[50vh]" />
+      {/* Head-start: gives the backdrop a moment pinned alone before card 1 arrives. */}
+      <div aria-hidden="true" className="h-[50vh]" />
 
-        {SERVICES.map((service, i) => (
-          <StackLayer
-            key={service.name}
-            index={i}
-            onLeave={() => setCardCollected(i, true)}
-            onEnterBack={() => setCardCollected(i, false)}
-          >
-            <div className="relative h-full w-full overflow-hidden flex flex-col justify-center bg-cream-soft px-8 py-16 md:mx-auto md:h-auto md:min-h-[32rem] md:w-[85%] md:max-w-4xl md:rounded-[2rem] md:border md:border-ink/10 md:px-16 md:py-20 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-3 -top-6 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-left-4 md:-top-10 md:text-[11rem]"
-              >
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div className="relative z-10">
-                <h3 className="font-serif text-4xl text-ink md:text-6xl">{service.name}</h3>
-                <p className="mt-6 max-w-xl font-sans text-lg text-ink/70 md:text-xl">{service.description}</p>
-              </div>
+      {SERVICES.map((service, i) => (
+        <StackLayer
+          key={service.name}
+          index={i}
+          onLeave={() => setCardCollected(i, true)}
+          onEnterBack={() => setCardCollected(i, false)}
+        >
+          <div className="relative h-full w-full overflow-hidden flex flex-col justify-center bg-cream-soft px-8 py-16 md:mx-auto md:h-auto md:min-h-[32rem] md:w-[85%] md:max-w-4xl md:rounded-[2rem] md:border md:border-ink/10 md:px-16 md:py-20 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-3 -top-6 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-left-4 md:-top-10 md:text-[11rem]"
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div className="relative z-10">
+              <h3 className="font-serif text-4xl text-ink md:text-6xl">{service.name}</h3>
+              <p className="mt-6 max-w-xl font-sans text-lg text-ink/70 md:text-xl">{service.description}</p>
             </div>
-          </StackLayer>
-        ))}
-      </section>
-
-      <SeeMoreCTA />
-    </>
+            <Link
+              to={`/solutions#${service.slug}`}
+              className="absolute bottom-6 right-6 z-10 rounded-full bg-green px-5 py-2.5 font-sans text-xs uppercase tracking-wider text-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-bright hover:shadow-lg active:translate-y-0 active:scale-95 md:bottom-8 md:right-8"
+            >
+              See More
+            </Link>
+          </div>
+        </StackLayer>
+      ))}
+    </section>
   )
 }

@@ -55,3 +55,16 @@ body {
   }
 }
 
+/* Browsers force their own background/text color onto autofilled inputs,
+   ignoring author CSS — this keeps the intake form's cream fields cream
+   (not the browser's default white/blue autofill tint) once filled. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #15140f;
+  -webkit-box-shadow: 0 0 0 1000px #f1e9da inset;
+  box-shadow: 0 0 0 1000px #f1e9da inset;
+  caret-color: #15140f;
+  transition: background-color 9999s ease-in-out 0s;
+}
+

@@ -84,7 +84,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     await resend.emails.send({
       from: 'Alioth Website <noreply@aliothgroup.co.za>',
-      to: 'hello@aliothgroup.co.za',
+      to: ['rohan@aliothgroup.co.za', 'aedan@aliothgroup.co.za'],
       replyTo: payload.email,
       subject: `New enquiry from ${firstName} ${lastName} (${payload.source})`,
       text: `From: ${firstName} ${lastName} <${payload.email}>\nSource: ${payload.source}\n\n${payload.message}`,

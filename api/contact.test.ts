@@ -205,7 +205,7 @@ describe('contact handler', () => {
     expect(res.status).toBe(200)
     expect(sendMock).toHaveBeenCalledOnce()
     expect(sendMock.mock.calls[0][0]).toMatchObject({
-      to: 'hello@aliothgroup.co.za',
+      to: ['rohan@aliothgroup.co.za', 'aedan@aliothgroup.co.za'],
       replyTo: 'jane@example.com',
     })
   })

@@ -13,10 +13,18 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 const STEP_COUNT = 3
 
 const inputClass = (tone: ContactFormTone) =>
-  `w-full border-b bg-transparent px-1 py-3 font-serif text-2xl outline-none transition-colors duration-200 focus:border-green md:text-3xl ${
-    tone === 'dark'
-      ? 'border-cream/30 text-cream placeholder:text-cream/40 focus:border-cream'
-      : 'border-ink/20 text-ink placeholder:text-ink/30'
+  `w-full rounded-xl bg-cream px-4 py-3.5 font-serif text-xl text-ink outline-none placeholder:text-ink/40 transition-shadow duration-200 focus:ring-2 focus:ring-green/50 md:text-2xl ${
+    tone === 'light' ? 'border border-ink/15' : ''
+  }`
+
+const primaryButtonClass = (tone: ContactFormTone) =>
+  `self-start rounded-xl px-8 py-3.5 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none ${
+    tone === 'dark' ? 'bg-cream text-ink hover:bg-cream-deep' : 'bg-green text-cream hover:bg-green-bright'
+  }`
+
+const backButtonClass = (tone: ContactFormTone) =>
+  `rounded-xl px-6 py-3.5 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 ${
+    tone === 'dark' ? 'bg-cream/70 text-ink hover:bg-cream' : 'border border-ink/20 text-ink hover:bg-ink/5'
   }`
 
 export default function ContactForm({ source, tone = 'light' }: ContactFormProps) {
@@ -135,12 +143,7 @@ export default function ContactForm({ source, tone = 'light' }: ContactFormProps
               className={inputClass(tone)}
             />
           </div>
-          <button
-            type="submit"
-            className={`self-start rounded-full px-8 py-3 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 ${
-              tone === 'dark' ? 'bg-cream text-ink hover:bg-cream-deep' : 'bg-green text-cream hover:bg-green-bright'
-            }`}
-          >
+          <button type="submit" className={primaryButtonClass(tone)}>
             Continue
           </button>
         </form>
@@ -163,15 +166,10 @@ export default function ContactForm({ source, tone = 'light' }: ContactFormProps
             className={inputClass(tone)}
           />
           <div className="flex items-center gap-4">
-            <button
-              type="submit"
-              className={`self-start rounded-full px-8 py-3 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 ${
-                tone === 'dark' ? 'bg-cream text-ink hover:bg-cream-deep' : 'bg-green text-cream hover:bg-green-bright'
-              }`}
-            >
+            <button type="submit" className={primaryButtonClass(tone)}>
               Continue
             </button>
-            <button type="button" onClick={() => setStep(0)} className={`font-sans text-xs uppercase tracking-wider ${mutedText}`}>
+            <button type="button" onClick={() => setStep(0)} className={backButtonClass(tone)}>
               Back
             </button>
           </div>
@@ -200,16 +198,10 @@ export default function ContactForm({ source, tone = 'light' }: ContactFormProps
             </p>
           )}
           <div className="flex items-center gap-4">
-            <button
-              type="submit"
-              disabled={status === 'submitting'}
-              className={`self-start rounded-full px-8 py-3 font-sans text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none ${
-                tone === 'dark' ? 'bg-cream text-ink hover:bg-cream-deep' : 'bg-green text-cream hover:bg-green-bright'
-              }`}
-            >
+            <button type="submit" disabled={status === 'submitting'} className={primaryButtonClass(tone)}>
               {status === 'submitting' ? 'Sending…' : 'Send'}
             </button>
-            <button type="button" onClick={() => setStep(1)} className={`font-sans text-xs uppercase tracking-wider ${mutedText}`}>
+            <button type="button" onClick={() => setStep(1)} className={backButtonClass(tone)}>
               Back
             </button>
           </div>
