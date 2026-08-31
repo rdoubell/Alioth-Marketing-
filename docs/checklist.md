@@ -2,6 +2,16 @@
 
 Last updated: 2026-08-25 (site is live; added a comprehensive per-page design suggestion list below, grounded in current 2026 trend research)
 
+## Roadmap (your priority order)
+
+1. [ ] **Footer** — still the Foundation-phase placeholder, no real design yet.
+2. [ ] **Solutions** — still a placeholder page. Also now the link target for every "See More" button and tracker pill on the Home stack (`/solutions#<slug>`, slugs: strategy, paid-media, email-automation, seo-content, design-creative, analytics-reporting) — the page build needs matching anchors.
+3. [ ] **About** — still a placeholder. Question series to gather content starting below.
+4. [ ] **Contact Us** — form itself rebuilt as the conversational multi-step flow (done, see Contact section notes below); the page around it (`src/pages/Contact.tsx`) is still just a bare heading + the form, no further content added yet.
+5. [x] **Email intake setup** — intake emails now go to `rohan@aliothgroup.co.za` and `aedan@aliothgroup.co.za` (both Home and /contact use the same shared form/handler). Still open: verify `RESEND_API_KEY` is actually set in Vercel — can't check that from the repo.
+6. [ ] **Analytics setup** — GA4, not yet added (see Pre-launch technical below).
+7. [ ] **Social media** — held for last, at launch.
+
 ## Content still needed
 
 - [ ] **About page** — currently a placeholder (`<h1>About</h1>` only). Spec calls for headline → mission paragraph → stats row → team blurb → narrative → closing CTA. **Now live on the public site as-is.**
@@ -41,7 +51,9 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] Mobile Hero fixes: desktop logo lockup on mobile navbar, static poster frame instead of video (no play-button overlay), subhead second line breaks on mobile
 - [x] Desktop Navbar transparent-over-hero reverted to the solid cream bar per your feedback — mobile keeps the transparent treatment, desktop is always solid/sticky now
 - [x] What We Offer / Services section rebuilt entirely as a GSAP scroll-stacking sequence (see Services section notes below) — new `gsap` dependency added
-- [x] All commits pushed to GitHub (`origin/main` at `2ed8d38`)
+- [x] Each service card now has its own green "See More" button to `/solutions#<slug>`; tracker pills link the same way; removed the old generic "See More" at the bottom of the stack
+- [x] Contact form rebuilt as a conversational 3-step flow with cream rounded-rectangle inputs/buttons and an autofill-color fix; intake now emails rohan@ and aedan@aliothgroup.co.za
+- [x] All commits pushed to GitHub (`origin/main` at `e6a89c6`)
 
 ---
 
@@ -75,16 +87,19 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Services section
 
-- [x] **The single biggest structural opportunity on the page — resolved, replaced the uniform 3×2 grid entirely.** Rebuilt as a GSAP ScrollTrigger scroll-stacking sequence: "What We Offer" pins as a persistent backdrop for the entire 6-card scroll region (with a head-start spacer so it gets a moment alone before card 1 arrives), then each card slides up and pins in turn, scaling down slightly as the next arrives. A tracker bar under the heading fills in as each card is scrolled past. Backdrop is a forest-green vertical gradient (brand tokens, cream text/bar for contrast). Cards are large on desktop (up to 896px wide, anchored below the heading/bar so they don't overlap it) and genuinely full-screen on mobile, with large translucent-green numerals bleeding off the top-left corner. Ends with a "See More" button to /solutions (not a recap grid — that level of depth belongs on the Solutions page itself) before the Contact section. Eased scale animation, respects `prefers-reduced-motion`. Moved the "What We Offer" text out of Hero's bottom band into this backdrop, so it only appears once.
+- [x] **The single biggest structural opportunity on the page — resolved, replaced the uniform 3×2 grid entirely.** Rebuilt as a GSAP ScrollTrigger scroll-stacking sequence: "What We Offer" pins as a persistent backdrop for the entire 6-card scroll region (with a head-start spacer so it gets a moment alone before card 1 arrives), then each card slides up and pins in turn, scaling down slightly as the next arrives. A tracker bar under the heading fills in as each card is scrolled past (now derived redundantly from the same scroll-progress value driving the scale, so it can't silently fail to fill in) — and every pill links to that service's `/solutions#<slug>` anchor. Backdrop is your background SVG (`public/Alioth background section 2.svg`). Cards are large on desktop (up to 896px wide, anchored below the heading/bar so they don't overlap it) and genuinely full-screen on mobile, with large translucent-green numerals bleeding off the top-left corner, plus their own green "See More" button (bottom-right) linking to the same anchor. Eased scale animation, respects `prefers-reduced-motion`. Moved the "What We Offer" text out of Hero's bottom band into this backdrop, so it only appears once; subheading removed, just the heading and pills now.
 - [x] Scroll-triggered, staggered fade-up per card as the section enters view — superseded by the stacking-scroll rebuild above.
 - [x] Card hover lift/shadow — superseded by the stacking-scroll rebuild above.
-- [x] Small accent numeral (01–06, Space Mono) per card instead of a generic icon pack — done as part of the rebuild.
+- [x] Small accent numeral (01–06, Space Mono) per card instead of a generic icon pack — done as part of the rebuild, later enlarged and restyled as a translucent-green corner numeral.
+- [ ] **More "3D" scroll feel + a specific Hero → What We Offer transition idea** — you flagged this but said you'd send the detail in a follow-up message. Not started, waiting on that.
 
 ### Contact section (Home) + /contact page
 
-- [x] **Rebuilt as a conversational, personalized 3-step form** — name → email → message, each its own mini-form (native validation + Enter-to-continue still work). Later steps and the success message address the person by their first name. Branded focus states (green underline instead of the browser default) — done.
+- [x] **Rebuilt as a conversational, personalized 3-step form** — name → email → message, each its own mini-form (native validation + Enter-to-continue still work). Later steps and the success message address the person by their first name.
 - [x] Submit button now has the same hover-lift treatment as Hero/Services — done.
 - [x] Success message now animates in (checkmark badge + personalized "Thanks, {name}" + a reply-time reassurance line) instead of an instant swap — done.
+- [x] Inputs redesigned as solid cream rounded-rectangle boxes (not underlines) with a `-webkit-autofill` override so browser autofill can't tint them blue/white; Continue/Send/Back are all matching cream rounded-rectangle buttons now, Back is a real button instead of a text link.
+- [ ] `/contact` page itself is still just a bare "Contact" heading + the form — no further page content added yet (address, hours, map, etc. — undecided).
 
 ### Footer
 
