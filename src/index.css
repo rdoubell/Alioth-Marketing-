@@ -54,3 +54,26 @@ body {
     transition: none;
   }
 }
+
+/* Slow-drifting glow behind the "What We Offer" stack backdrop. */
+@keyframes living-gradient-drift {
+  0% {
+    transform: translate(-52%, 4%) scale(1);
+  }
+  50% {
+    transform: translate(-48%, -4%) scale(1.12);
+  }
+  100% {
+    transform: translate(-50%, 2%) scale(0.96);
+  }
+}
+
+.living-gradient-blob {
+  animation: living-gradient-drift 16s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .living-gradient-blob {
+    animation: none;
+  }
+}

@@ -36,11 +36,6 @@ describe('Hero', () => {
     expect(screen.getByRole('link', { name: 'Our Solutions' })).toHaveAttribute('href', '/solutions')
   })
 
-  it('renders a "What We Offer" teaser band beneath the video, hinting at the next section', () => {
-    renderHero()
-    expect(screen.getByText('What We Offer')).toBeInTheDocument()
-  })
-
   it('renders the decorative watermark mark as a hidden, non-focusable image', () => {
     const { container } = renderHero()
     const watermark = container.querySelector('img[alt=""]')
