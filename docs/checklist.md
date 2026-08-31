@@ -75,7 +75,7 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Services section
 
-- [x] **The single biggest structural opportunity on the page — resolved, replaced the uniform 3×2 grid entirely.** Rebuilt as a GSAP ScrollTrigger scroll-stacking sequence: "What We Offer" pins as a backdrop, then each of the 6 cards slides up and pins in turn, scaling down slightly as the next arrives so earlier ones peek out behind it. 3D-shadowed cream blocks (not the reference's glass/blur style), respects `prefers-reduced-motion`.
+- [x] **The single biggest structural opportunity on the page — resolved, replaced the uniform 3×2 grid entirely.** Rebuilt as a GSAP ScrollTrigger scroll-stacking sequence: "What We Offer" pins as a persistent backdrop (with a slow-drifting living green gradient glow, cream base) for the entire 6-card scroll region, then each card slides up and pins in turn, scaling down slightly as the next arrives so earlier ones peek out behind it. Cards are large on desktop (up to 896px wide) and genuinely full-screen on mobile. 3D-shadowed cream blocks (not the reference's glass/blur style), eased scale animation, respects `prefers-reduced-motion`. Moved the "What We Offer" text out of Hero's bottom band into this backdrop, so it only appears once.
 - [x] Scroll-triggered, staggered fade-up per card as the section enters view — superseded by the stacking-scroll rebuild above.
 - [x] Card hover lift/shadow — superseded by the stacking-scroll rebuild above.
 - [x] Small accent numeral (01–06, Space Mono) per card instead of a generic icon pack — done as part of the rebuild.
