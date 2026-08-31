@@ -6,15 +6,15 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 
 1. [ ] **Footer** — still the Foundation-phase placeholder, no real design yet.
 2. [ ] **Solutions** — still a placeholder page. Also now the link target for every "See More" button and tracker pill on the Home stack (`/solutions#<slug>`, slugs: strategy, paid-media, email-automation, seo-content, design-creative, analytics-reporting) — the page build needs matching anchors.
-3. [ ] **About** — still a placeholder. Question series to gather content starting below.
+3. [x] **About** — built. Name/star story, origin (side hustle across commodity trading, insurance, iGaming, health & fitness, personal branding), "one team, no hand-offs" philosophy, who it's built for, Work With Us CTA. No client names, no stats row, collective "we" voice, per your direction.
 4. [ ] **Contact Us** — form itself rebuilt as the conversational multi-step flow (done, see Contact section notes below); the page around it (`src/pages/Contact.tsx`) is still just a bare heading + the form, no further content added yet.
-5. [x] **Email intake setup** — intake emails now go to `rohan@aliothgroup.co.za` and `aedan@aliothgroup.co.za` (both Home and /contact use the same shared form/handler). Still open: verify `RESEND_API_KEY` is actually set in Vercel — can't check that from the repo.
+5. [ ] **Email intake setup** — recipients updated to `rohan@aliothgroup.co.za` and `aedan@aliothgroup.co.za`, but **you flagged it's not actually firing** — debugging that is explicitly held for tomorrow, not started. First things to check: is `RESEND_API_KEY` actually set in Vercel (can't verify from the repo), and Vercel's function logs for the `/api/contact` route for the real error.
 6. [ ] **Analytics setup** — GA4, not yet added (see Pre-launch technical below).
 7. [ ] **Social media** — held for last, at launch.
 
 ## Content still needed
 
-- [ ] **About page** — currently a placeholder (`<h1>About</h1>` only). Spec calls for headline → mission paragraph → stats row → team blurb → narrative → closing CTA. **Now live on the public site as-is.**
+- [x] **About page** — built (see Roadmap above for the details).
 - [ ] **Solutions page** — currently a placeholder. Spec calls for 8 repeating service blocks + closing CTA. **Now live on the public site as-is.**
 - [ ] **Blog** — structure/routing only exists (`/blog`, `/blog/:slug`), zero real posts.
 - [ ] **Footer design** — still the Foundation-phase placeholder. No real design has been provided yet.
@@ -53,7 +53,8 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 - [x] What We Offer / Services section rebuilt entirely as a GSAP scroll-stacking sequence (see Services section notes below) — new `gsap` dependency added
 - [x] Each service card now has its own green "See More" button to `/solutions#<slug>`; tracker pills link the same way; removed the old generic "See More" at the bottom of the stack
 - [x] Contact form rebuilt as a conversational 3-step flow with cream rounded-rectangle inputs/buttons and an autofill-color fix; intake now emails rohan@ and aedan@aliothgroup.co.za
-- [x] All commits pushed to GitHub (`origin/main` at `e6a89c6`)
+- [x] About page written and built; confirmed the cream-input intake redesign was already live in production (checked aliothgroup.co.za directly); fixed the focus ring reading as blue (was green at 50% opacity — too desaturated to read as green against cream, now full-opacity green-bright)
+- [x] All commits pushed to GitHub (`origin/main` at `8f159be`)
 
 ---
 
