@@ -101,7 +101,8 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 - [x] Verified on production (aliothgroup.co.za) that the card/pill links and cream intake redesign were already live — nothing was actually missing, just needed confirming
 - [x] Added Email Integration setup guide and Backend Hub future-initiative sections to the checklist
 - [x] Footer visual polish pass: real LogoC2 mark, watermark texture, mono labels, animated link underlines, 3-column grid
-- [x] All commits pushed to GitHub (`origin/main` at `457e782`)
+- [x] Seamless Hero → What We Offer transition built (continuous "A" watermark, visible teaser heading, gradient continuity) + fixed the real card-overflow bug from your screenshot + last pill fires mid-card
+- [x] All commits pushed to GitHub (`origin/main` at `8172f47`)
 
 ---
 
@@ -139,7 +140,9 @@ Combines the taste-skill audit with current (2026) web design trend research —
 - [x] Scroll-triggered, staggered fade-up per card as the section enters view — superseded by the stacking-scroll rebuild above.
 - [x] Card hover lift/shadow — superseded by the stacking-scroll rebuild above.
 - [x] Small accent numeral (01–06, Space Mono) per card instead of a generic icon pack — done as part of the rebuild, later enlarged and restyled as a translucent-green corner numeral.
-- [ ] **More "3D" scroll feel + a specific Hero → What We Offer transition idea** — you flagged this but said you'd send the detail in a follow-up message. Not started, waiting on that.
+- [x] **Hero → What We Offer transition — the detailed idea, built.** "What We Offer" visible at the bottom of Hero without scrolling (same styling it has once pinned, so it reads as one heading transitioning from normal scroll to sticky, not two). The "A" watermark is now one continuous mark across both sections — two fragments (Hero top, backdrop bottom) sharing identical height/position math, verified pixel-exact alignment (same x/width, backdrop's top offset = exactly one section's height). Gradient overlay added so the backdrop doesn't cut in abruptly against Hero's own bottom gradient. Desktop only — mobile's full-screen cards would hide most of it anyway.
+- [x] **Fixed a real overflow bug you caught via screenshot** — cards were tall enough to bleed past the sticky container's bottom on real screens, cutting off the See More button. Reduced card padding/min-height and the top offset reserved for the tracker bar; verified no overflow at 1512×945 (your screenshot's resolution) and a tighter 1280×720. See More button is now visibly bigger too.
+- [x] **Last pill (Analytics & Reporting) now turns cream mid-card** (50% scroll progress) instead of only after being fully scrolled past — matches your "only once that pill becomes cream" note; you can watch it happen while still on the last card.
 
 ### Contact section (Home) + /contact page
 
