@@ -26,11 +26,23 @@ export default function Hero() {
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover md:hidden"
       />
+      {/* Mobile watermark — contained entirely within Hero, unchanged. */}
       <img
         src={logoMark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-8 right-0 h-48 w-auto max-w-none opacity-[0.35] md:-bottom-24 md:-right-24 md:h-[130%]"
+        className="pointer-events-none absolute -bottom-8 right-0 h-48 w-auto max-w-none opacity-[0.35] md:hidden"
+      />
+      {/* Desktop watermark — top portion of one continuous mark that carries on
+          into ServicesSection's backdrop (see the matching fragment there).
+          Both fragments share the same height/position math so the seam
+          lines up: this shows image-range [0, 100%-of-section-height]. */}
+      <img
+        src={logoMark}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 hidden w-auto max-w-none opacity-[0.35] md:block"
+        style={{ top: 0, height: 'calc(150vh - 7.5rem)' }}
       />
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div
@@ -71,6 +83,12 @@ export default function Hero() {
             Our Solutions
           </Link>
         </div>
+        <p
+          aria-hidden="true"
+          className="animate-fade-up mt-14 font-serif text-2xl font-bold uppercase text-cream [animation-delay:450ms] md:mt-20 md:text-4xl"
+        >
+          What We Offer
+        </p>
       </div>
     </section>
   )
