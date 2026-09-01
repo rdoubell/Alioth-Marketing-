@@ -127,7 +127,6 @@ export default function ContactForm({ source, tone = 'light' }: ContactFormProps
               placeholder="First Name"
               aria-label="First Name"
               required
-              autoFocus
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className={inputClass(tone)}

@@ -26,18 +26,28 @@ export default function Navbar() {
   const [pillRect, setPillRect] = useState<PillRect | null>(null)
 
   useLayoutEffect(() => {
-    const activeIndex = NAV_LINKS.findIndex((link) => link.href === location.pathname)
-    const activeEl = linkRefs.current[activeIndex]
-    setPillRect(
-      activeEl
-        ? {
-            left: activeEl.offsetLeft,
-            top: activeEl.offsetTop,
-            width: activeEl.offsetWidth,
-            height: activeEl.offsetHeight,
-          }
-        : null
-    )
+    function measurePill() {
+      const activeIndex = NAV_LINKS.findIndex((link) => link.href === location.pathname)
+      const activeEl = linkRefs.current[activeIndex]
+      setPillRect(
+        activeEl
+          ? {
+              left: activeEl.offsetLeft,
+              top: activeEl.offsetTop,
+              width: activeEl.offsetWidth,
+              height: activeEl.offsetHeight,
+            }
+          : null
+      )
+    }
+
+    measurePill()
+    // The pill is measured off each link's rendered width, but web fonts can
+    // still be swapping in at mount time — re-measure once they've settled
+    // (and on resize) so the pill doesn't stay sized to a fallback font.
+    document.fonts?.ready?.then(measurePill)
+    window.addEventListener('resize', measurePill)
+    return () => window.removeEventListener('resize', measurePill)
   }, [location.pathname])
 
   return (

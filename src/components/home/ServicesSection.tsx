@@ -197,7 +197,7 @@ export default function ServicesSection() {
           <div className="relative h-full w-full overflow-hidden flex flex-col justify-center bg-cream-soft px-8 py-16 md:mx-auto md:h-auto md:min-h-[18rem] md:w-[85%] md:max-w-4xl md:rounded-[2rem] md:border md:border-ink/10 md:px-10 md:py-8 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute -left-3 -top-6 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-left-4 md:-top-10 md:text-[11rem]"
+              className="pointer-events-none absolute -right-3 -top-6 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:text-[11rem]"
             >
               {String(i + 1).padStart(2, '0')}
             </span>
