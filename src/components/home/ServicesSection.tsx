@@ -166,8 +166,8 @@ export default function ServicesSection() {
 
   return (
     <section className="relative bg-cream">
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        <div className="sticky top-0 flex h-screen flex-col items-center gap-4 overflow-hidden pt-16 md:top-20 md:h-[calc(100vh-5rem)] md:pt-20">
+      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
+        <div className="sticky top-0 flex h-screen flex-col items-center gap-4 pt-16 md:top-20 md:h-[calc(100vh-5rem)] md:pt-20">
           <SectionBackground />
           <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
             <h2 className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</h2>
