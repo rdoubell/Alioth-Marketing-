@@ -88,12 +88,16 @@ interface StackLayerProps {
    * "done" the same way, so it turns cream partway through its own view
    * instead — see ServicesSection. */
   collectAt: number
+  /** The last card has no next card to reveal, so its normal full-viewport
+   * dwell just reads as dead scroll space once it's finished scaling.
+   * Shortening its own sticky range trims that tail before Contact begins. */
+  isLast?: boolean
   onLeave: () => void
   onEnterBack: () => void
   children: ReactNode
 }
 
-function StackLayer({ index, collectAt, onLeave, onEnterBack, children }: StackLayerProps) {
+function StackLayer({ index, collectAt, isLast, onLeave, onEnterBack, children }: StackLayerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -131,7 +135,9 @@ function StackLayer({ index, collectAt, onLeave, onEnterBack, children }: StackL
   return (
     <div
       ref={containerRef}
-      className="sticky top-0 flex h-screen items-center justify-center md:top-20 md:h-[calc(100vh-5rem)] md:items-start md:pt-56"
+      className={`sticky top-0 flex h-screen items-center justify-center md:top-20 md:items-start md:pt-56 ${
+        isLast ? 'md:h-[65vh]' : 'md:h-[calc(100vh-5rem)]'
+      }`}
       style={{ zIndex: index + 1 }}
     >
       <div ref={cardRef} className="h-full w-full will-change-transform md:h-auto" style={{ position: 'relative' }}>
@@ -166,8 +172,8 @@ export default function ServicesSection() {
 
   return (
     <section className="relative bg-cream">
-      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
-        <div className="sticky top-0 flex h-screen flex-col items-center gap-4 pt-16 md:top-20 md:h-[calc(100vh-5rem)] md:pt-20">
+      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+        <div className="sticky top-0 flex h-screen flex-col items-center gap-4 overflow-hidden pt-16 md:top-20 md:h-[calc(100vh-5rem)] md:pt-20">
           <SectionBackground />
           <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
             <h2 className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</h2>
@@ -184,6 +190,7 @@ export default function ServicesSection() {
           key={service.name}
           index={i}
           collectAt={i === SERVICES.length - 1 ? 0.5 : 0.999}
+          isLast={i === SERVICES.length - 1}
           onLeave={() => setCardCollected(i, true)}
           onEnterBack={() => setCardCollected(i, false)}
         >
