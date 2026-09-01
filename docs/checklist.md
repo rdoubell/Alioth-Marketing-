@@ -4,7 +4,7 @@ Last updated: 2026-08-25 (site is live; added a comprehensive per-page design su
 
 ## Roadmap (your priority order)
 
-1. [ ] **Footer** — still the Foundation-phase placeholder, no real design yet.
+1. [x] **Footer** — done. Real LogoC2 wordmark instead of plain text, the same watermark "A" mark used in Hero (faint, bottom-right) for texture instead of flat black, mono section labels, animated underline on link hover, moved to a proper 3-column grid.
 2. [ ] **Solutions** — still a placeholder page. Also now the link target for every "See More" button and tracker pill on the Home stack (`/solutions#<slug>`, slugs: strategy, paid-media, email-automation, seo-content, design-creative, analytics-reporting) — the page build needs matching anchors.
 3. [x] **About** — built. Name/star story, origin (side hustle across commodity trading, insurance, iGaming, health & fitness, personal branding), "one team, no hand-offs" philosophy, who it's built for, Work With Us CTA. No client names, no stats row, collective "we" voice, per your direction.
 4. [ ] **Contact Us** — form itself rebuilt as the conversational multi-step flow (done, see Contact section notes below); the page around it (`src/pages/Contact.tsx`) is still just a bare heading + the form, no further content added yet.
@@ -61,7 +61,7 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 - [x] **About page** — built (see Roadmap above for the details).
 - [ ] **Solutions page** — currently a placeholder. Spec calls for 8 repeating service blocks + closing CTA. **Now live on the public site as-is.**
 - [ ] **Blog** — structure/routing only exists (`/blog`, `/blog/:slug`), zero real posts.
-- [ ] **Footer design** — still the Foundation-phase placeholder. No real design has been provided yet.
+- [x] **Footer design** — done (see Roadmap above).
 - [ ] **404 page** — currently a bare placeholder, not brand-styled.
 - [ ] **Real contact phone number** — `CONTACT_PHONE` in `src/lib/brand.ts` is still `+27 (0) 00 000 0000`.
 - [ ] **Privacy Policy / legal page** — open question flagged in the original spec, never resolved. revx.ai (the structural reference) has one; decide if Alioth needs one.
@@ -98,7 +98,10 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 - [x] Each service card now has its own green "See More" button to `/solutions#<slug>`; tracker pills link the same way; removed the old generic "See More" at the bottom of the stack
 - [x] Contact form rebuilt as a conversational 3-step flow with cream rounded-rectangle inputs/buttons and an autofill-color fix; intake now emails rohan@ and aedan@aliothgroup.co.za
 - [x] About page written and built; confirmed the cream-input intake redesign was already live in production (checked aliothgroup.co.za directly); fixed the focus ring reading as blue (was green at 50% opacity — too desaturated to read as green against cream, now full-opacity green-bright)
-- [x] All commits pushed to GitHub (`origin/main` at `8f159be`)
+- [x] Verified on production (aliothgroup.co.za) that the card/pill links and cream intake redesign were already live — nothing was actually missing, just needed confirming
+- [x] Added Email Integration setup guide and Backend Hub future-initiative sections to the checklist
+- [x] Footer visual polish pass: real LogoC2 mark, watermark texture, mono labels, animated link underlines, 3-column grid
+- [x] All commits pushed to GitHub (`origin/main` at `457e782`)
 
 ---
 
@@ -148,7 +151,7 @@ Combines the taste-skill audit with current (2026) web design trend research —
 
 ### Footer
 
-- Still the unstyled Foundation-phase placeholder — no design provided yet. When it's designed: current research favors simpler footers (fewer link columns, clear primary paths) over a "link farm," which fits a small agency site well anyway.
+- [x] **Visual polish pass — done.** Real LogoC2 wordmark, faint watermark "A" mark for texture, mono section labels ("Navigate", "Get In Touch"), animated underline on hover, 3-column grid. Kept the same simple 3-column structure (no link farm) — already matched the "simpler footers" research note, just needed to not look flat.
 
 ### About page (not built yet)
 
