@@ -251,18 +251,6 @@ export default function ServicesSection() {
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-green-deep to-transparent"
           />
-          {/* Bottom half of the continuous watermark that starts in Hero —
-              see the matching fragment there. Shifted up by one section's
-              (100vh) height so the image's second half lands here. Right
-              offset must stay identical to Hero's fragment for the seam to
-              line up. */}
-          <img
-            src={logoMark}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute w-auto max-w-none opacity-[0.35]"
-            style={{ top: 'calc(-100vh)', height: '150vh', right: '-507px' }}
-          />
           <div className="relative z-10 text-center">
             <h2 className="font-serif text-3xl font-bold uppercase text-cream">What We Offer</h2>
           </div>

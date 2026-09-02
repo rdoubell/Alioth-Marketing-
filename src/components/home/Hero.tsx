@@ -26,11 +26,10 @@ export default function Hero() {
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover md:hidden"
       />
-      {/* Mobile watermark — top half of one continuous mark that carries on
-          into ServicesSection's mobile backdrop (see the matching fragment
-          there). Mirrors the desktop two-fragment technique: Hero is a full
-          100vh on mobile (no navbar offset, since the mobile nav is fixed
-          and out of flow), so no -5rem correction is needed here. */}
+      {/* Mobile watermark — contained entirely within Hero (unlike desktop,
+          it does not continue into ServicesSection). Sized taller than the
+          section on purpose so it reads as cut off at the bottom edge,
+          clipped by Hero's own overflow-hidden. */}
       <img
         src={logoMark}
         alt=""
