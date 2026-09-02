@@ -35,7 +35,7 @@ function SectionBackground() {
           instead of the SVG cutting in abruptly. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-green-deep/90 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-green-deep to-transparent"
       />
       {/* Bottom portion of the continuous watermark that starts in Hero —
           see the matching fragment there for the shared height/position math.
@@ -240,7 +240,7 @@ export default function ServicesSection() {
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-green-deep/90 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-green-deep to-transparent"
           />
           {/* Bottom half of the continuous watermark that starts in Hero —
               see the matching fragment there. Shifted up by one section's

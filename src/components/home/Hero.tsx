@@ -40,7 +40,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div
-        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-green/85 via-green/35 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-green-deep via-green-deep/40 to-transparent"
         aria-hidden="true"
       />
       <div
