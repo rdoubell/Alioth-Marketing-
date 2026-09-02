@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ReactNode } from 'react'
+import { useState, useEffect, useRef, type ReactNode, type RefObject } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -7,20 +7,24 @@ import logoMark from '../../assets/brand/A-cream.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// One layer per service — see docs/superpowers/specs for the design. The
-// "What We Offer" backdrop is a separate, non-scaling sticky panel that
-// stays pinned behind the whole stack, not one of these layers, so it
-// never gets covered/replaced like a card would. A blank head-start spacer
-// (see ServicesSection) gives the backdrop a moment alone before card 1
-// arrives, instead of both landing at once.
+// One card per service, all pinned in a single shared frame — see
+// docs/superpowers/specs for the design. Each card slides up into place once
+// scrolled to, then stays put permanently, offset a few pixels lower than
+// the one before it, so every earlier card's top edge keeps peeking out
+// above the current front card (a fanned card-deck look). The "What We
+// Offer" backdrop above is a separate, independently-pinned panel that
+// never gets covered by the cards.
 //
-// This whole scroll-stacking treatment is desktop-only (md: and up). On
+// This whole scroll-driven treatment is desktop-only (md: and up). On
 // mobile it's replaced by a plain, non-animated vertical list of cards —
-// see the `md:hidden` block in ServicesSection — so StackLayer skips
-// creating its ScrollTrigger below that breakpoint.
-const LAYER_COUNT = SERVICES.length
-const SCALE_STEP = 0.05
-const scaleEase = gsap.parseEase('power2.out')
+// see the `md:hidden` block in ServicesSection — so PeekCard skips creating
+// its ScrollTrigger below that breakpoint.
+const PEEK_OFFSET_PX = 16
+const TOP_OFFSET_PX = 176
+const HIDDEN_DELTA_PX = 500
+const FRAME_HEIGHT = 'min(calc(100vh - 5rem), 46rem)'
+const COLLECT_AT = 0.99
+const peekEase = gsap.parseEase('power2.out')
 
 function SectionBackground() {
   return (
@@ -113,45 +117,45 @@ function ServiceCard({ service, index }: ServiceCardProps) {
   )
 }
 
-interface StackLayerProps {
+interface PeekCardProps {
   index: number
-  /** Progress (0-1) at which this layer's pill should turn cream. Every card
-   * but the last waits until it's fully scrolled past (matches the next
-   * card visibly taking over). The last card has nothing after it to signal
-   * "done" the same way, so it turns cream partway through its own view
-   * instead — see ServicesSection. */
-  collectAt: number
+  markerRefs: RefObject<Array<HTMLDivElement | null>>
   onLeave: () => void
   onEnterBack: () => void
   children: ReactNode
 }
 
-function StackLayer({ index, collectAt, onLeave, onEnterBack, children }: StackLayerProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+function PeekCard({ index, markerRefs, onLeave, onEnterBack, children }: PeekCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const container = containerRef.current
+    // Read the marker live, inside the effect (which runs after commit),
+    // rather than from a value captured during render — markerRefs.current[
+    // index] isn't populated by the marker's own ref callback until commit,
+    // so a value read at render time would still be null.
+    const marker = markerRefs.current?.[index]
     const card = cardRef.current
-    if (!container || !card) return
+    if (!marker || !card) return
     if (!window.matchMedia('(min-width: 768px)').matches) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const targetScale = 1 - (LAYER_COUNT - index) * SCALE_STEP
-    gsap.set(card, { scale: 1, transformOrigin: 'center top', force3D: true })
+    const targetY = index * PEEK_OFFSET_PX
+    const hiddenY = targetY + HIDDEN_DELTA_PX
+    gsap.set(card, { y: hiddenY, force3D: true })
 
     const trigger = ScrollTrigger.create({
-      trigger: container,
+      trigger: marker,
       start: 'top center',
       end: 'bottom center',
       scrub: 0.8,
       onUpdate: (self) => {
-        const scale = gsap.utils.interpolate(1, targetScale, scaleEase(self.progress))
-        gsap.set(card, { scale: Math.max(scale, targetScale), force3D: true })
+        const y = gsap.utils.interpolate(hiddenY, targetY, peekEase(self.progress))
+        gsap.set(card, { y: Math.max(y, targetY), force3D: true })
         // Belt-and-braces: derive "collected" straight from the same progress
-        // value driving the visible scale, not only the onLeave/onEnterBack
-        // events below, so the pill can never silently fail to fill in.
-        if (self.progress >= collectAt) onLeave()
+        // value driving the visible position, not only the onLeave/
+        // onEnterBack events below, so the pill can never silently fail to
+        // fill in.
+        if (self.progress >= COLLECT_AT) onLeave()
         else if (self.progress <= 0.001) onEnterBack()
       },
       onLeave: () => onLeave(),
@@ -160,15 +164,11 @@ function StackLayer({ index, collectAt, onLeave, onEnterBack, children }: StackL
 
     return () => trigger.kill()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, collectAt])
+  }, [index])
 
   return (
-    <div
-      ref={containerRef}
-      className="sticky top-0 flex h-screen items-center justify-center md:top-20 md:h-[min(calc(100vh-5rem),42rem)] md:items-start md:pt-56"
-      style={{ zIndex: index + 1 }}
-    >
-      <div ref={cardRef} className="w-full will-change-transform" style={{ position: 'relative' }}>
+    <div className="absolute inset-x-0 top-0 flex justify-center" style={{ paddingTop: TOP_OFFSET_PX, zIndex: index + 1 }}>
+      <div ref={cardRef} className="w-[85%] max-w-4xl will-change-transform" style={{ position: 'relative' }}>
         {children}
       </div>
     </div>
@@ -177,13 +177,13 @@ function StackLayer({ index, collectAt, onLeave, onEnterBack, children }: StackL
 
 export default function ServicesSection() {
   const [collected, setCollected] = useState<boolean[]>(() => SERVICES.map(() => false))
+  const markerRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
-    // Each StackLayer creates its own trigger in its own effect, so the very
-    // first one can be measured before its later siblings (and the spacer)
-    // have contributed their height — and web fonts reflow text after that
-    // too. Refresh once layout has actually settled, and again once fonts
-    // are ready, so cached trigger positions aren't stale.
+    // Layout (markers, backdrop) needs to settle — and web fonts reflow text
+    // after that too — before trigger positions can be trusted. Refresh once
+    // layout has actually settled, and again once fonts are ready, so
+    // cached trigger positions aren't stale.
     const raf = requestAnimationFrame(() => ScrollTrigger.refresh())
     document.fonts?.ready?.then(() => ScrollTrigger.refresh())
     return () => cancelAnimationFrame(raf)
@@ -200,7 +200,7 @@ export default function ServicesSection() {
 
   return (
     <section className="relative bg-cream">
-      {/* Desktop: pinned backdrop + scroll-scaled stacking cards. */}
+      {/* Desktop: pinned backdrop + a pinned card-deck frame. */}
       <div className="hidden md:block" data-testid="services-desktop">
         <div className="absolute inset-0" style={{ zIndex: 0 }}>
           <div className="sticky top-0 flex h-screen flex-col items-center gap-4 overflow-hidden pt-16 md:top-20 md:h-[calc(100vh-5rem)] md:pt-20">
@@ -215,32 +215,52 @@ export default function ServicesSection() {
         {/* Head-start: gives the backdrop a moment pinned alone before card 1 arrives. */}
         <div aria-hidden="true" className="h-[50vh]" />
 
-        {SERVICES.map((service, i) => (
-          <StackLayer
-            key={service.name}
-            index={i}
-            collectAt={i === SERVICES.length - 1 ? 0.5 : 0.999}
-            onLeave={() => setCardCollected(i, true)}
-            onEnterBack={() => setCardCollected(i, false)}
-          >
-            <ServiceCard service={service} index={i} />
-          </StackLayer>
-        ))}
+        {/* Invisible markers — one per card, stacked in normal flow. Each one
+            is purely a scroll-range reference for that card's own trigger;
+            the cards themselves render separately, absolutely positioned,
+            in the pinned frame below. */}
+        <div className="relative">
+          {SERVICES.map((service, i) => (
+            <div
+              key={service.slug}
+              ref={(el) => {
+                markerRefs.current[i] = el
+              }}
+              aria-hidden="true"
+              style={{ height: FRAME_HEIGHT }}
+            />
+          ))}
 
-        {/* Trailing spacer: every layer but the last "borrows" its dwell room
-            from the next sibling still to come in this shared containing
-            block — position:sticky can't hold an element past its own
-            containing block's bottom edge. The last layer has nothing after
-            it, so without this it gets squeezed almost immediately instead
-            of holding at top-20 like the others. Matches a layer's own
-            height so it gets the same dwell. */}
-        <div aria-hidden="true" className="md:h-[min(calc(100vh-5rem),42rem)]" />
+          <div className="absolute inset-0">
+            <div className="sticky overflow-hidden" style={{ top: '5rem', height: FRAME_HEIGHT }}>
+              {SERVICES.map((service, i) => (
+                <PeekCard
+                  key={service.name}
+                  index={i}
+                  markerRefs={markerRefs}
+                  onLeave={() => setCardCollected(i, true)}
+                  onEnterBack={() => setCardCollected(i, false)}
+                >
+                  <ServiceCard service={service} index={i} />
+                </PeekCard>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Trailing spacer: the pinned frame "borrows" its dwell room from
+            markers still to come — position:sticky can't hold an element
+            past its own containing block's bottom edge. Without this, the
+            frame would get squeezed out of its top-20 hold as it nears the
+            last marker instead of staying put through it. Matches the
+            frame's own height so it gets the same dwell throughout. */}
+        <div aria-hidden="true" style={{ height: FRAME_HEIGHT }} />
       </div>
 
       {/* Mobile: plain scroll, no pinning/scaling — same card look, just a
           normal list, one after another. */}
       <div className="md:hidden" data-testid="services-mobile">
-        <div className="relative overflow-hidden bg-green-deep px-6 pb-10 pt-16">
+        <div className="relative overflow-hidden bg-green-deep px-6 pb-56 pt-16">
           <img
             src="/Alioth%20background%20section%202.svg"
             alt=""
@@ -255,7 +275,7 @@ export default function ServicesSection() {
             <h2 className="font-serif text-3xl font-bold uppercase text-cream">What We Offer</h2>
           </div>
         </div>
-        <div className="flex flex-col gap-4 px-4 pb-8 pt-6">
+        <div className="-mt-44 flex flex-col gap-4 px-4 pb-8">
           {SERVICES.map((service, i) => (
             <ServiceCard key={service.name} service={service} index={i} />
           ))}
