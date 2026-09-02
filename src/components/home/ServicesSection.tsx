@@ -226,6 +226,15 @@ export default function ServicesSection() {
             <ServiceCard service={service} index={i} />
           </StackLayer>
         ))}
+
+        {/* Trailing spacer: every layer but the last "borrows" its dwell room
+            from the next sibling still to come in this shared containing
+            block — position:sticky can't hold an element past its own
+            containing block's bottom edge. The last layer has nothing after
+            it, so without this it gets squeezed almost immediately instead
+            of holding at top-20 like the others. Matches a layer's own
+            height so it gets the same dwell. */}
+        <div aria-hidden="true" className="md:h-[min(calc(100vh-5rem),42rem)]" />
       </div>
 
       {/* Mobile: plain scroll, no pinning/scaling — same card look, just a
