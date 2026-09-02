@@ -92,7 +92,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[18rem] md:rounded-[2rem] md:px-10 md:py-8 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
+    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[26rem] md:rounded-[2rem] md:px-10 md:py-8 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -right-3 -top-6 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:text-[11rem]"
@@ -231,7 +231,7 @@ export default function ServicesSection() {
       {/* Mobile: plain scroll, no pinning/scaling — same card look, just a
           normal list, one after another. */}
       <div className="md:hidden" data-testid="services-mobile">
-        <div className="relative overflow-hidden bg-green-deep px-6 py-16">
+        <div className="relative overflow-hidden bg-green-deep px-6 pb-10 pt-16">
           <img
             src="/Alioth%20background%20section%202.svg"
             alt=""
@@ -244,20 +244,21 @@ export default function ServicesSection() {
           />
           {/* Bottom half of the continuous watermark that starts in Hero —
               see the matching fragment there. Shifted up by one section's
-              (100vh) height so the image's second half lands here. */}
+              (100vh) height so the image's second half lands here. Right
+              offset must stay identical to Hero's fragment for the seam to
+              line up. */}
           <img
             src={logoMark}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute -right-10 w-auto max-w-none opacity-[0.35]"
-            style={{ top: 'calc(-100vh)', height: '150vh' }}
+            className="pointer-events-none absolute w-auto max-w-none opacity-[0.35]"
+            style={{ top: 'calc(-100vh)', height: '150vh', right: '-507px' }}
           />
-          <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+          <div className="relative z-10 text-center">
             <h2 className="font-serif text-3xl font-bold uppercase text-cream">What We Offer</h2>
-            <TrackerBar collected={SERVICES.map(() => true)} />
           </div>
         </div>
-        <div className="flex flex-col gap-4 px-4 py-8">
+        <div className="flex flex-col gap-4 px-4 pb-8 pt-6">
           {SERVICES.map((service, i) => (
             <ServiceCard key={service.name} service={service} index={i} />
           ))}

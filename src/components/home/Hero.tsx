@@ -35,8 +35,8 @@ export default function Hero() {
         src={logoMark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -right-10 w-auto max-w-none opacity-[0.35] md:hidden"
-        style={{ top: 0, height: '150vh' }}
+        className="pointer-events-none absolute w-auto max-w-none opacity-[0.35] md:hidden"
+        style={{ top: 0, height: '150vh', right: '-507px' }}
       />
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div
