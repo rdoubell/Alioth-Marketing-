@@ -24,7 +24,7 @@ export default function Footer() {
         src={logoMark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -right-24 h-[140%] w-auto max-w-none opacity-[0.05]"
+        className="pointer-events-none absolute -bottom-12 -right-12 h-64 w-auto max-w-none opacity-[0.05] md:-bottom-20 md:-right-16 md:h-96"
       />
 
       <div className="relative mx-auto grid max-w-6xl gap-12 md:grid-cols-[1.3fr_1fr_1fr]">

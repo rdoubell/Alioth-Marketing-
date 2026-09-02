@@ -6,6 +6,11 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
+    name: 'Web Design & Build',
+    slug: 'web-design-build',
+    description: 'Custom-built websites designed and developed around your brand, not a template.',
+  },
+  {
     name: 'Strategy',
     slug: 'strategy',
     description: 'Brand positioning and growth plans built on real market insight, not guesswork.',

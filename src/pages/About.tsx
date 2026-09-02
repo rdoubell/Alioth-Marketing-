@@ -93,7 +93,7 @@ export default function About() {
 
         <h2 className="mt-16 font-serif text-2xl text-ink md:mt-20 md:text-3xl">One team. No hand-offs.</h2>
         <p className="mt-4 font-sans text-lg text-ink/70">
-          We work as one team across six disciplines instead of handing you between departments and account
+          We work as one team across seven disciplines instead of handing you between departments and account
           managers. When you work with us, you&apos;re talking directly to the people doing the work. And where a
           project calls for more — photography, video, influencer partnerships — we bring in specialists from our
           own network to build a strategy tailored to your business, not a template.
