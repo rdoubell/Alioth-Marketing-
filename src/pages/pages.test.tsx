@@ -38,8 +38,12 @@ describe('page shells', () => {
   })
 
   it('Solutions renders an h1 "Solutions"', () => {
-    render(<Solutions />)
-    expect(screen.getByRole('heading', { name: 'Solutions' })).toBeInTheDocument()
+    render(
+      <MemoryRouter>
+        <Solutions />
+      </MemoryRouter>
+    )
+    expect(screen.getByRole('heading', { level: 1, name: 'Solutions' })).toBeInTheDocument()
   })
 
   it('Contact renders an h1 "Contact"', () => {

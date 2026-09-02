@@ -41,3 +41,7 @@ vi.stubGlobal(
 // otherwise) — stub it so ScrollToTop and similar navigation-driven scroll
 // resets don't spam test output.
 vi.stubGlobal('scrollTo', vi.fn())
+
+// jsdom also doesn't implement Element.scrollIntoView, used by ScrollToTop
+// for hash-anchor navigation.
+Element.prototype.scrollIntoView = vi.fn()
