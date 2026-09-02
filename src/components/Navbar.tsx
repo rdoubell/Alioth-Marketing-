@@ -15,7 +15,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
-  const { atTop, hidden } = useNavbarScrollState(isHome)
+  const { atTop } = useNavbarScrollState(isHome)
   // Transparent-over-hero only applies at the very top of Home, and never
   // while the mobile menu is open (it needs a readable backing regardless).
   // Mobile only — desktop (md+) always shows the solid cream bar, see the
@@ -52,11 +52,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`inset-x-0 top-0 z-50 transition-all duration-300 md:sticky md:translate-y-0 md:border-b md:border-ink/10 md:backdrop-blur-sm md:bg-cream/90 ${isHome ? 'fixed' : 'sticky'} ${
+      className={`inset-x-0 top-0 z-50 transition-all duration-300 md:sticky md:border-b md:border-ink/10 md:backdrop-blur-sm md:bg-cream/90 ${isHome ? 'fixed' : 'sticky'} ${
         isTransparent
           ? 'bg-transparent'
           : `border-b border-ink/10 backdrop-blur-sm ${open ? 'bg-cream' : 'bg-cream/90'}`
-      } ${isHome && hidden ? '-translate-y-full' : 'translate-y-0'}`}
+      }`}
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center px-6">
         <div className="hidden w-full grid-cols-[1fr_auto_1fr] items-center gap-4 md:grid">

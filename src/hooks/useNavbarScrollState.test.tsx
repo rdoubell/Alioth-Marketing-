@@ -3,12 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { useNavbarScrollState } from './useNavbarScrollState'
 
 function TestTarget({ active }: { active: boolean }) {
-  const { atTop, hidden } = useNavbarScrollState(active)
-  return (
-    <span>
-      atTop:{String(atTop)} hidden:{String(hidden)}
-    </span>
-  )
+  const { atTop } = useNavbarScrollState(active)
+  return <span>atTop:{String(atTop)}</span>
 }
 
 function setScrollY(value: number) {
@@ -22,31 +18,18 @@ function fireScroll() {
 }
 
 describe('useNavbarScrollState', () => {
-  it('starts at the top, not hidden', () => {
+  it('starts at the top', () => {
     render(<TestTarget active={true} />)
-    expect(screen.getByText('atTop:true hidden:false')).toBeInTheDocument()
+    expect(screen.getByText('atTop:true')).toBeInTheDocument()
   })
 
-  it('hides once scrolled down past the threshold', () => {
+  it('reports not-at-top once scrolled past the threshold', () => {
     render(<TestTarget active={true} />)
 
     setScrollY(200)
     fireScroll()
 
-    expect(screen.getByText('atTop:false hidden:true')).toBeInTheDocument()
-  })
-
-  it('reveals again as soon as the user scrolls up, even slightly', () => {
-    render(<TestTarget active={true} />)
-
-    setScrollY(200)
-    fireScroll()
-    expect(screen.getByText('atTop:false hidden:true')).toBeInTheDocument()
-
-    setScrollY(190)
-    fireScroll()
-
-    expect(screen.getByText('atTop:false hidden:false')).toBeInTheDocument()
+    expect(screen.getByText('atTop:false')).toBeInTheDocument()
   })
 
   it('reports atTop again once scrolled back near the top', () => {
@@ -57,7 +40,7 @@ describe('useNavbarScrollState', () => {
     setScrollY(10)
     fireScroll()
 
-    expect(screen.getByText('atTop:true hidden:false')).toBeInTheDocument()
+    expect(screen.getByText('atTop:true')).toBeInTheDocument()
   })
 
   it('stays at the resting state and ignores scroll when inactive', () => {
@@ -66,6 +49,6 @@ describe('useNavbarScrollState', () => {
     setScrollY(500)
     fireScroll()
 
-    expect(screen.getByText('atTop:true hidden:false')).toBeInTheDocument()
+    expect(screen.getByText('atTop:true')).toBeInTheDocument()
   })
 })

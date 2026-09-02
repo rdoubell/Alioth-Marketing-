@@ -36,3 +36,8 @@ vi.stubGlobal(
   'matchMedia',
   vi.fn().mockReturnValue({ matches: false, addEventListener: () => {}, removeEventListener: () => {} })
 )
+
+// jsdom doesn't implement window.scrollTo (logs "Not implemented" and no-ops
+// otherwise) — stub it so ScrollToTop and similar navigation-driven scroll
+// resets don't spam test output.
+vi.stubGlobal('scrollTo', vi.fn())

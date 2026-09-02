@@ -108,7 +108,6 @@ describe('Navbar', () => {
     const header = container.querySelector('header')
     expect(header).toHaveClass('md:sticky')
     expect(header).toHaveClass('md:bg-cream/90')
-    expect(header).toHaveClass('md:translate-y-0')
   })
 
   it('animates the mobile toggle bars into an X when opened', () => {

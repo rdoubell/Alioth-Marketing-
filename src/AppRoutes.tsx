@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SchemaOrg from './components/SchemaOrg'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import About from './pages/About'
 import Solutions from './pages/Solutions'
@@ -20,6 +21,7 @@ export default function AppRoutes() {
         Skip to content
       </a>
       <SchemaOrg />
+      <ScrollToTop />
       <Navbar />
       <main id="main-content">
         <Routes>
