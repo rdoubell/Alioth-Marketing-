@@ -33,6 +33,14 @@ describe('Solutions', () => {
     })
   })
 
+  it('renders a tagline for every service', () => {
+    const { container } = renderSolutions()
+    SERVICES.forEach((service) => {
+      const section = container.querySelector(`#${service.slug}`)
+      expect(section?.querySelector('span')?.textContent).toBeTruthy()
+    })
+  })
+
   it('links the closing CTA to Contact', () => {
     renderSolutions()
     expect(screen.getByRole('link', { name: 'Work With Us' })).toHaveAttribute('href', '/contact')

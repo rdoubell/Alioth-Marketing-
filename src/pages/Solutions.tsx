@@ -2,6 +2,18 @@ import { Link } from 'react-router-dom'
 import SEOMeta from '../components/SEOMeta'
 import { SERVICES } from '../components/home/services-data'
 
+// Short taglines shown above each service heading, revx-style. Kept local to
+// this page since they're not needed anywhere else SERVICES is consumed.
+const TAGLINES: Record<string, string> = {
+  'web-design-build': "A website that's actually yours",
+  strategy: 'A roadmap, not guesswork',
+  'paid-media': 'Ad spend that becomes pipeline',
+  'email-automation': 'Always top of mind',
+  'seo-content': 'Found by the people who matter',
+  'design-creative': 'A brand people recognize instantly',
+  'analytics-reporting': 'Full transparency, always',
+}
+
 export default function Solutions() {
   return (
     <>
@@ -23,7 +35,7 @@ export default function Solutions() {
         {SERVICES.map((service) => (
           <section key={service.slug} id={service.slug} className="scroll-mt-28 py-16">
             <span className="font-mono text-xs uppercase tracking-widest text-green/70">
-              [Placeholder tagline]
+              {TAGLINES[service.slug]}
             </span>
             <h2 className="mt-3 font-serif text-3xl text-ink md:text-4xl">{service.name}</h2>
             <p className="mt-4 max-w-2xl font-sans text-lg text-ink/70">{service.description}</p>
