@@ -88,16 +88,12 @@ interface StackLayerProps {
    * "done" the same way, so it turns cream partway through its own view
    * instead — see ServicesSection. */
   collectAt: number
-  /** The last card has no next card to reveal, so its normal full-viewport
-   * dwell just reads as dead scroll space once it's finished scaling.
-   * Shortening its own sticky range trims that tail before Contact begins. */
-  isLast?: boolean
   onLeave: () => void
   onEnterBack: () => void
   children: ReactNode
 }
 
-function StackLayer({ index, collectAt, isLast, onLeave, onEnterBack, children }: StackLayerProps) {
+function StackLayer({ index, collectAt, onLeave, onEnterBack, children }: StackLayerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -135,9 +131,7 @@ function StackLayer({ index, collectAt, isLast, onLeave, onEnterBack, children }
   return (
     <div
       ref={containerRef}
-      className={`sticky top-0 flex h-screen items-center justify-center md:top-20 md:items-start md:pt-56 ${
-        isLast ? 'md:h-[65vh]' : 'md:h-[calc(100vh-5rem)]'
-      }`}
+      className="sticky top-0 flex h-screen items-center justify-center md:top-20 md:h-[min(calc(100vh-5rem),42rem)] md:items-start md:pt-56"
       style={{ zIndex: index + 1 }}
     >
       <div ref={cardRef} className="h-full w-full will-change-transform md:h-auto" style={{ position: 'relative' }}>
@@ -190,7 +184,6 @@ export default function ServicesSection() {
           key={service.name}
           index={i}
           collectAt={i === SERVICES.length - 1 ? 0.5 : 0.999}
-          isLast={i === SERVICES.length - 1}
           onLeave={() => setCardCollected(i, true)}
           onEnterBack={() => setCardCollected(i, false)}
         >
