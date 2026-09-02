@@ -95,7 +95,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
     <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[26rem] md:rounded-[2rem] md:px-10 md:py-8 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -right-3 -top-6 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:text-[11rem]"
+        className="pointer-events-none absolute -bottom-4 -right-3 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:bottom-auto md:text-[11rem]"
       >
         {String(index + 1).padStart(2, '0')}
       </span>
