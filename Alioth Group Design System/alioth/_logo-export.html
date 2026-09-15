@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alioth — Logo Export</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  html,body{margin:0;background:#fff}
+  #stage{width:100vw;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff}
+  /* force pure black ink for clean alpha extraction */
+  #stage, #stage *{color:#000 !important}
+  #stage .lc-div{background:#000 !important}
+  #stage .s-grp{font-weight:300 !important}
+  .exp{display:inline-flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div id="stage"><div class="exp" id="exp"></div></div>
+
+<script>
+  var ICON = 'assets/A-black.png';
+  var exp = document.getElementById('exp');
+
+  function build(name, H){
+    var FS = Math.round(H/0.654);
+    var M = {
+      'icon':    '<img src="'+ICON+'" alt="" style="display:block;height:'+H+'px;width:auto">',
+      'primary': '<span class="cg" style="font-size:'+FS+'px"><img src="'+ICON+'" alt="">lioth</span>',
+      'stacked': '<span class="stack"><img class="emblem" src="'+ICON+'" alt="" style="height:'+H+'px;margin-bottom:'+Math.round(H*0.24)+'px"><span class="s-word" style="font-size:'+Math.round(FS*0.46)+'px">Alioth</span><span class="s-grp" style="font-size:'+Math.round(FS*0.15)+'px;letter-spacing:.5em;margin-top:.5em;margin-left:.5em">Group</span></span>',
+      'c2':      '<span class="lc"><span class="lc-al" style="font-size:'+FS+'px">Alioth</span><span class="lc-div"></span><span class="b2"><span>Marketing<i class="bl"></i></span><br><span>Group<i class="bl"></i></span></span></span>',
+      'c3':      '<span class="lc"><span class="cg" style="font-size:'+FS+'px"><img src="'+ICON+'" alt="">lioth</span><span class="lc-div"></span><span class="b2"><span>Marketing<i class="bl"></i></span><br><span>Group<i class="bl"></i></span></span></span>',
+      'c4':      '<span class="lc"><img class="lc-ico" src="'+ICON+'" alt="" style="height:'+H+'px"><span class="lc-div"></span><span class="b2"><span>Alioth<i class="bl"></i></span><br><span>Group<i class="bl"></i></span></span></span>'
+    };
+    return M[name] || '';
+  }
+  // per-logo cap height tuned so each fits ~840px wide with margin
+  var HEIGHTS = {icon:300, primary:136, stacked:200, c2:84, c3:93, c4:200};
+
+  var CAP = 0.654;
+  function alignLC(){
+    document.querySelectorAll('.lc').forEach(function(lc){
+      var ref = lc.querySelector('.lc-ico') || lc.querySelector('.cg img') || lc.querySelector('.lc-al');
+      var div = lc.querySelector('.lc-div');
+      var b2  = lc.querySelector('.b2');
+      if(!ref || !div || !b2) return;
+      b2.style.transform='none'; div.style.transform='none';
+      var lcTop = lc.getBoundingClientRect().top, refTop, refBot;
+      if(ref.classList.contains('lc-ico') || ref.tagName==='IMG'){
+        var r=ref.getBoundingClientRect(); refTop=r.top; refBot=r.bottom;
+      } else {
+        var mk=document.createElement('i'); mk.style.cssText='display:inline-block;width:0;height:0;vertical-align:baseline';
+        ref.appendChild(mk); var bl=mk.getBoundingClientRect().top; ref.removeChild(mk);
+        var fsr=parseFloat(getComputedStyle(ref).fontSize); refBot=bl; refTop=bl-CAP*fsr;
+      }
+      var Hh=refBot-refTop;
+      div.style.height=Hh+'px'; div.style.transform='translateY('+(refTop-lcTop)+'px)';
+      var fs2=Hh*0.6; b2.style.fontSize=fs2+'px'; b2.style.lineHeight=(Hh-CAP*fs2)+'px';
+      var bls=b2.querySelectorAll('.bl');
+      if(bls.length){ var bl1=bls[0].getBoundingClientRect().top, capTop1=bl1-CAP*fs2;
+        b2.style.transform='translateY('+(refTop-capTop1)+'px)'; }
+    });
+  }
+
+  window.setLogo = function(name){
+    exp.innerHTML = build(name, HEIGHTS[name] || 150);
+    alignLC();
+    requestAnimationFrame(alignLC);
+    return name;
+  };
+
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function(){
+    window.setLogo('c3'); setTimeout(alignLC,120); window.__ready = true;
+  });
+</script>
+</body>
+</html>

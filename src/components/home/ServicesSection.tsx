@@ -180,12 +180,12 @@ function PeekCard({ index, markerRefs, onLeave, onEnterBack, children }: PeekCar
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index])
 
-  // top-4: a small, fixed breathing gap below wherever the pills actually
+  // top-9: a small, fixed breathing gap below wherever the pills actually
   // end — not a guess at the pills' own height, since this div's own top:0
   // already starts right after them in document flow (see the "flex-1"
   // wrapper in ServicesSection).
   return (
-    <div className="absolute inset-x-0 top-4 flex justify-center" style={{ zIndex: index + 1 }}>
+    <div className="absolute inset-x-0 top-9 flex justify-center" style={{ zIndex: index + 1 }}>
       <div ref={cardRef} className="w-[85%] max-w-4xl will-change-transform" style={{ position: 'relative' }}>
         {children}
       </div>
