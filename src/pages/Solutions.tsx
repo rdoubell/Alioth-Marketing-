@@ -1,18 +1,7 @@
 import { Link } from 'react-router-dom'
 import SEOMeta from '../components/SEOMeta'
 import { SERVICES } from '../components/home/services-data'
-
-// Short taglines shown above each service heading, revx-style. Kept local to
-// this page since they're not needed anywhere else SERVICES is consumed.
-const TAGLINES: Record<string, string> = {
-  'web-design-build': "A website that's actually yours",
-  strategy: 'A roadmap, not guesswork',
-  'paid-media': 'Ad spend that becomes pipeline',
-  'email-automation': 'Always top of mind',
-  'seo-content': 'Found by the people who matter',
-  'design-creative': 'A brand people recognize instantly',
-  'analytics-reporting': 'Full transparency, always',
-}
+import { SOLUTION_DETAILS } from './solutions-data'
 
 export default function Solutions() {
   return (
@@ -32,15 +21,32 @@ export default function Solutions() {
       </section>
 
       <div className="mx-auto max-w-3xl divide-y divide-ink/10 px-6">
-        {SERVICES.map((service) => (
-          <section key={service.slug} id={service.slug} className="scroll-mt-28 py-16">
-            <span className="font-mono text-xs uppercase tracking-widest text-green/70">
-              {TAGLINES[service.slug]}
-            </span>
-            <h2 className="mt-3 font-serif text-3xl text-ink md:text-4xl">{service.name}</h2>
-            <p className="mt-4 max-w-2xl font-sans text-lg text-ink/70">{service.description}</p>
-          </section>
-        ))}
+        {SERVICES.map((service, i) => {
+          const detail = SOLUTION_DETAILS[service.slug]
+          const Icon = detail.icon
+          return (
+            <section key={service.slug} id={service.slug} className="scroll-mt-28 py-16">
+              <div className="flex items-start gap-5">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-green/10 text-green">
+                  <Icon size={24} strokeWidth={1.75} aria-hidden="true" />
+                </div>
+                <div>
+                  <span className="font-mono text-xs uppercase tracking-widest text-green/70">
+                    {String(i + 1).padStart(2, '0')} — {detail.tagline}
+                  </span>
+                  <h2 className="mt-2 font-serif text-3xl text-ink md:text-4xl">{service.name}</h2>
+                </div>
+              </div>
+              <div className="mt-6 space-y-4 pl-0 md:pl-[4.75rem]">
+                {detail.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)} className="max-w-2xl font-sans text-lg text-ink/70">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </section>
+          )
+        })}
       </div>
 
       <section className="bg-green px-6 py-20 text-center text-cream">

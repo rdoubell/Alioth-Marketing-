@@ -8,7 +8,7 @@ export const SERVICES: Service[] = [
   {
     name: 'Web Design & Build',
     slug: 'web-design-build',
-    description: 'Placeholder copy — final description pending once the scope of this service is confirmed.',
+    description: 'Custom-built websites designed and developed around your brand — no drag-and-drop templates.',
   },
   {
     name: 'Strategy',

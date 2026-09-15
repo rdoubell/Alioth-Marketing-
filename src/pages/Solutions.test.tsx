@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
 import Solutions from './Solutions'
 import { SERVICES } from '../components/home/services-data'
+import { SOLUTION_DETAILS } from './solutions-data'
 
 function renderSolutions() {
   return render(
@@ -18,6 +19,15 @@ describe('Solutions', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Solutions' })).toBeInTheDocument()
   })
 
+  it('has a detail entry (tagline, icon, and at least one paragraph) for every service', () => {
+    SERVICES.forEach((service) => {
+      const detail = SOLUTION_DETAILS[service.slug]
+      expect(detail, `missing SOLUTION_DETAILS entry for ${service.slug}`).toBeDefined()
+      expect(detail.tagline.length).toBeGreaterThan(0)
+      expect(detail.paragraphs.length).toBeGreaterThan(0)
+    })
+  })
+
   it('renders every service as a heading with an anchor matching its slug', () => {
     const { container } = renderSolutions()
     SERVICES.forEach((service) => {
@@ -26,18 +36,15 @@ describe('Solutions', () => {
     })
   })
 
-  it('renders every service description', () => {
-    renderSolutions()
-    SERVICES.forEach((service) => {
-      expect(screen.getByText(service.description)).toBeInTheDocument()
-    })
-  })
-
-  it('renders a tagline for every service', () => {
+  it('renders the full depth copy and an icon for every service, not just the short card description', () => {
     const { container } = renderSolutions()
     SERVICES.forEach((service) => {
       const section = container.querySelector(`#${service.slug}`)
-      expect(section?.querySelector('span')?.textContent).toBeTruthy()
+      const detail = SOLUTION_DETAILS[service.slug]
+      detail.paragraphs.forEach((paragraph) => {
+        expect(section?.textContent).toContain(paragraph)
+      })
+      expect(section?.querySelector('svg')).toBeInTheDocument()
     })
   })
 
