@@ -10,3 +10,4 @@ dist
 .env*
 !.env.local.example
 *.tsbuildinfo
+Alioth Group Design System/
