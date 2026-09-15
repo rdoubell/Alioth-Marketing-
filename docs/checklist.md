@@ -59,11 +59,11 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 ## Content still needed
 
 - [x] **About page** — built (see Roadmap above for the details).
-- [ ] **Solutions page** — currently a placeholder. Spec calls for 8 repeating service blocks + closing CTA. **Now live on the public site as-is.**
+- [x] **Solutions page** — built. 7 real service sections with depth copy, icons, and anchors matching every Home card's "See More" link.
 - [ ] **Blog** — removed from the live site and nav for now (per your direction — you want a finished product without it right now). Deferred to a future phase, not dropped from the roadmap. `src/pages/Blog.tsx` / `BlogPost.tsx` and their routes were deleted; re-add when there's real content to put on it.
 - [x] **Footer design** — done (see Roadmap above).
 - [ ] **404 page** — currently a bare placeholder, not brand-styled.
-- [ ] **Real contact phone number** — `CONTACT_PHONE` in `src/lib/brand.ts` is still `+27 (0) 00 000 0000`.
+- [x] **Real contact phone number and email** — `CONTACT_PHONE`/`CONTACT_EMAIL` in `src/lib/brand.ts` now hold your real number and `rohan@aliothgroup.co.za` (matches what `/api/contact` actually sends to).
 - [ ] **Privacy Policy / legal page** — open question flagged in the original spec, never resolved. revx.ai (the structural reference) has one; decide if Alioth needs one.
 
 ## Pre-launch technical
@@ -71,6 +71,8 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 - [ ] **Verify `RESEND_API_KEY`** is actually set as a Vercel environment variable (needed for the contact form to send email in production — not something I can check from the repo alone).
 - [ ] **GA4 / analytics** — explicitly deferred in the original spec, not yet added.
 - [x] ~~Decide when to lift the maintenance gate~~ — done. Gate removed entirely (`ComingSoon` component deleted); site is live to real visitors as of commit `3a187fe`, pushed to `origin/main`.
+- [x] **SEO copy + structured data pass** — every page's title/description rewritten to target real search terms ("marketing agency Johannesburg" on Home, the actual service list on Solutions) instead of generic brand-only copy; `SchemaOrg` upgraded to `ProfessionalService` with a full 7-service `hasOfferCatalog`; `og:locale`/`lang` set to `en-ZA`; `sitemap.xml` given `lastmod`/`priority`.
+- [ ] **SPA has no pre-rendering** — flagged, not fixed. This is a client-rendered React app with no server-side rendering or static pre-rendering (`vercel.json` rewrites every route to the same `index.html`). Google itself renders JS fine, but any crawler or link-preview bot that does *not* execute JavaScript (many SEO audit tools, some social-share scrapers) sees the *same* title/description on every route until React hydrates — only the homepage's static fallback in `index.html` is correct out of the box. The real fix is generating per-route static HTML at build time (or moving to a framework with SSR/SSG). Worth a dedicated session if organic ranking on non-Home pages (especially Solutions) matters — flagging now so it isn't lost, not attempting it inline.
 
 ## In progress
 
