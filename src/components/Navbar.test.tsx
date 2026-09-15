@@ -18,11 +18,10 @@ describe('Navbar', () => {
     expect(logo).toHaveAttribute('href', '/')
   })
 
-  it('renders About, Solutions, and Blog nav links pointing to their pages', () => {
+  it('renders About and Solutions nav links pointing to their pages', () => {
     renderNavbar()
     expect(screen.getAllByRole('link', { name: 'About' })[0]).toHaveAttribute('href', '/about')
     expect(screen.getAllByRole('link', { name: 'Solutions' })[0]).toHaveAttribute('href', '/solutions')
-    expect(screen.getAllByRole('link', { name: 'Blog' })[0]).toHaveAttribute('href', '/blog')
   })
 
   it('renders a Contact Us button linking to the contact page', () => {
@@ -40,7 +39,6 @@ describe('Navbar', () => {
     renderNavbar(['/'])
     expect(screen.getAllByRole('link', { name: 'About' })[0]).not.toHaveAttribute('aria-current')
     expect(screen.getAllByRole('link', { name: 'Solutions' })[0]).not.toHaveAttribute('aria-current')
-    expect(screen.getAllByRole('link', { name: 'Blog' })[0]).not.toHaveAttribute('aria-current')
   })
 
   it('toggles the mobile menu open and closed', () => {

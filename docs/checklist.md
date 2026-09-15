@@ -60,7 +60,7 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 
 - [x] **About page** — built (see Roadmap above for the details).
 - [ ] **Solutions page** — currently a placeholder. Spec calls for 8 repeating service blocks + closing CTA. **Now live on the public site as-is.**
-- [ ] **Blog** — structure/routing only exists (`/blog`, `/blog/:slug`), zero real posts.
+- [ ] **Blog** — removed from the live site and nav for now (per your direction — you want a finished product without it right now). Deferred to a future phase, not dropped from the roadmap. `src/pages/Blog.tsx` / `BlogPost.tsx` and their routes were deleted; re-add when there's real content to put on it.
 - [x] **Footer design** — done (see Roadmap above).
 - [ ] **404 page** — currently a bare placeholder, not brand-styled.
 - [ ] **Real contact phone number** — `CONTACT_PHONE` in `src/lib/brand.ts` is still `+27 (0) 00 000 0000`.

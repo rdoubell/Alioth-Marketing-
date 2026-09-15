@@ -32,16 +32,6 @@ describe('AppRoutes', () => {
     expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument()
   })
 
-  it('renders Insights at /blog', () => {
-    renderAt('/blog')
-    expect(screen.getByRole('heading', { name: 'Insights' })).toBeInTheDocument()
-  })
-
-  it('renders the post slug at /blog/:slug', () => {
-    renderAt('/blog/hello-world')
-    expect(screen.getByRole('heading', { name: 'Post: hello-world' })).toBeInTheDocument()
-  })
-
   it('renders Navbar and Footer on every route', () => {
     renderAt('/about')
     expect(screen.getAllByRole('link', { name: 'Alioth Marketing Solutions' })[0]).toHaveAttribute('href', '/')

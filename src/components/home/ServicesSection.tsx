@@ -20,10 +20,14 @@ gsap.registerPlugin(ScrollTrigger)
 // see the `md:hidden` block in ServicesSection — so PeekCard skips creating
 // its ScrollTrigger below that breakpoint.
 const PEEK_OFFSET_PX = 16
-const TOP_OFFSET_PX = 176
+const TOP_OFFSET_PX = 290
 const HIDDEN_DELTA_PX = 500
-const FRAME_HEIGHT = 'min(calc(100vh - 5rem), 46rem)'
-const COLLECT_AT = 0.99
+const FRAME_HEIGHT = 'min(calc(100vh - 5rem), 48rem)'
+// Compared against the *eased* value, not raw scroll progress — power2.out
+// is already ~99% of the way to its target well before raw progress hits 1,
+// so gating on raw progress alone fires noticeably late relative to when the
+// card visually stops moving.
+const COLLECT_AT_EASED = 0.97
 const peekEase = gsap.parseEase('power2.out')
 
 function SectionBackground() {
@@ -96,7 +100,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[26rem] md:rounded-[2rem] md:px-10 md:py-8 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
+    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[22rem] md:rounded-[2rem] md:px-10 md:py-7 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-4 -right-3 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:bottom-auto md:text-[11rem]"
@@ -149,13 +153,14 @@ function PeekCard({ index, markerRefs, onLeave, onEnterBack, children }: PeekCar
       end: 'bottom center',
       scrub: 0.8,
       onUpdate: (self) => {
-        const y = gsap.utils.interpolate(hiddenY, targetY, peekEase(self.progress))
+        const eased = peekEase(self.progress)
+        const y = gsap.utils.interpolate(hiddenY, targetY, eased)
         gsap.set(card, { y: Math.max(y, targetY), force3D: true })
-        // Belt-and-braces: derive "collected" straight from the same progress
+        // Belt-and-braces: derive "collected" straight from the same eased
         // value driving the visible position, not only the onLeave/
         // onEnterBack events below, so the pill can never silently fail to
-        // fill in.
-        if (self.progress >= COLLECT_AT) onLeave()
+        // fill in — and so it can't lag behind the card's own motion either.
+        if (eased >= COLLECT_AT_EASED) onLeave()
         else if (self.progress <= 0.001) onEnterBack()
       },
       onLeave: () => onLeave(),
