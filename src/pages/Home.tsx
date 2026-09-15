@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <>
       <SEOMeta
-        title="Alioth Marketing Solutions"
-        description="South African marketing consultancy helping ambitious brands grow with data-driven strategy, paid media, and creative."
+        title="Marketing Agency Johannesburg | Alioth Marketing Solutions"
+        description="Johannesburg marketing agency helping South African businesses grow through web design, SEO, paid media, and brand strategy — one team, no hand-offs."
         path="/"
       />
       <Hero />

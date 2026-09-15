@@ -8,8 +8,8 @@ describe('brand constants', () => {
 
   it('exposes site name and contact details', () => {
     expect(SITE_NAME).toBe('Alioth Marketing Solutions')
-    expect(CONTACT_EMAIL).toBe('hello@aliothgroup.co.za')
-    expect(CONTACT_PHONE).toBe('+27 (0) 00 000 0000')
+    expect(CONTACT_EMAIL).toBe('rohan@aliothgroup.co.za')
+    expect(CONTACT_PHONE).toBe('+27 79 351 1570')
   })
 
   it('defines exactly the three navbar links in order', () => {

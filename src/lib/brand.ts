@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://www.aliothgroup.co.za'
 export const SITE_NAME = 'Alioth Marketing Solutions'
-export const CONTACT_EMAIL = 'hello@aliothgroup.co.za'
-export const CONTACT_PHONE = '+27 (0) 00 000 0000'
+export const CONTACT_EMAIL = 'rohan@aliothgroup.co.za'
+export const CONTACT_PHONE = '+27 79 351 1570'
 
 export interface NavLink {
   label: string

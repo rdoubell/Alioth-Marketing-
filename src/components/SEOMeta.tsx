@@ -58,6 +58,7 @@ export default function SEOMeta({
     setMeta('og:type', ogType, 'property')
     setMeta('og:image', image, 'property')
     setMeta('og:site_name', SITE_NAME, 'property')
+    setMeta('og:locale', 'en_ZA', 'property')
 
     setMeta('twitter:card', 'summary_large_image')
     setMeta('twitter:title', fullTitle)

@@ -68,7 +68,7 @@ export default function About() {
     <>
       <SEOMeta
         title="About"
-        description="Why Alioth is called Alioth, how we started, and the kind of businesses we're built for."
+        description="Meet the Johannesburg-based team behind Alioth — why we're called Alioth, how we started, and the South African businesses we're built for."
         path="/about"
       />
 

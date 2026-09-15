@@ -20,14 +20,11 @@ describe('Footer', () => {
         <Footer />
       </MemoryRouter>
     )
-    expect(screen.getByRole('link', { name: 'hello@aliothgroup.co.za' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'rohan@aliothgroup.co.za' })).toHaveAttribute(
       'href',
-      'mailto:hello@aliothgroup.co.za'
+      'mailto:rohan@aliothgroup.co.za'
     )
-    expect(screen.getByRole('link', { name: '+27 (0) 00 000 0000' })).toHaveAttribute(
-      'href',
-      'tel:+27(0)000000000'
-    )
+    expect(screen.getByRole('link', { name: '+27 79 351 1570' })).toHaveAttribute('href', 'tel:+27793511570')
   })
 
   it('renders nav links including Contact', () => {

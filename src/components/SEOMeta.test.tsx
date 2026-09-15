@@ -33,6 +33,12 @@ describe('SEOMeta', () => {
     expect(ogType?.getAttribute('content')).toBe('website')
   })
 
+  it('sets og:locale for South African English', () => {
+    render(<SEOMeta title="Solutions" description="What we offer." path="/solutions" />)
+    const locale = document.querySelector('meta[property="og:locale"]')
+    expect(locale?.getAttribute('content')).toBe('en_ZA')
+  })
+
   it('defaults robots to index, follow when noindex is not set', () => {
     render(<SEOMeta title="Solutions" description="What we offer." path="/solutions" />)
     const robots = document.querySelector('meta[name="robots"]')

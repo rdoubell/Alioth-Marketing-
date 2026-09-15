@@ -7,8 +7,8 @@ export default function Solutions() {
   return (
     <>
       <SEOMeta
-        title="Solutions"
-        description="Web design, strategy, paid media, email automation, SEO, design, and analytics — everything Alioth Marketing Solutions offers."
+        title="Marketing Services — Web Design, SEO & Paid Media"
+        description="Full-service Johannesburg marketing agency offering web design, strategy, paid media, email automation, SEO & content, design, and analytics."
         path="/solutions"
       />
 

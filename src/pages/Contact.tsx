@@ -6,7 +6,7 @@ export default function Contact() {
     <>
       <SEOMeta
         title="Contact"
-        description="Get in touch with Alioth Marketing Solutions to talk about growing your business."
+        description="Get in touch with Alioth Marketing Solutions — a Johannesburg marketing agency ready to help your South African business grow. Call, email, or send a message."
         path="/contact"
       />
       <section className="mx-auto max-w-3xl px-6 py-24">
