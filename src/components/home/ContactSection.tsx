@@ -1,11 +1,44 @@
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import ContactForm from '../ContactForm'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function ContactSection() {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    if (!window.matchMedia('(min-width: 768px)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    // Desktop only, matching the card deck above it: once the last service
+    // card has locked into place, this section slides up from below and
+    // covers the settled stack, rather than the default plain scroll-past
+    // reveal. Standard "sticky reveal" GSAP pattern — start/end use the
+    // section's own natural (pre-sticky) document position, which is what
+    // makes it read as sliding up specifically as this section enters view.
+    gsap.set(section, { y: '100%' })
+
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top bottom',
+      end: 'top top',
+      scrub: 0.8,
+      onUpdate: (self) => {
+        gsap.set(section, { y: `${100 - self.progress * 100}%`, force3D: true })
+      },
+    })
+
+    return () => trigger.kill()
+  }, [])
 
   return (
-    <section className="bg-green px-6 py-24">
+    <section ref={sectionRef} className="relative z-[60] bg-green px-6 py-24 md:sticky md:top-0">
       <div
         ref={ref}
         className="mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row lg:items-start lg:justify-between"
