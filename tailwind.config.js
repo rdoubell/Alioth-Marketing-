@@ -17,7 +17,7 @@ export default {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['Archivo', 'system-ui', 'sans-serif'],
         mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
-        // Reserved for hero-scale headline moments only — not a general replacement for `serif`.
+        // Reserved for main page-title headlines (Hero, and h1s like About/Solutions) — not a general replacement for `serif`.
         display: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
       },
     },

@@ -74,8 +74,7 @@ export default function About() {
 
       <section className="mx-auto max-w-3xl px-6 py-24">
         <div className="animate-fade-up">
-          <span className="font-mono text-xs uppercase tracking-widest text-green">About</span>
-          <h1 className="mt-4 font-serif text-4xl text-ink md:text-5xl">Why we&apos;re called Alioth.</h1>
+          <h1 className="font-display text-4xl font-black text-ink md:text-5xl">Why we&apos;re called Alioth.</h1>
         </div>
 
         <p className="animate-fade-up mt-8 font-sans text-lg text-ink/80 [animation-delay:100ms] md:text-xl">

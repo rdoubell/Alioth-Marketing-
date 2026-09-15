@@ -31,7 +31,7 @@ const PANEL_HEIGHT = 'min(calc(100vh - 5rem), 48rem)'
 // Sized to just barely outlast the last card's own reveal, not a full extra
 // panel's worth — a bigger value here just reads as a dead gap of plain
 // cream before Contact appears.
-const TRAILING_HEIGHT_PX = 200
+const TRAILING_HEIGHT_PX = 100
 // Compared against the *eased* value, not raw scroll progress — power2.out
 // is already ~99% of the way to its target well before raw progress hits 1,
 // so gating on raw progress alone fires noticeably late relative to when the
@@ -102,6 +102,26 @@ function TrackerBar({ collected }: TrackerBarProps) {
   )
 }
 
+// Splits on **bold** markers in the teaser copy (see services-data.ts) and
+// renders those spans bold — gives the teaser a scannable hook instead of a
+// flat line of text, without needing a markdown dependency for one pattern.
+function TeaserText({ text }: { text: string }) {
+  const parts = text.split(/\*\*(.+?)\*\*/g)
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="font-semibold text-ink">
+            {part}
+          </strong>
+        ) : (
+          part
+        )
+      )}
+    </>
+  )
+}
+
 interface ServiceCardProps {
   service: Service
   index: number
@@ -118,7 +138,9 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       </span>
       <div className="relative z-10">
         <h3 className="font-serif text-4xl text-ink md:text-5xl">{service.name}</h3>
-        <p className="mt-4 max-w-xl font-sans text-lg text-ink/70 md:text-xl">{service.description}</p>
+        <p className="mt-4 max-w-xl font-sans text-lg text-ink/70 md:text-xl">
+          <TeaserText text={service.description} />
+        </p>
       </div>
       <Link
         to={`/solutions#${service.slug}`}

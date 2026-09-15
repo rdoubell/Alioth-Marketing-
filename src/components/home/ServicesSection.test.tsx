@@ -38,7 +38,11 @@ describe('ServicesSection', () => {
     const desktop = desktopTree()
     SERVICES.forEach((service) => {
       expect(desktop.getByRole('heading', { name: service.name })).toBeInTheDocument()
-      expect(desktop.getByText(service.description)).toBeInTheDocument()
+      // Description text may include **bold** markers rendered as a nested
+      // <strong>, splitting it across DOM nodes — compare against the
+      // stripped-marker text content rather than the raw source string.
+      const plainText = service.description.replace(/\*\*/g, '')
+      expect(desktop.getByText((_, node) => node?.textContent === plainText)).toBeInTheDocument()
     })
   })
 

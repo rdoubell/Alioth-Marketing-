@@ -12,12 +12,19 @@ export default function Solutions() {
         path="/solutions"
       />
 
-      <section className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <span className="font-mono text-xs uppercase tracking-widest text-green">Solutions</span>
-        <h1 className="mt-4 font-serif text-4xl text-ink md:text-5xl">Solutions</h1>
-        <p className="mt-6 font-sans text-lg text-ink/70">
-          A closer look at each of the seven ways we help brands grow.
-        </p>
+      <section className="relative overflow-hidden px-6 py-24 text-center">
+        {/* Green glow stemming from the sticky navbar's bottom edge — gives
+            the heading some depth against the plain cream background. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-green/25 to-transparent blur-3xl md:h-96"
+        />
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-display text-5xl font-black text-ink md:text-6xl">Solutions</h1>
+          <p className="mt-6 font-sans text-lg text-ink/70">
+            A closer look at each of the seven ways we help brands grow.
+          </p>
+        </div>
       </section>
 
       <div className="mx-auto max-w-3xl divide-y divide-ink/10 px-6">
