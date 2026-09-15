@@ -26,8 +26,14 @@ export default function ContactSection() {
 
     const trigger = ScrollTrigger.create({
       trigger: section,
-      start: 'top bottom',
-      end: 'top top',
+      // Starts earlier than 'top bottom' (while Contact is still a good way
+      // below the viewport) so its slide-up overlaps the tail end of the
+      // card deck releasing, instead of a plain gap first and only then an
+      // animation. 'top top' as the end (a full viewport of scroll) also
+      // left a long stretch where Contact was barely visible yet — both
+      // compressed together into one snappier, more overlapped transition.
+      start: 'top 200%',
+      end: 'top 66%',
       scrub: 0.8,
       onUpdate: (self) => {
         gsap.set(section, { y: `${100 - self.progress * 100}%`, force3D: true })
@@ -38,7 +44,7 @@ export default function ContactSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative z-[60] bg-green px-6 py-24 md:sticky md:top-0">
+    <section ref={sectionRef} className="relative z-40 bg-green px-6 py-24 md:sticky md:top-20">
       <div
         ref={ref}
         className="mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row lg:items-start lg:justify-between"

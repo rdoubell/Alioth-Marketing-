@@ -19,10 +19,14 @@ gsap.registerPlugin(ScrollTrigger)
 // mobile it's replaced by a plain, non-animated vertical list of cards —
 // see the `md:hidden` block in ServicesSection — so PeekCard skips creating
 // its ScrollTrigger below that breakpoint.
-const PEEK_OFFSET_PX = 16
-const TOP_OFFSET_PX = 290
+const PEEK_OFFSET_PX = 14
+const TOP_OFFSET_PX = 200
 const HIDDEN_DELTA_PX = 500
-const FRAME_HEIGHT = 'min(calc(100vh - 5rem), 48rem)'
+const FRAME_HEIGHT = 'min(calc(100vh - 5rem), 42rem)'
+// Sized to just barely outlast the last card's own reveal, not a full extra
+// frame's worth — this used to be FRAME_HEIGHT, which left a long stretch of
+// plain cream background between the deck settling and Contact appearing.
+const TRAILING_HEIGHT_PX = 200
 // Compared against the *eased* value, not raw scroll progress — power2.out
 // is already ~99% of the way to its target well before raw progress hits 1,
 // so gating on raw progress alone fires noticeably late relative to when the
@@ -100,7 +104,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[22rem] md:rounded-[2rem] md:px-10 md:py-7 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
+    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[18rem] md:rounded-[2rem] md:px-10 md:py-6 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-4 -right-3 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:bottom-auto md:text-[11rem]"
@@ -256,10 +260,11 @@ export default function ServicesSection() {
         {/* Trailing spacer: the pinned frame "borrows" its dwell room from
             markers still to come — position:sticky can't hold an element
             past its own containing block's bottom edge. Without this, the
-            frame would get squeezed out of its top-20 hold as it nears the
-            last marker instead of staying put through it. Matches the
-            frame's own height so it gets the same dwell throughout. */}
-        <div aria-hidden="true" style={{ height: FRAME_HEIGHT }} />
+            frame would get squeezed out of its top-20 hold before the last
+            card finishes settling. Only needs to outlast that settle, not a
+            full extra card's worth — anything more just reads as a dead gap
+            of plain cream before Contact appears. */}
+        <div aria-hidden="true" style={{ height: TRAILING_HEIGHT_PX }} />
       </div>
 
       {/* Mobile: plain scroll, no pinning/scaling — same card look, just a
