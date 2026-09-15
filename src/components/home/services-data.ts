@@ -23,7 +23,7 @@ export const SERVICES: Service[] = [
   {
     name: 'Email & Automation',
     slug: 'email-automation',
-    description: 'Lifecycle flows and campaigns that keep your audience engaged between purchases.',
+    description: 'Lifecycle flows and campaigns that keep your audience engaged and moving toward a decision.',
   },
   {
     name: 'SEO & Content',

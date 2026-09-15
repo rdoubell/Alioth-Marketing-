@@ -15,7 +15,7 @@ export const SOLUTION_DETAILS: Record<string, SolutionDetail> = {
     tagline: "A website that's actually yours",
     icon: LayoutTemplate,
     paragraphs: [
-      "Most “custom” websites are really just a stock template with your logo dropped in. We build from scratch — structure, layout, and interactions designed around how your specific business actually sells, not a generic best-practice checklist. Fast to load, built to convert, and easy for your team to update without calling us every time you need to change a headline.",
+      "We design every site to look like nobody else in your category — structure, layout, and interactions built around how your specific business actually sells, not a generic best-practice checklist dropped onto a stock template. Fast to load, built to convert, and easy for your team to update without calling us every time you need to change a headline.",
       'Every build starts with the same question we ask for every service: what does this page need to make someone act? From there we handle design, front-end development, copy structure, and the technical groundwork so the site is ready to do its job the day it goes live.',
     ],
   },
@@ -23,7 +23,7 @@ export const SOLUTION_DETAILS: Record<string, SolutionDetail> = {
     tagline: 'A roadmap, not guesswork',
     icon: Compass,
     paragraphs: [
-      "Before we touch a single ad or write a single page of copy, we work out where you actually stand — who you're really competing with, what your customers are searching for and saying about you, and where the fastest, most credible path to growth actually is. That becomes a plan with a clear sequence: what to do first, what to measure, and what success looks like in real numbers.",
+      "Before we touch a single ad or write a single page of copy, we work out where you actually stand — who you're really competing with, what your customers are searching for and saying about you, and where the fastest, most credible path to growth actually is. That becomes a written roadmap with a clear sequence: what to do first, what to measure, and what success looks like in real numbers.",
       "We're not interested in a strategy deck that sits in a drawer. Every recommendation ties back to something we can execute — through our own other disciplines or yours — so the strategy phase ends with a plan you'll actually see through.",
     ],
   },
@@ -31,7 +31,7 @@ export const SOLUTION_DETAILS: Record<string, SolutionDetail> = {
     tagline: 'Ad spend that becomes pipeline',
     icon: TrendingUp,
     paragraphs: [
-      'We run paid campaigns across Google, Meta, and other platforms with one goal: turning ad spend into pipeline, not just impressions. That means proper audience research and targeting up front, creative built for the platform it runs on, and continuous optimisation based on what the data actually shows — not a campaign left to quietly burn budget.',
+      'We run paid campaigns wherever your customers actually are — search, social, or otherwise — with one goal: turning ad spend into pipeline, not just impressions. That means proper audience research and targeting up front, creative built for the platform it runs on, and continuous optimisation based on what the data actually shows — not a campaign left to quietly burn budget.',
       "You get straightforward reporting on what's working, and campaigns get adjusted in response to real performance, not run on autopilot until the next quarterly check-in.",
     ],
   },
@@ -39,7 +39,7 @@ export const SOLUTION_DETAILS: Record<string, SolutionDetail> = {
     tagline: 'Always top of mind',
     icon: Mail,
     paragraphs: [
-      'Most businesses lose customers not because of a bad experience, but because they simply go quiet after the first purchase or enquiry. We build the email flows that keep that relationship alive — welcome sequences, abandoned-cart recovery, re-engagement campaigns, and regular sends that actually give people a reason to open them.',
+      'Most businesses lose customers and leads not because of a bad experience, but because they simply go quiet after the first purchase or enquiry. We build the email flows that keep that relationship alive — welcome sequences, follow-ups that nurture an enquiry toward a decision, re-engagement campaigns, and regular sends that actually give people a reason to open them.',
       "Everything runs automatically once it's built, so your audience gets the right message at the right moment without your team sending a single email by hand — but every flow is built around your actual customer journey, not a generic template.",
     ],
   },
@@ -47,7 +47,7 @@ export const SOLUTION_DETAILS: Record<string, SolutionDetail> = {
     tagline: 'Found by the people who matter',
     icon: Search,
     paragraphs: [
-      "Paid traffic stops the moment you stop paying. Organic visibility keeps working long after you've published it — which is exactly why we treat SEO and content as one discipline, not two. We research how your actual customers search, build content around those real questions, and handle the technical groundwork that determines whether Google can find and rank it in the first place.",
+      "Paid traffic stops the moment you stop paying. Organic visibility keeps working long after you've published it — which is exactly why we treat SEO and content as one discipline, not two. We research how South African customers actually search, optimise your Google Business Profile and local listings so you show up in the searches that matter in your area, and build content around the real questions your customers are asking.",
       "The result compounds: content published today keeps bringing in visibility months and years later, instead of resetting to zero the moment a campaign ends.",
     ],
   },
