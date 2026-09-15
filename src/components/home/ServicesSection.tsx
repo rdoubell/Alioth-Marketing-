@@ -7,25 +7,30 @@ import logoMark from '../../assets/brand/A-cream.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// One card per service, all pinned in a single shared frame — see
-// docs/superpowers/specs for the design. Each card slides up into place once
-// scrolled to, then stays put permanently, offset a few pixels lower than
-// the one before it, so every earlier card's top edge keeps peeking out
-// above the current front card (a fanned card-deck look). The "What We
-// Offer" backdrop above is a separate, independently-pinned panel that
-// never gets covered by the cards.
+// One card per service, all pinned in a single shared panel alongside the
+// "What We Offer" heading and tracker pills — see docs/superpowers/specs for
+// the design. Each card slides up into place once scrolled to, then stays
+// put permanently, offset a few pixels lower than the one before it, so
+// every earlier card's top edge keeps peeking out above the current front
+// card (a fanned card-deck look).
+//
+// The heading/pills and the card area used to be two separately-pinned
+// panels kept in sync with a hand-measured pixel offset — which drifted out
+// of sync on real screens and let cards climb up over the pills. They're now
+// one flex column: the card area is a normal flex child that starts exactly
+// where the pills end, in document flow, so overlap isn't possible
+// regardless of screen size or how tall the pills row renders.
 //
 // This whole scroll-driven treatment is desktop-only (md: and up). On
 // mobile it's replaced by a plain, non-animated vertical list of cards —
 // see the `md:hidden` block in ServicesSection — so PeekCard skips creating
 // its ScrollTrigger below that breakpoint.
 const PEEK_OFFSET_PX = 14
-const TOP_OFFSET_PX = 200
 const HIDDEN_DELTA_PX = 500
-const FRAME_HEIGHT = 'min(calc(100vh - 5rem), 42rem)'
+const PANEL_HEIGHT = 'min(calc(100vh - 5rem), 48rem)'
 // Sized to just barely outlast the last card's own reveal, not a full extra
-// frame's worth — this used to be FRAME_HEIGHT, which left a long stretch of
-// plain cream background between the deck settling and Contact appearing.
+// panel's worth — a bigger value here just reads as a dead gap of plain
+// cream before Contact appears.
 const TRAILING_HEIGHT_PX = 200
 // Compared against the *eased* value, not raw scroll progress — power2.out
 // is already ~99% of the way to its target well before raw progress hits 1,
@@ -104,7 +109,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[18rem] md:rounded-[2rem] md:px-10 md:py-6 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
+    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[16rem] md:rounded-[2rem] md:px-10 md:py-6 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-4 -right-3 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:bottom-auto md:text-[11rem]"
@@ -175,8 +180,12 @@ function PeekCard({ index, markerRefs, onLeave, onEnterBack, children }: PeekCar
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index])
 
+  // top-4: a small, fixed breathing gap below wherever the pills actually
+  // end — not a guess at the pills' own height, since this div's own top:0
+  // already starts right after them in document flow (see the "flex-1"
+  // wrapper in ServicesSection).
   return (
-    <div className="absolute inset-x-0 top-0 flex justify-center" style={{ paddingTop: TOP_OFFSET_PX, zIndex: index + 1 }}>
+    <div className="absolute inset-x-0 top-4 flex justify-center" style={{ zIndex: index + 1 }}>
       <div ref={cardRef} className="w-[85%] max-w-4xl will-change-transform" style={{ position: 'relative' }}>
         {children}
       </div>
@@ -189,7 +198,7 @@ export default function ServicesSection() {
   const markerRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
-    // Layout (markers, backdrop) needs to settle — and web fonts reflow text
+    // Layout (markers, panel) needs to settle — and web fonts reflow text
     // after that too — before trigger positions can be trusted. Refresh once
     // layout has actually settled, and again once fonts are ready, so
     // cached trigger positions aren't stale.
@@ -209,39 +218,27 @@ export default function ServicesSection() {
 
   return (
     <section className="relative bg-cream">
-      {/* Desktop: pinned backdrop + a pinned card-deck frame. */}
+      {/* Desktop: one pinned panel holding the heading, the tracker pills,
+          and the card deck below them — in that document-flow order, so the
+          cards can never render above the pills. */}
       <div className="hidden md:block" data-testid="services-desktop">
         <div className="absolute inset-0" style={{ zIndex: 0 }}>
-          <div className="sticky top-0 flex h-screen flex-col items-center gap-4 overflow-hidden pt-16 md:top-20 md:h-[calc(100vh-5rem)] md:pt-20">
+          <div
+            className="sticky flex flex-col items-center overflow-hidden pt-16 md:top-20 md:pt-20"
+            style={{ height: PANEL_HEIGHT }}
+          >
             <SectionBackground />
             <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
               <h2 className="font-serif text-3xl font-bold uppercase text-cream md:text-5xl">What We Offer</h2>
             </div>
-            <TrackerBar collected={collected} />
-          </div>
-        </div>
+            <div className="relative z-10 mt-4">
+              <TrackerBar collected={collected} />
+            </div>
 
-        {/* Head-start: gives the backdrop a moment pinned alone before card 1 arrives. */}
-        <div aria-hidden="true" className="h-[50vh]" />
-
-        {/* Invisible markers — one per card, stacked in normal flow. Each one
-            is purely a scroll-range reference for that card's own trigger;
-            the cards themselves render separately, absolutely positioned,
-            in the pinned frame below. */}
-        <div className="relative">
-          {SERVICES.map((service, i) => (
-            <div
-              key={service.slug}
-              ref={(el) => {
-                markerRefs.current[i] = el
-              }}
-              aria-hidden="true"
-              style={{ height: FRAME_HEIGHT }}
-            />
-          ))}
-
-          <div className="absolute inset-0">
-            <div className="sticky overflow-hidden" style={{ top: '5rem', height: FRAME_HEIGHT }}>
+            {/* Card deck zone: a normal flex child, so its own top edge is
+                guaranteed to start right after the pills above — cards are
+                positioned relative to THIS, not to the whole panel. */}
+            <div className="relative z-10 w-full flex-1">
               {SERVICES.map((service, i) => (
                 <PeekCard
                   key={service.name}
@@ -257,13 +254,28 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        {/* Trailing spacer: the pinned frame "borrows" its dwell room from
+        {/* Head-start: gives the panel a moment pinned alone before card 1 arrives. */}
+        <div aria-hidden="true" className="h-[50vh]" />
+
+        {/* Invisible markers — one per card, stacked in normal flow. Each one
+            is purely a scroll-range reference for that card's own trigger;
+            the cards themselves render inside the pinned panel above. */}
+        {SERVICES.map((service, i) => (
+          <div
+            key={service.slug}
+            ref={(el) => {
+              markerRefs.current[i] = el
+            }}
+            aria-hidden="true"
+            style={{ height: PANEL_HEIGHT }}
+          />
+        ))}
+
+        {/* Trailing spacer: the pinned panel "borrows" its dwell room from
             markers still to come — position:sticky can't hold an element
             past its own containing block's bottom edge. Without this, the
-            frame would get squeezed out of its top-20 hold before the last
-            card finishes settling. Only needs to outlast that settle, not a
-            full extra card's worth — anything more just reads as a dead gap
-            of plain cream before Contact appears. */}
+            panel would get squeezed out of its top-20 hold before the last
+            card finishes settling. */}
         <div aria-hidden="true" style={{ height: TRAILING_HEIGHT_PX }} />
       </div>
 
