@@ -38,6 +38,14 @@ describe('AppRoutes', () => {
     expect(screen.getByText(/All rights reserved/)).toBeInTheDocument()
   })
 
+  it('renders the draft Privacy Policy at /privacy, noindexed and not linked from the Footer', () => {
+    renderAt('/privacy')
+    expect(screen.getByRole('heading', { level: 1, name: 'Privacy Policy' })).toBeInTheDocument()
+    expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow')
+    expect(screen.queryByRole('link', { name: 'Privacy Policy' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /privacy/i })).not.toBeInTheDocument()
+  })
+
   it('renders NotFound for an unmatched path', () => {
     renderAt('/servicez')
     expect(screen.getByRole('heading', { name: 'Page Not Found' })).toBeInTheDocument()

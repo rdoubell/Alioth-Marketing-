@@ -49,8 +49,13 @@ describe('page shells', () => {
     expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument()
   })
 
-  it('NotFound renders an h1 "Page Not Found"', () => {
-    render(<NotFound />)
+  it('NotFound renders an h1 "Page Not Found" with a way back to Home', () => {
+    render(
+      <MemoryRouter>
+        <NotFound />
+      </MemoryRouter>
+    )
     expect(screen.getByRole('heading', { name: 'Page Not Found' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Back to Home' })).toHaveAttribute('href', '/')
   })
 })

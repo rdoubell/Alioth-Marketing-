@@ -62,13 +62,13 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 - [x] **Solutions page** — built. 7 real service sections with depth copy, icons, and anchors matching every Home card's "See More" link.
 - [ ] **Blog** — removed from the live site and nav for now (per your direction — you want a finished product without it right now). Deferred to a future phase, not dropped from the roadmap. `src/pages/Blog.tsx` / `BlogPost.tsx` and their routes were deleted; re-add when there's real content to put on it.
 - [x] **Footer design** — done (see Roadmap above).
-- [ ] **404 page** — currently a bare placeholder, not brand-styled.
+- [x] **404 page** — done. Brand-styled (`src/pages/NotFound.tsx`): green glow, large translucent "404" numeral, and a "Back to Home" CTA — no longer a dead end.
 - [x] **Real contact phone number and email** — `CONTACT_PHONE`/`CONTACT_EMAIL` in `src/lib/brand.ts` now hold your real number and `rohan@aliothgroup.co.za` (matches what `/api/contact` actually sends to).
-- [ ] **Privacy Policy / legal page** — open question flagged in the original spec, never resolved. revx.ai (the structural reference) has one; decide if Alioth needs one.
+- [ ] **Privacy Policy / legal page** — **draft built** at `src/pages/PrivacyPolicy.tsx` (route `/privacy`), styled to match the rest of the site, referencing POPIA (the correct SA law, not GDPR) and the real vendors involved (Resend, Vercel). Deliberately `noindex` and **not linked from the Footer or Navbar yet** — it's a working mockup for your review, not published legal content. **Recommended placement once approved**: a small text link in the Footer's bottom bar, next to the "© 2026 Alioth Marketing Solutions. All rights reserved." line — the standard convention, low-visual-weight, doesn't compete with the main nav columns. Also get the final copy checked against POPIA by someone qualified to do that before it goes live.
 
 ## Pre-launch technical
 
-- [ ] **Verify `RESEND_API_KEY`** is actually set as a Vercel environment variable (needed for the contact form to send email in production — not something I can check from the repo alone).
+- [ ] **`RESEND_API_KEY` is confirmed NOT set** — checked directly via the Vercel project on 2026-09-19: zero environment variables exist on this project. The contact form is currently broken in production; every submission fails silently server-side. See the Email Integration section above for the exact steps (Resend domain verification → API key → add to Vercel → redeploy).
 - [ ] **GA4 / analytics** — explicitly deferred in the original spec, not yet added.
 - [x] ~~Decide when to lift the maintenance gate~~ — done. Gate removed entirely (`ComingSoon` component deleted); site is live to real visitors as of commit `3a187fe`, pushed to `origin/main`.
 - [x] **SEO copy + structured data pass** — every page's title/description rewritten to target real search terms ("marketing agency Johannesburg" on Home, the actual service list on Solutions) instead of generic brand-only copy; `SchemaOrg` upgraded to `ProfessionalService` with a full 7-service `hasOfferCatalog`; `og:locale`/`lang` set to `en-ZA`; `sitemap.xml` given `lastmod`/`priority`.
@@ -76,7 +76,7 @@ Given the real scope here — team accounts/auth, email-sending infrastructure, 
 
 ## In progress
 
-- [ ] **Splash screen on first load** — logo on cream, ~1s hold, once per browser session. **Design approved via mockup** — not yet built. (The transparent/scroll-aware Navbar half of this design is now done, see below.)
+- [x] **Splash screen on first load** — done. `src/components/SplashScreen.tsx`, wired in at the app root (`App.tsx`) so it runs once per session regardless of which route loads first. Icon only on cream, ~1s hold then a 400ms fade, `sessionStorage`-gated so it doesn't replay on in-session navigation, and skips entirely under `prefers-reduced-motion`.
 
 ## Already done this session
 
