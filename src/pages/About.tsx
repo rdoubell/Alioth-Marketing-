@@ -72,17 +72,24 @@ export default function About() {
         path="/about"
       />
 
-      <section className="mx-auto max-w-3xl px-6 py-24">
-        <div className="animate-fade-up">
-          <h1 className="font-display text-4xl font-black text-ink md:text-5xl">Why we&apos;re called Alioth.</h1>
+      <section className="relative overflow-hidden px-6 py-24 text-center">
+        {/* Same treatment as the Solutions page hero — green glow stemming
+            from the sticky navbar's bottom edge, font-display title. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-green/25 to-transparent blur-3xl md:h-96"
+        />
+        <div className="mx-auto max-w-3xl animate-fade-up">
+          <h1 className="font-display text-5xl font-black text-ink md:text-6xl">Why we&apos;re called Alioth.</h1>
+          <p className="mt-6 font-sans text-lg text-ink/70 [animation-delay:100ms] md:text-xl">
+            Alioth is the star sailors and travelers once used to find their way home — a fixed, trusted point in a
+            shifting sky. That&apos;s the role we set out to play for the businesses we work with.
+          </p>
         </div>
+      </section>
 
-        <p className="animate-fade-up mt-8 font-sans text-lg text-ink/80 [animation-delay:100ms] md:text-xl">
-          Alioth is the star sailors and travelers once used to find their way home — a fixed, trusted point in a
-          shifting sky. That&apos;s the role we set out to play for the businesses we work with.
-        </p>
-
-        <p className="mt-6 font-sans text-lg text-ink/70">
+      <section className="mx-auto max-w-3xl px-6 pb-24">
+        <p className="font-sans text-lg text-ink/70">
           We started Alioth together, kept noticing the same gap across every industry we touched: real potential
           with no one steady guiding the marketing behind it. Here&apos;s the short version of how that turned into
           what we do now.
