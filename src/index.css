@@ -8,6 +8,14 @@ body {
   @apply bg-cream text-ink font-sans antialiased;
 }
 
+/* Browser-default selection is system blue, which belongs to no part of the
+   brand. A light sage with ink text stays legible on both the cream and the
+   deep-green sections. */
+::selection {
+  background: #a9c4b4;
+  color: #15140f;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

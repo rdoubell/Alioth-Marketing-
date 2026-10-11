@@ -307,7 +307,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Head-start: gives the panel a moment pinned alone before card 1 arrives. */}
-        <div aria-hidden="true" className="h-[50vh]" />
+        <div aria-hidden="true" className="h-[28vh]" />
 
         {/* Invisible markers — one per card, stacked in normal flow. Each one
             is purely a scroll-range reference for that card's own trigger;
