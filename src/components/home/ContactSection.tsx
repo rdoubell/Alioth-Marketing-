@@ -50,8 +50,7 @@ export default function ContactSection() {
         className="mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row lg:items-start lg:justify-between"
       >
         <div className={`reveal max-w-md ${isVisible ? 'reveal-visible' : ''}`}>
-          <span className="font-mono text-xs uppercase tracking-widest text-cream/70">Get In Touch</span>
-          <h2 className="mt-4 font-serif text-4xl text-cream">Start the Conversation</h2>
+          <h2 className="font-serif text-4xl text-cream">Start the Conversation</h2>
           <p className="mt-4 font-sans text-cream/70">
             Tell us where your brand is headed — we&apos;ll tell you how to get there faster.
           </p>

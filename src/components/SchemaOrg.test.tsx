@@ -20,7 +20,7 @@ describe('SchemaOrg', () => {
     expect(data.address.addressCountry).toBe('ZA')
   })
 
-  it('lists every service in the offer catalog, matching the Solutions page anchors', () => {
+  it('lists every service in the offer catalog, matching the service page URLs', () => {
     const { container } = render(<SchemaOrg />)
     const script = container.querySelector('script[type="application/ld+json"]')
     const data = JSON.parse(script!.textContent ?? '{}')
@@ -29,7 +29,7 @@ describe('SchemaOrg', () => {
     SERVICES.forEach((service, i) => {
       const offer = data.hasOfferCatalog.itemListElement[i]
       expect(offer.itemOffered.name).toBe(service.name)
-      expect(offer.itemOffered.url).toBe(`https://www.aliothgroup.co.za/solutions#${service.slug}`)
+      expect(offer.itemOffered.url).toBe(`https://www.aliothgroup.co.za/solutions/${service.slug}`)
     })
   })
 })

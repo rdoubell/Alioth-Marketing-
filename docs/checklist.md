@@ -1,6 +1,12 @@
 # Alioth Website — Launch Checklist
 
-Last updated: 2026-08-25 (site is live; added a comprehensive per-page design suggestion list below, grounded in current 2026 trend research)
+Last updated: 2026-10-12 (see "Update — 2026-10-12" below for the latest changes)
+
+## Update — 2026-10-12
+
+Done: per-service pages at `/solutions/<slug>` (each with its own title, description, Service + FAQ structured data; `/solutions` is now an overview and old `/solutions#slug` links redirect); general FAQ on Solutions; "How we work" strip on Home; WhatsApp links (Contact page + Footer); Privacy Policy published and linked in the Footer (copy still worth a POPIA check by someone qualified); GA4 wired in but **inactive until `VITE_GA_MEASUREMENT_ID` is set** in Vercel (skips visitors sending Do Not Track); sitemap lists every page.
+
+Still open: **`RESEND_API_KEY` not set — the contact form does not deliver email**; pages other than Home show generic meta tags to bots that don't run JavaScript (no pre-rendering); 8th "Lead Generation" service not added (framing undecided).
 
 ## Roadmap (your priority order)
 

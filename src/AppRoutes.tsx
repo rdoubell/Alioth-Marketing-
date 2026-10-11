@@ -3,9 +3,11 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SchemaOrg from './components/SchemaOrg'
 import ScrollToTop from './components/ScrollToTop'
+import Analytics from './components/Analytics'
 import Home from './pages/Home'
 import About from './pages/About'
 import Solutions from './pages/Solutions'
+import ServiceDetail from './pages/ServiceDetail'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import NotFound from './pages/NotFound'
@@ -21,15 +23,15 @@ export default function AppRoutes() {
       </a>
       <SchemaOrg />
       <ScrollToTop />
+      <Analytics />
       <Navbar />
       <main id="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/:slug" element={<ServiceDetail />} />
           <Route path="/contact" element={<Contact />} />
-          {/* Draft — see the note in PrivacyPolicy.tsx. Reachable by direct
-              URL for review, deliberately not linked from Navbar/Footer. */}
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -68,3 +68,131 @@ export const SOLUTION_DETAILS: Record<string, SolutionDetail> = {
     ],
   },
 }
+
+export interface Faq {
+  question: string
+  answer: string
+}
+
+// Two questions per service for its own page. Answers restate what the
+// service copy above already commits to — no prices or timelines, since
+// those are scoped per client.
+export const SERVICE_FAQS: Record<string, Faq[]> = {
+  'web-design-build': [
+    {
+      question: 'Do you use templates?',
+      answer:
+        'No. Every site is designed around how your specific business sells, not dropped into a stock template with your logo on it.',
+    },
+    {
+      question: 'Can my team update the website ourselves?',
+      answer:
+        "Yes. We build with easy editing in mind, so changing a headline or an image shouldn't mean calling us every time.",
+    },
+  ],
+  strategy: [
+    {
+      question: 'What do I receive at the end of a strategy engagement?',
+      answer:
+        'A written roadmap: what to do first, what to measure, and what success looks like in real numbers.',
+    },
+    {
+      question: 'Do I have to use Alioth to carry the plan out?',
+      answer:
+        "No. Every recommendation ties back to something that can be executed, whether that's through us or through your own team.",
+    },
+  ],
+  'paid-media': [
+    {
+      question: 'Which platforms do you advertise on?',
+      answer:
+        'Wherever your customers actually are — search, social, or elsewhere. Channels are chosen from audience research, not habit.',
+    },
+    {
+      question: 'How will I know the campaigns are working?',
+      answer:
+        'You get straightforward reporting on leads and cost per acquisition, and campaigns are adjusted in response to real performance rather than left on autopilot.',
+    },
+  ],
+  'email-automation': [
+    {
+      question: 'Is email automation only for online shops?',
+      answer:
+        'No. It suits any business that wants to keep customers and leads engaged — from welcome sequences to follow-ups that nurture an enquiry toward a decision.',
+    },
+    {
+      question: 'Will my team need to send these emails by hand?',
+      answer:
+        'No. Once a flow is built it runs automatically, and each one is shaped around your actual customer journey.',
+    },
+  ],
+  'seo-content': [
+    {
+      question: 'How long does SEO take to work?',
+      answer:
+        "SEO compounds over time rather than switching on overnight, which is why it keeps working after paid traffic stops. We'll give you honest expectations once we've seen your starting point.",
+    },
+    {
+      question: 'Do you handle local search?',
+      answer:
+        'Yes. We optimise your Google Business Profile and local listings, and research how South African customers actually search, so you show up in the searches that matter in your area.',
+    },
+  ],
+  'design-creative': [
+    {
+      question: 'Do you only do full rebrands?',
+      answer:
+        "No. It can be a full visual identity from scratch or creative for a single campaign — the rule is the same: it should look like you everywhere it shows up.",
+    },
+    {
+      question: 'Can you arrange photography or video?',
+      answer:
+        'Yes. Where a project needs more than our in-house team, we bring in specialists from our own network, briefed against the same strategy.',
+    },
+  ],
+  'analytics-reporting': [
+    {
+      question: 'What will you report on?',
+      answer:
+        'The numbers that matter to your business — leads, cost per acquisition, revenue influenced — not just impressions and reach.',
+    },
+    {
+      question: 'How often will I get updates?',
+      answer:
+        'Regular, plain-language updates, with the rhythm agreed with each client. If something is not working you will hear it from us directly.',
+    },
+  ],
+}
+
+export const GENERAL_FAQS: Faq[] = [
+  {
+    question: 'How much does it cost?',
+    answer:
+      "Every engagement is scoped around your goals, so there's no one-size-fits-all price. We talk through what you need first and quote from there.",
+  },
+  {
+    question: 'Do I have to buy everything?',
+    answer:
+      'No. Use one service or several. They work well together because one team plans and delivers them, but you only take what you need.',
+  },
+  {
+    question: 'Who will I be working with?',
+    answer:
+      "The people doing the work. We're one team across all seven disciplines, with no hand-offs between departments and account managers.",
+  },
+  {
+    question: 'Do you only work with certain industries?',
+    answer:
+      "No. We've worked across commodity trading, insurance, iGaming, health & fitness, and personal branding, and we're open to any industry ready to build something real.",
+  },
+  {
+    question: 'Where are you based?',
+    answer:
+      "Johannesburg, working with South African businesses. We're happy to meet in person or visit your premises to understand your business first.",
+  },
+  {
+    question: 'How do we get started?',
+    answer:
+      "Send us a message or call. We'll arrange a short visit, call, or Google Meet to understand where you want to go before proposing anything.",
+  },
+]

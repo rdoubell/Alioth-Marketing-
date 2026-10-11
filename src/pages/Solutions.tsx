@@ -1,10 +1,22 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import SEOMeta from '../components/SEOMeta'
-import { SERVICES } from '../components/home/services-data'
-import { SOLUTION_DETAILS } from './solutions-data'
+import FaqSection from '../components/FaqSection'
+import { SERVICES, plainDescription } from '../components/home/services-data'
+import { SOLUTION_DETAILS, GENERAL_FAQS } from './solutions-data'
 
 export default function Solutions() {
+  const { hash } = useLocation()
+  const navigate = useNavigate()
+
+  // Every service used to be a section on this page (/solutions#slug) and now
+  // has its own page — send old anchor links straight to the right one.
+  useEffect(() => {
+    const slug = hash.slice(1)
+    if (SOLUTION_DETAILS[slug]) navigate(`/solutions/${slug}`, { replace: true })
+  }, [hash, navigate])
+
   return (
     <>
       <SEOMeta
@@ -28,65 +40,39 @@ export default function Solutions() {
         </div>
       </section>
 
-      {/* Jump bar: seven long sections with one shared structure is a lot to
-          scroll blind, so every service is one tap away and stays pinned
-          under the navbar. */}
-      <nav
-        aria-label="Jump to a service"
-        className="sticky top-20 z-30 border-y border-ink/10 bg-cream/90 backdrop-blur-sm"
-      >
-        <ul className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {SERVICES.map((service) => (
-            // Auto margins on the first/last chip centre the row when it fits
-            // but, unlike justify-center, never clip the first chip off-screen
-            // when it overflows and has to scroll.
-            <li key={service.slug} className="shrink-0 first:ml-auto last:mr-auto">
-              <a
-                href={`#${service.slug}`}
-                className="block rounded-full border border-green/25 px-4 py-1.5 font-sans text-xs uppercase tracking-wide text-green transition-colors duration-200 hover:bg-green hover:text-cream"
-              >
-                {service.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <div className="mx-auto max-w-3xl divide-y divide-ink/10 px-6">
+      <ul className="mx-auto max-w-3xl divide-y divide-ink/10 border-y border-ink/10 px-6">
         {SERVICES.map((service) => {
           const detail = SOLUTION_DETAILS[service.slug]
           const Icon = detail.icon
           return (
-            <section key={service.slug} id={service.slug} className="scroll-mt-40 py-16">
+            <li key={service.slug} id={service.slug} className="py-10">
               <div className="flex items-start gap-5">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-green/10 text-green">
                   <Icon size={24} strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="font-serif text-3xl text-ink md:text-4xl">{service.name}</h2>
+                  <h2 className="font-serif text-3xl text-ink md:text-4xl">
+                    <Link to={`/solutions/${service.slug}`} className="hover:text-green">
+                      {service.name}
+                    </Link>
+                  </h2>
                   <p className="mt-1 font-serif text-xl italic text-green">{detail.tagline}</p>
+                  <p className="mt-4 max-w-2xl font-sans text-lg text-ink/70">{plainDescription(service)}</p>
+                  <Link
+                    to={`/solutions/${service.slug}`}
+                    className="mt-5 inline-flex items-center gap-2 font-sans text-sm uppercase tracking-wider text-green underline-offset-4 transition-colors hover:text-green-bright hover:underline"
+                  >
+                    Explore {service.name}
+                    <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+                  </Link>
                 </div>
               </div>
-              <div className="mt-6 space-y-4 pl-0 md:pl-[4.75rem]">
-                {detail.paragraphs.map((paragraph) => (
-                  <p key={paragraph.slice(0, 24)} className="max-w-2xl font-sans text-lg text-ink/70">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <div className="mt-8 md:pl-[4.75rem]">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 font-sans text-sm uppercase tracking-wider text-green underline-offset-4 transition-colors hover:text-green-bright hover:underline"
-                >
-                  Talk to us about {service.name}
-                  <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
-                </Link>
-              </div>
-            </section>
+            </li>
           )
         })}
-      </div>
+      </ul>
+
+      <FaqSection heading="Common questions" faqs={GENERAL_FAQS} />
 
       <section className="bg-green px-6 py-20 text-center text-cream">
         <h2 className="font-serif text-2xl md:text-3xl">Not sure where to start?</h2>

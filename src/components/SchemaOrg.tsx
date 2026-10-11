@@ -38,7 +38,7 @@ export default function SchemaOrg() {
         itemOffered: {
           '@type': 'Service',
           name: service.name,
-          url: `${SITE_URL}/solutions#${service.slug}`,
+          url: `${SITE_URL}/solutions/${service.slug}`,
         },
       })),
     },

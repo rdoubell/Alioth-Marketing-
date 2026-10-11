@@ -15,6 +15,7 @@ describe('page shells', () => {
       </MemoryRouter>
     )
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/where you should be/i)
+    expect(screen.getByRole('heading', { level: 2, name: 'How we work' })).toBeInTheDocument()
   })
 
   it('About renders the "Why we\'re called Alioth" headline', () => {

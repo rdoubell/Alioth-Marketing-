@@ -1,12 +1,9 @@
 import SEOMeta from '../components/SEOMeta'
 import { SITE_NAME, CONTACT_EMAIL } from '../lib/brand'
 
-// Draft page — built as a real, working mockup (more useful to review than a
-// static image) rather than final legal copy. Deliberately NOT linked from
-// the Navbar or Footer yet, and kept noindex, so nothing reaches a real
-// visitor or search engine until you've reviewed it and had it checked
-// against POPIA by someone qualified to do that. See docs/checklist.md for
-// the placement recommendation once it's approved.
+// Plain-language policy written against POPIA (South Africa's Protection of
+// Personal Information Act). Update it whenever a new tool that handles visitor
+// data is added to the site.
 interface PolicySection {
   title: string
   paragraphs: string[]
@@ -23,7 +20,7 @@ const SECTIONS: PolicySection[] = [
     title: 'Information We Collect',
     paragraphs: [
       "When you submit the contact form, we collect the information you provide directly — your name, email address, and the message you send us. We don't ask for anything beyond what's needed to reply to you.",
-      "Like most websites, our hosting provider automatically logs standard technical information (such as IP address and browser type) for security and performance purposes. We don't currently run analytics or advertising cookies on this site.",
+      "Like most websites, our hosting provider automatically logs standard technical information (such as IP address and browser type) for security and performance purposes. If website analytics are switched on, they record which pages are visited and general device and location information, not who you are.",
     ],
   },
   {
@@ -41,7 +38,7 @@ const SECTIONS: PolicySection[] = [
   {
     title: 'Cookies',
     paragraphs: [
-      "This site does not currently use analytics, advertising, or tracking cookies. If that changes — for example, if we add website analytics in future — this policy will be updated first, and where required, you'll be asked for consent.",
+      "We do not use advertising cookies. We may use Google Analytics to understand how visitors use this site; it is never loaded for visitors whose browser sends a Do Not Track signal. If we add any other tracking, this policy will be updated first and, where required, you will be asked for consent.",
     ],
   },
   {
@@ -75,7 +72,6 @@ export default function PrivacyPolicy() {
         title="Privacy Policy"
         description="How Alioth Marketing Solutions collects, uses, and protects your personal information."
         path="/privacy"
-        noindex
       />
 
       <section className="relative overflow-hidden px-6 py-24 text-center">
@@ -84,13 +80,11 @@ export default function PrivacyPolicy() {
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-green/25 to-transparent blur-3xl md:h-96"
         />
         <div className="mx-auto max-w-3xl">
-          <span className="inline-block rounded-full border border-green/30 bg-green/5 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-green">
-            Draft — for internal review, not yet linked from the site
-          </span>
-          <h1 className="mt-6 font-display text-4xl font-black text-ink md:text-5xl">Privacy Policy</h1>
+          <h1 className="font-display text-4xl font-black text-ink md:text-5xl">Privacy Policy</h1>
           <p className="mt-6 font-sans text-lg text-ink/70">
             How we collect, use, and protect your personal information on this website.
           </p>
+          <p className="mt-3 font-sans text-sm text-ink/60">Last updated: October 2026</p>
         </div>
       </section>
 

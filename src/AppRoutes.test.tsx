@@ -38,12 +38,32 @@ describe('AppRoutes', () => {
     expect(screen.getByText(/All rights reserved/)).toBeInTheDocument()
   })
 
-  it('renders the draft Privacy Policy at /privacy, noindexed and not linked from the Footer', () => {
+  it('renders the Privacy Policy at /privacy, indexable and linked from the Footer', () => {
     renderAt('/privacy')
     expect(screen.getByRole('heading', { level: 1, name: 'Privacy Policy' })).toBeInTheDocument()
-    expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow')
-    expect(screen.queryByRole('link', { name: 'Privacy Policy' })).not.toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: /privacy/i })).not.toBeInTheDocument()
+    expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('index, follow')
+    expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy')
+  })
+
+  it('renders a service page at /solutions/:slug', () => {
+    renderAt('/solutions/seo-content')
+    expect(screen.getByRole('heading', { level: 1, name: 'SEO & Content' })).toBeInTheDocument()
+  })
+
+  it('keeps Solutions highlighted in the Navbar on a service page', () => {
+    renderAt('/solutions/strategy')
+    const current = screen.getAllByRole('link', { name: 'Solutions' }).filter((l) => l.getAttribute('aria-current') === 'page')
+    expect(current.length).toBeGreaterThan(0)
+  })
+
+  it('renders NotFound for an unknown service slug', () => {
+    renderAt('/solutions/not-a-service')
+    expect(screen.getByRole('heading', { name: 'Page Not Found' })).toBeInTheDocument()
+  })
+
+  it('sends old /solutions#slug anchor links to the matching service page', () => {
+    renderAt('/solutions#strategy')
+    expect(screen.getByRole('heading', { level: 1, name: 'Strategy' })).toBeInTheDocument()
   })
 
   it('renders NotFound for an unmatched path', () => {

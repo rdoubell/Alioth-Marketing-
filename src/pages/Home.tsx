@@ -1,5 +1,6 @@
 import SEOMeta from '../components/SEOMeta'
 import Hero from '../components/home/Hero'
+import HowWeWork from '../components/home/HowWeWork'
 import ServicesSection from '../components/home/ServicesSection'
 import ContactSection from '../components/home/ContactSection'
 
@@ -12,6 +13,7 @@ export default function Home() {
         path="/"
       />
       <Hero />
+      <HowWeWork />
       <ServicesSection />
       <ContactSection />
     </>

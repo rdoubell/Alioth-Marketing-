@@ -1,6 +1,6 @@
 import SEOMeta from '../components/SEOMeta'
 import ContactForm from '../components/ContactForm'
-import { CONTACT_EMAIL, CONTACT_PHONE } from '../lib/brand'
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_URL } from '../lib/brand'
 
 export default function Contact() {
   return (
@@ -34,6 +34,14 @@ export default function Contact() {
             </a>
             .
           </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-block rounded-full border border-green px-7 py-3 font-sans text-xs uppercase tracking-wider text-green transition-all duration-200 hover:-translate-y-0.5 hover:bg-green hover:text-cream active:translate-y-0 active:scale-95"
+          >
+            Message us on WhatsApp
+          </a>
         </div>
         <div className="mx-auto mt-12 flex max-w-3xl justify-center">
           <ContactForm source="contact-page" />

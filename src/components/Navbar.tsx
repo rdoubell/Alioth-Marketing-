@@ -11,6 +11,12 @@ interface PillRect {
   height: number
 }
 
+// A section link stays lit on its child pages too (/solutions/seo-content
+// keeps "Solutions" active); Home only matches the root.
+function isActivePath(href: string, pathname: string) {
+  return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
@@ -27,7 +33,7 @@ export default function Navbar() {
 
   useLayoutEffect(() => {
     function measurePill() {
-      const activeIndex = NAV_LINKS.findIndex((link) => link.href === location.pathname)
+      const activeIndex = NAV_LINKS.findIndex((link) => isActivePath(link.href, location.pathname))
       const activeEl = linkRefs.current[activeIndex]
       setPillRect(
         activeEl
@@ -81,7 +87,7 @@ export default function Navbar() {
               />
             )}
             {NAV_LINKS.map((link, index) => {
-              const active = location.pathname === link.href
+              const active = isActivePath(link.href, location.pathname)
               return (
                 <Link
                   key={link.href}
@@ -141,7 +147,7 @@ export default function Navbar() {
       {open && (
         <nav aria-label="Primary" className="flex flex-col gap-2 px-6 pb-6 md:hidden">
           {NAV_LINKS.map((link) => {
-            const active = location.pathname === link.href
+            const active = isActivePath(link.href, location.pathname)
             return (
               <Link
                 key={link.href}

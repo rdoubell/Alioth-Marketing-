@@ -96,7 +96,7 @@ function TrackerBar({ collected }: TrackerBarProps) {
       {SERVICES.map((service, i) => (
         <Link
           key={service.name}
-          to={`/solutions#${service.slug}`}
+          to={`/solutions/${service.slug}`}
           className={`flex items-center gap-2 rounded-full border px-3 py-1.5 transition-all duration-500 ease-out md:px-4 md:py-2 ${
             collected[i]
               ? 'scale-100 border-cream bg-cream'
@@ -162,7 +162,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
           <TeaserText text={service.description} />
         </p>
         <Link
-          to={`/solutions#${service.slug}`}
+          to={`/solutions/${service.slug}`}
           className="mt-8 inline-flex items-center gap-2 rounded-full bg-green px-7 py-3.5 font-sans text-sm uppercase tracking-wider text-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-bright hover:shadow-lg active:translate-y-0 active:scale-95 md:mt-6 md:px-8 md:py-3.5"
         >
           See More

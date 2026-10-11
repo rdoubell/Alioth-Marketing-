@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { NAV_LINKS, SITE_NAME, CONTACT_EMAIL, CONTACT_PHONE } from '../lib/brand'
+import { NAV_LINKS, SITE_NAME, CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_URL } from '../lib/brand'
 import LogoC2 from './LogoC2'
 import logoMark from '../assets/brand/A-cream.png'
 
@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-cream/40">Navigate</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-cream/60">Navigate</span>
           <nav className="mt-4 flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
               <FooterLink key={link.href} to={link.href}>
@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-cream/40">Get In Touch</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-cream/60">Get In Touch</span>
           <div className="mt-4 flex flex-col gap-3 font-sans text-sm text-cream/70">
             <a
               href={`mailto:${CONTACT_EMAIL}`}
@@ -64,12 +64,26 @@ export default function Footer() {
               {CONTACT_PHONE}
               <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-cream transition-all duration-300 group-hover:w-full" />
             </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative w-fit transition-colors duration-200 hover:text-cream"
+            >
+              Message us on WhatsApp
+              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-cream transition-all duration-300 group-hover:w-full" />
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-6xl border-t border-cream/10 pt-6 font-mono text-[10px] uppercase tracking-widest text-cream/40">
-        © {year} {SITE_NAME}. All rights reserved.
+      <div className="relative mx-auto mt-16 flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-cream/10 pt-6 font-mono text-[10px] uppercase tracking-widest text-cream/60">
+        <span>
+          © {year} {SITE_NAME}. All rights reserved.
+        </span>
+        <Link to="/privacy" className="transition-colors duration-200 hover:text-cream">
+          Privacy Policy
+        </Link>
       </div>
     </footer>
   )

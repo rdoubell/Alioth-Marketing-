@@ -44,3 +44,9 @@ export const SERVICES: Service[] = [
     description: 'Clear, honest reporting so you **always know what is working** and what is not.',
   },
 ]
+
+// Card copy marks its punchiest phrase with **double asterisks**; metadata and
+// structured data want the same text without the markers.
+export function plainDescription(service: Service): string {
+  return service.description.replace(/\*\*/g, '')
+}

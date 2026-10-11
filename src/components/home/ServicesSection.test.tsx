@@ -46,22 +46,22 @@ describe('ServicesSection', () => {
     })
   })
 
-  it('gives every card its own "See More" link to its Solutions page anchor', () => {
+  it('gives every card its own "See More" link to its service page', () => {
     renderServicesSection()
     const seeMoreLinks = desktopTree().getAllByRole('link', { name: 'See More' })
     expect(seeMoreLinks).toHaveLength(7)
     SERVICES.forEach((service, i) => {
-      expect(seeMoreLinks[i]).toHaveAttribute('href', `/solutions#${service.slug}`)
+      expect(seeMoreLinks[i]).toHaveAttribute('href', `/solutions/${service.slug}`)
     })
   })
 
-  it('links every tracker pill to its Solutions page anchor', () => {
+  it('links every tracker pill to its service page', () => {
     renderServicesSection()
     const desktop = desktopTree()
     SERVICES.forEach((service) => {
       expect(desktop.getByRole('link', { name: new RegExp(service.name) })).toHaveAttribute(
         'href',
-        `/solutions#${service.slug}`
+        `/solutions/${service.slug}`
       )
     })
   })
