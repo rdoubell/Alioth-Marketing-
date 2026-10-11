@@ -46,18 +46,22 @@ export default function Hero() {
         className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-cream/70 to-transparent"
         aria-hidden="true"
       />
-      {/* Desktop watermark — top portion of one continuous mark that carries on
-          into ServicesSection's backdrop (see the matching fragment there).
-          Both fragments share the same height/position math so the seam
-          lines up: this shows image-range [0, 100%-of-section-height].
-          Rendered above the dimming overlays (not below) so its color/opacity
-          reads the same as the undimmed fragment in ServicesSection. */}
+      {/* Desktop watermark — kept entirely inside Hero. It no longer runs on
+          into the next section: the image is 1.5x Hero's height, so Hero's
+          bottom edge falls at 2/3 of the image, and the mask fades the mark
+          to nothing by exactly that line. Rendered above the dimming
+          overlays so it keeps its full colour until the fade starts. */}
       <img
         src={logoMark}
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 hidden w-auto max-w-none opacity-[0.35] md:block"
-        style={{ top: 0, height: 'calc(150vh - 7.5rem)' }}
+        style={{
+          top: 0,
+          height: 'calc(150vh - 7.5rem)',
+          maskImage: 'linear-gradient(to bottom, #000 38%, transparent 66%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, #000 38%, transparent 66%)',
+        }}
       />
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
         <h1 className="animate-fade-up max-w-3xl font-display text-3xl font-black text-cream drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] md:text-7xl">

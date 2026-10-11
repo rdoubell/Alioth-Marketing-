@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, type ReactNode, type RefObject } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowUpRight } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SERVICES, type Service } from './services-data'
-import logoMark from '../../assets/brand/A-cream.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -39,31 +39,48 @@ const TRAILING_HEIGHT_PX = 100
 const COLLECT_AT_EASED = 0.97
 const peekEase = gsap.parseEase('power2.out')
 
+const DIAGONAL_LINES_MASK = 'radial-gradient(ellipse 75% 70% at 50% 55%, #000 25%, transparent 78%)'
+
+// Solid deep green (the same colour Hero's bottom gradient ends on, so the
+// two sections join with no visible seam) with three quiet layers on top:
+// the supplied light-shaft SVG turned down so it reads as depth rather than
+// grey wash, hairlines on the angle of the logo's strokes that fade out
+// toward the edges, and a soft glow behind the card deck so the cream cards
+// have something to lift off. The logo watermark no longer continues in
+// here — it stays inside Hero and fades out before Hero's bottom edge.
 function SectionBackground() {
   return (
     <>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-green-deep" />
       <img
         src="/Alioth%20background%20section%202.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.28]"
       />
-      {/* Continues Hero's own bottom gradient seamlessly into this section,
-          instead of the SVG cutting in abruptly. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-green-deep to-transparent"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(112deg, rgba(241,233,218,0.06) 0, rgba(241,233,218,0.06) 1px, transparent 1px, transparent 46px)',
+          maskImage: DIAGONAL_LINES_MASK,
+          WebkitMaskImage: DIAGONAL_LINES_MASK,
+        }}
       />
-      {/* Bottom portion of the continuous watermark that starts in Hero —
-          see the matching fragment there for the shared height/position math.
-          Shifted up by exactly one section's height so image-range
-          [100%, 150%] lands in this section's own [0, 50%] window. */}
-      <img
-        src={logoMark}
-        alt=""
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 hidden w-auto max-w-none opacity-[0.35] md:block"
-        style={{ top: 'calc(-100vh + 5rem)', height: 'calc(150vh - 7.5rem)' }}
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(ellipse 55% 45% at 50% 64%, rgba(39,81,63,0.7), transparent 72%)',
+        }}
+      />
+      {/* Dissolves the panel's lit lower half into the section's flat green so
+          the panel's bottom edge (a few px short of the viewport on tall
+          screens) doesn't show as a hard line. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-green-deep to-transparent"
       />
     </>
   )
@@ -82,16 +99,16 @@ function TrackerBar({ collected }: TrackerBarProps) {
           to={`/solutions#${service.slug}`}
           className={`flex items-center gap-2 rounded-full border px-3 py-1.5 transition-all duration-500 ease-out md:px-4 md:py-2 ${
             collected[i]
-              ? 'scale-100 border-cream bg-cream opacity-100'
-              : 'scale-90 border-cream/25 bg-transparent opacity-60'
+              ? 'scale-100 border-cream bg-cream'
+              : 'scale-95 border-cream/40 bg-transparent'
           }`}
         >
-          <span className={`font-mono text-[10px] md:text-xs ${collected[i] ? 'text-green' : 'text-cream/50'}`}>
+          <span className={`font-mono text-[10px] md:text-xs ${collected[i] ? 'text-green' : 'text-cream/75'}`}>
             {String(i + 1).padStart(2, '0')}
           </span>
           <span
             className={`font-sans text-[10px] uppercase tracking-wide md:text-xs ${
-              collected[i] ? 'text-green' : 'hidden md:inline md:text-cream/40'
+              collected[i] ? 'text-green' : 'hidden md:inline md:text-cream/75'
             }`}
           >
             {service.name}
@@ -129,25 +146,29 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[16rem] md:rounded-[2rem] md:px-10 md:py-6 md:shadow-[0_30px_70px_-20px_rgba(15,20,15,0.4),inset_0_1px_0_rgba(255,255,255,0.6)]">
+    <div className="relative w-full overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream-soft px-6 py-10 shadow-[0_20px_50px_-15px_rgba(15,20,15,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] md:mx-auto md:w-[85%] md:max-w-4xl md:min-h-[16rem] md:rounded-[2rem] md:px-12 md:py-9 md:shadow-[0_30px_70px_-20px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.6)]">
+      {/* Mobile: bleeds off the bottom-right corner. Desktop: sits whole,
+          vertically centred in the empty right half of the card, so it
+          reads as a deliberate numeral instead of a clipped one. */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-4 -right-3 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:-right-4 md:-top-10 md:bottom-auto md:text-[11rem]"
+        className="pointer-events-none absolute -bottom-4 -right-3 select-none font-serif text-[7rem] font-black leading-none text-green/20 md:bottom-auto md:right-12 md:top-1/2 md:-translate-y-1/2 md:text-[9rem] md:text-green/[0.14]"
       >
         {String(index + 1).padStart(2, '0')}
       </span>
-      <div className="relative z-10">
+      <div className="relative z-10 md:max-w-lg">
         <h3 className="font-serif text-4xl text-ink md:text-5xl">{service.name}</h3>
-        <p className="mt-4 max-w-xl font-sans text-lg text-ink/70 md:text-xl">
+        <p className="mt-4 font-sans text-lg text-ink/70 md:text-xl">
           <TeaserText text={service.description} />
         </p>
+        <Link
+          to={`/solutions#${service.slug}`}
+          className="mt-8 inline-flex items-center gap-2 rounded-full bg-green px-7 py-3.5 font-sans text-sm uppercase tracking-wider text-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-bright hover:shadow-lg active:translate-y-0 active:scale-95 md:mt-6 md:px-8 md:py-3.5"
+        >
+          See More
+          <ArrowUpRight size={18} strokeWidth={2} aria-hidden="true" />
+        </Link>
       </div>
-      <Link
-        to={`/solutions#${service.slug}`}
-        className="relative z-10 mt-8 inline-block rounded-full bg-green px-7 py-3.5 font-sans text-sm uppercase tracking-wider text-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-bright hover:shadow-lg active:translate-y-0 active:scale-95 md:absolute md:bottom-8 md:right-8 md:mt-0 md:px-9 md:py-4 md:text-base"
-      >
-        See More
-      </Link>
     </div>
   )
 }
@@ -218,6 +239,12 @@ function PeekCard({ index, markerRefs, onLeave, onEnterBack, children }: PeekCar
 export default function ServicesSection() {
   const [collected, setCollected] = useState<boolean[]>(() => SERVICES.map(() => false))
   const markerRefs = useRef<Array<HTMLDivElement | null>>([])
+  // With reduced motion the scroll-driven deck never animates, which used to
+  // leave all seven desktop cards piled in one spot (only the last readable)
+  // and every pill unfilled. Those visitors get the plain list instead.
+  const [reduceMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
 
   useEffect(() => {
     // Layout (markers, panel) needs to settle — and web fonts reflow text
@@ -239,10 +266,13 @@ export default function ServicesSection() {
   }
 
   return (
-    <section className="relative bg-cream">
+    <section className={`relative bg-cream ${reduceMotion ? '' : 'md:bg-green-deep'}`}>
       {/* Desktop: one pinned panel holding the heading, the tracker pills,
           and the card deck below them — in that document-flow order, so the
-          cards can never render above the pills. */}
+          cards can never render above the pills. The section itself is the
+          same deep green as the panel on desktop, so the stretch after the
+          panel releases never flashes cream before Contact slides up. */}
+      {!reduceMotion && (
       <div className="hidden md:block" data-testid="services-desktop">
         <div className="absolute inset-0" style={{ zIndex: 0 }}>
           <div
@@ -300,10 +330,12 @@ export default function ServicesSection() {
             card finishes settling. */}
         <div aria-hidden="true" style={{ height: TRAILING_HEIGHT_PX }} />
       </div>
+      )}
 
       {/* Mobile: plain scroll, no pinning/scaling — same card look, just a
-          normal list, one after another. */}
-      <div className="md:hidden" data-testid="services-mobile">
+          normal list, one after another. Also the fallback at every width
+          for reduced-motion visitors. */}
+      <div className={reduceMotion ? '' : 'md:hidden'} data-testid="services-mobile">
         <div className="relative overflow-hidden bg-green-deep px-6 pb-56 pt-16">
           <img
             src="/Alioth%20background%20section%202.svg"
